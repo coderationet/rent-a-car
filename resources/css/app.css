@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*{
+    box-sizing: border-box;
+}
+.container {
+    @apply mx-auto px-4;
+    max-width: 1100px;
+}
+.header{
+    @apply flex items-center justify-between ;
+    height: 80px;
+}
+.primary-bg{
+    background-color: #385FDD;
+}
+.primary-color{
+    color: #385FDD;
+}
+.home-search-bg{
+    background-color: #F98888;
+    min-height: 350px;
+}
+.home-profile-picture{
+    max-width: 100px;
+}
+.footer{
+    background-color: #31353a;
+}
+.hover-primary:hover{
+    color: #385FDD;
+}
