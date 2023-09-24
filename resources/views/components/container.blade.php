@@ -1,4 +1,3 @@
-@props(['class' => '$class'])
-<div {{ $attributes->merge(['class' => 'container mx-auto ' . $class]) }}>
+<div {{ $attributes->merge(['class' => 'container mx-auto ']) }}>
     {{ $slot }}
 </div>

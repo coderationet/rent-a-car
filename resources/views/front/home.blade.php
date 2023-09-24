@@ -9,12 +9,14 @@
                            id="start_date"
                            name="date-start"
                            class="border-0 border-r p-3 px-4"
+                           value="{{request()->has('date-start') ? request()->get('date-start') : ''}}"
                            required
                            placeholder="Başlangıç Tarihi">
                 </div>
                 <div class="flex-1 flex flex-col">
                     <label for="end_date" class="text-gray-600">Bitiş</label>
                     <input type="date" name="date-end" class="border-0 border-r p-3 px-4 "
+                           value="{{request()->has('date-end') ? request()->get('date-end') : ''}}"
                            required
                            placeholder="Bitiş Tarihi">
                 </div>
@@ -36,7 +38,7 @@
         </form>
         <div>
             <p class="text-white text-center mt-3">
-                 Tarihleri belirleyin, aracınızı seçin ve hemen kiralayın.
+                Tarihleri belirleyin, aracınızı seçin ve hemen kiralayın.
             </p>
         </div>
     </div>
