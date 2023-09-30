@@ -1,0 +1,31 @@
+.admin-panel-template{
+    display: flex;
+    .sidebar{
+        width: 250px;
+        background: #f1f1f1;
+        min-height: 100vh;
+        ul{
+            list-style: none;
+            padding: 0;
+            li{
+                a{
+                    padding: 10px 20px;
+                    width: 100%;
+                    box-sizing: border-box;
+                    color: #000;
+                    text-decoration: none;
+                    display:flex;
+                    gap: 10px;
+                    &:hover{
+                        color: #fff;
+                        background: #000;
+                    }
+                }
+            }
+        }
+    }
+    .content{
+        flex: 1;
+        padding: 20px;
+    }
+}

@@ -1,6 +1,11 @@
+@import "admin.scss";
+@import "media_library.scss";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 *{
     box-sizing: border-box;
 }
