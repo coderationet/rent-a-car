@@ -30,7 +30,7 @@
         </div>
     </div>
 </div>
-<div class="shadow z-10">
+<div class="shadow z-10 header-container">
     <div class="container flex justify-between items-center header">
         <div class="flex-1">
             <a href="{{route('front.home')}}">
@@ -48,7 +48,7 @@
                     <a href="{{ route('front.page.show','about') }}" class="font-bold hover-primary">Hakkımızda</a>
                 </li>
                 <li>
-                    <a href="{{ route('front.page.show','contact') }}" class="font-bold hover-primary">İletişim</a>
+                    <a href="{{ route('front.page.contact') }}" class="font-bold hover-primary">İletişim</a>
                 </li>
             </ul>
         </nav>

@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 @section('content')
     <div class="home-search-bg z-0  flex flex-col justify-center items-center">
-        <form class=" w-1/3 flex justify-center items-center">
+        <form action="{{route('front.search.index')}}" class="w-1/3 flex justify-center items-center">
             <div class="flex justify-center items-end w-full">
                 <div class="flex-1 flex flex-col">
                     <label for="start_date" class="text-gray-600">Başlangıç</label>
@@ -51,28 +51,28 @@
         </p>
     </x-container>
     <x-container class="flex justify-between mt-4 gap-7">
-        <a href="" class="flex-1 shadow rounded overflow-hidden rounded overflow-hidden">
+        <a href="{{ route('front.search.index')}}" class="flex-1 shadow rounded overflow-hidden rounded overflow-hidden">
             <img src="{{ asset('assets/img/813ef1b94de3c0efeed2fc6ff26ff0dd.png') }}" class="w-full">
             <div class="p-3">
                 <h3 class="font-bold text-xl">Araba</h3>
                 <p class="text-gray-500">Uygun fiyatlarla kiralık araçlar</p>
             </div>
         </a>
-        <a href="" class="flex-1 shadow rounded overflow-hidden">
+        <a href="{{ route('front.search.index')}}" class="flex-1 shadow rounded overflow-hidden">
             <img src="{{ asset('assets/img/813ef1b94de3c0efeed2fc6ff26ff0dd.png') }}" class="w-full">
             <div class="p-3">
                 <h3 class="font-bold text-xl">ATV</h3>
                 <p class="text-gray-500">Uygun fiyatlarla kiralık araçlar</p>
             </div>
         </a>
-        <a href="" class="flex-1 shadow rounded overflow-hidden">
+        <a href="{{ route('front.search.index')}}" class="flex-1 shadow rounded overflow-hidden">
             <img src="{{ asset('assets/img/813ef1b94de3c0efeed2fc6ff26ff0dd.png') }}" class="w-full">
             <div class="p-3">
                 <h3 class="font-bold text-xl">Bisiklet</h3>
                 <p class="text-gray-500">Uygun fiyatlarla kiralık araçlar</p>
             </div>
         </a>
-        <a href="" class="flex-1 shadow rounded overflow-hidden">
+        <a  href="{{ route('front.search.index')}}" class="flex-1 shadow rounded overflow-hidden">
             <img src="{{ asset('assets/img/813ef1b94de3c0efeed2fc6ff26ff0dd.png') }}" class="w-full">
             <div class="p-3">
                 <h3 class="font-bold text-xl">Motor</h3>

@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('front.layouts.app')
 @section('title', $page->name)
 @section('content')
-    @include('breadcrumbs',['breadcrumbs' => [
-        ['name' => 'Home', 'url' => route('home')],
+    @include('front.breadcrumbs',['breadcrumbs' => [
+        ['name' => 'Home', 'url' => route('front.home')],
         ['name' => __('front/menu.contact'), 'url' => route('front.page.contact')]
     ]])
 
