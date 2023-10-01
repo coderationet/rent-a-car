@@ -24,6 +24,6 @@
         @yield("content")
     </div>
 </div>
-
+@stack('extra-footer')
 </body>
 </html>

@@ -27,5 +27,44 @@
     .content{
         flex: 1;
         padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .breadcrumb{
+            display: flex;
+            gap: 10px;
+            padding: 10px 20px;
+            background: #f1f1f1;
+            li{
+                cursor: pointer;
+            }
+        }
+        .card{
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            .card-header{
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-content: center;
+            }
+            .card-body{
+                .table{
+                    width: 100%;
+                    border-collapse: collapse;
+                    th,td{
+                        padding: 10px 20px;
+                        text-align: left;
+                        border-bottom: 1px solid #ddd;
+                    }
+                    th{
+                        background: #f1f1f1;
+                    }
+                }
+            }
+        }
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Helpers\Option;
+use App\Http\Controllers\Front\Controller;
 use App\Models\Media;
 use Illuminate\Http\Request;
-use App\Helpers\Option;
 
 class SiteSettingController extends Controller
 {

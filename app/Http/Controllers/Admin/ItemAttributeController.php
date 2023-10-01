@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Front\Controller;
 use App\Models\Attribute;
-use App\Models\AttributeValue;
 use Illuminate\Http\Request;
-use App\Models\Item;
 use Illuminate\Support\Facades\Validator;
 
 class ItemAttributeController extends Controller

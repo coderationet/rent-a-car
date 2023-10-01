@@ -1,5 +1,9 @@
 @import "admin.scss";
+@import "admin_buttons.scss";
 @import "media_library.scss";
+@import "datatables.net-dt/css/jquery.dataTables.min.css";
+@import "dataTables.scss";
+@import "form.scss";
 
 @tailwind base;
 @tailwind components;
@@ -36,3 +40,4 @@
 .hover-primary:hover{
     color: #385FDD;
 }
+

@@ -40,7 +40,7 @@
         <nav class="flex-1 ">
             <ul class="flex gap-7 justify-center items-center ">
                 <li>
-                    <a href="" class="font-bold hover-primary">Araçlar</a>
+                    <a href="{{ route('front.search.index') }}" class="font-bold hover-primary">Tüm Araçlar</a>
                 </li>
                 <li>
                     <a href=" " class="font-bold hover-primary">Hakkımızda</a>

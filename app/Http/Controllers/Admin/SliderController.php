@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Front\Controller;
 use App\Models\Slider;
-use App\Models\SliderItem;
 use Illuminate\Http\Request;
 
 class SliderController extends Controller

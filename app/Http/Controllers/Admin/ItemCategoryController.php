@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\HierarchicalListingHelper;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Front\Controller;
 use App\Models\ItemCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
