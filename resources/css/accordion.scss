@@ -1,0 +1,16 @@
+.accordion-item{
+    @apply border rounded bg-white p-4 mb-4;
+}
+.accordion-item .accordion-collapse{
+    @apply  max-h-0 overflow-hidden transition-all duration-300 ease-in-out;
+}
+.accordion-item .accordion-collapse.show{
+    max-height: 500px;
+}
+.accordion-item .accordion-header{
+    @apply flex justify-between items-center cursor-pointer ;
+}
+.accordion-item .accordion-body{
+    @apply text-black p-1 mt-2;
+}
+

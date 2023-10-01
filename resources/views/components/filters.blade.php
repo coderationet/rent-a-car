@@ -1,15 +1,13 @@
 <div>
     <form enctype="multipart/form-data" method="get" id="filter-form" action="{{route('front.search.index')}}">
-        <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion">
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseCount" aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapseCount">
+                    <button class="accordion-button" type="button">
                         {{__('front/category.results')}}
                     </button>
                 </h2>
-                <div id="panelsStayOpen-collapseCount" class="accordion-collapse collapse show">
+                <div class="accordion-collapse show">
                     <div class="accordion-body">
                         {{$items->total()}} {{__('front/category.results_found')}}
                     </div>
@@ -17,13 +15,11 @@
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapsePrice" aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapsePrice">
+                    <button class="accordion-button" type="button">
                         {{__('front/category.price_range')}}
                     </button>
                 </h2>
-                <div id="panelsStayOpen-collapsePrice" class="accordion-collapse collapse show">
+                <div class="accordion-collapse show">
                     <div class="accordion-body price-range">
                         <div class="show-price-range">
                             <input class="form-control" type="text" id="min_price" name="min_price"
@@ -39,17 +35,12 @@
             </div>
             @foreach($attribute_list as $attribute)
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-heading{{$attribute->id}}">
-                        <button class="accordion-button {{$attribute->is_open ? '' : 'collapsed'}}" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{$attribute->id}}"
-                                aria-expanded="{{$attribute->is_open ? 'true' : 'false'}}"
-                                aria-controls="panelsStayOpen-collapse{{$attribute->id}}">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button"   type="button">
                             {{$attribute->name}}
                         </button>
                     </h2>
-                    <div id="panelsStayOpen-collapse{{$attribute->id}}"
-                         class="accordion-collapse collapse {{$attribute->is_open ? 'show' : ''}}"
-                         aria-labelledby="panelsStayOpen-heading{{$attribute->id}}">
+                    <div class="accordion-collapse {{$attribute->is_open ? 'show' : ''}}">
                         <div class="accordion-body">
                             <ul class="list-group">
                                 @foreach($attribute->values as $attribute_value)
@@ -66,10 +57,8 @@
                     </div>
                 </div>
             @endforeach
-            <div class="accordion-item p-3">
-                <button type="button" class="btn btn-primary w-100"
-                        id="filter-form-submit">{{__('front/category.filter')}}</button>
-            </div>
+            <button type="button" class="bg-blue-500 p-2 text-white w-full hover:bg-blue-600"
+                    id="filter-form-submit">{{__('front/category.filter')}}</button>
         </div>
     </form>
 </div>

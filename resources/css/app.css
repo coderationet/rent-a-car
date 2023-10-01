@@ -4,11 +4,13 @@
 @import "datatables.net-dt/css/jquery.dataTables.min.css";
 @import "dataTables.scss";
 @import "form.scss";
+@import "accordion.scss";
+@import "breadcrumbs.scss";
+
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 *{
     box-sizing: border-box;
