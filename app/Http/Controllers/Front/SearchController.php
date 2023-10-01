@@ -11,11 +11,9 @@ class SearchController extends Controller
     public function index(Request $request)
     {
 
-
-
         $items = Item::query();
 
-        $category = $request->get('category'); // category slug array
+        $category = $request->get('category') ?? []; // category slug array
 
         $items = $items->whereHas('categories', function ($query) use ($category) {
             $query->whereIn('item_categories.slug', $category);

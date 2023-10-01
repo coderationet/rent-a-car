@@ -13,8 +13,7 @@ class Filters extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public $items,
-        public $slug,
+        public $items
     )
     {}
 
@@ -61,7 +60,6 @@ class Filters extends Component
             'min_price' => $min_price,
             'max_price' => $max_price,
             'attribute_list' => $attributes,
-            'slug' => $this->slug,
         ]);
     }
 }

@@ -18,7 +18,7 @@ Route::group(['as' => 'front.'], function () {
     Route::get('page/{slug}', [Front\PageController::class, 'show'])->name('page.show');
     Route::get('contact', [Front\PageController::class, 'contact'])->name('page.contact');
     Route::post('contact/post', [Front\PageController::class, 'contact_post'])->name('page.contact.post');
-    Route::post('search', [Front\SearchController::class, 'index'])->name('search.index');
+    Route::get('search', [Front\SearchController::class, 'index'])->name('search.index');
 });
 
 Route::middleware('auth')->group(function () {

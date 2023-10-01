@@ -17,7 +17,6 @@
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-gray-100">
     @include('front.layouts.navigation')
-
     @yield('content')
 
     <div class="footer py-10">

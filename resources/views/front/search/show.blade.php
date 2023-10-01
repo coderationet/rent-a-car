@@ -1,20 +1,20 @@
-@extends('layouts.app')
-@section('title', $category->name)
+@extends('front.layouts.app')
+{{--@section('title', $category->name)--}}
 @section('content')
     @include('front.breadcrumbs', ['breadcrumbs' => [
         [
             'name' => 'Home',
-            'url' => route('home')
+            'url' => route('front.home')
         ],
         [
-            'name' => $category->name,
-            'url' => route('front.category.show', $category->slug)
+            'name' => "Search",
+            'url' => route('front.search.index')
         ]
     ]])
     <div class="container category-page page">
         <div class="row">
             <div class="col-md-3 mb-3">
-                <x-filters :items="$items" :slug="$category->slug"  />
+                <x-filters :items="$items" :slug="$category->slug ?? null"  />
             </div>
             <div class="col-md-9">
                 <x-active-filters  :category="$category"/>
