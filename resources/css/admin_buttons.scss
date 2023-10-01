@@ -1,0 +1,39 @@
+.admin-panel-template{
+    .button{
+        padding: 10px 20px;
+        width: 100%;
+        box-sizing: border-box;
+        color: #000;
+        text-decoration: none;
+        display:flex;
+        gap: 10px;
+        &:hover{
+            color: #fff;
+            background: #000;
+        }
+    }
+    .button-primary{
+        background: #000;
+        color: #fff;
+        &:hover{
+            background: #fff;
+            color: #000;
+        }
+    }
+    .button-danger{
+        background: #f00;
+        color: #fff;
+        &:hover{
+            background: #fff;
+            color: #f00;
+        }
+    }
+    .button-secondary{
+        background: #f1f1f1;
+        color: #000;
+        &:hover{
+            background: #000;
+            color: #f1f1f1;
+        }
+    }
+}

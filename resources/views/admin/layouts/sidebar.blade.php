@@ -5,7 +5,7 @@
     <li>
         <a href="{{ route('admin.dashboard') }}">
             @include('icons.home')
-            <span>Dashboard</span>
+            <span>Gösterge Paneli</span>
         </a>
     </li>
     <!-- Media -->
@@ -13,6 +13,13 @@
         <a href="{{ route('admin.media-library.index') }}">
             @include('icons.photo')
             <span>Ortam Kütüphanesi</span>
+        </a>
+    </li>
+    <!-- Users -->
+    <li>
+        <a href="{{ route('admin.users.index') }}">
+            @include('icons.users')
+            <span>Kullanıcılar</span>
         </a>
     </li>
 </ul>
