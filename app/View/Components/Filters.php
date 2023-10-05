@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use App\Models\Attribute;
+use App\Models\ItemCategory;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -54,12 +55,24 @@ class Filters extends Component
 
         });
 
+        $categories = cache()->remember('all_categories',60 * 60 * 24, function () {
+            return ItemCategory::whereNull('parent_id')->orderBy('name','ASC')->get();
+        });
+
+        $selected_categories = [];
+
+        if (request()->has('category')) {
+            $selected_categories = request()->category;
+        }
+
         return view('components.filters', [
             'items' => $items,
             'attributes' => $attributes,
             'min_price' => $min_price,
             'max_price' => $max_price,
             'attribute_list' => $attributes,
+            'categories' => $categories,
+            'selected_categories' => $selected_categories,
         ]);
     }
 }

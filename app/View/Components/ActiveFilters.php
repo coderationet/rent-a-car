@@ -4,6 +4,7 @@ namespace App\View\Components;
 
 use App\Models\Attribute;
 use App\Models\AttributeValue;
+use App\Models\ItemCategory;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -48,14 +49,25 @@ class ActiveFilters extends Component
             }
         }
 
+
         $filters['filter_attributes'] = Attribute::whereIn('slug',$filter_attributes)->get();
         $filters['filter_attributes'] = $filters['filter_attributes']->unique('id')->keyBy('id');
 
         $filters['filter_values'] = AttributeValue::whereIn('id',$filter_values)->get();
         $filters['filter_values'] = $filters['filter_values']->unique('id')->keyBy('id');
 
-        $category = $this->category;
+        $filters['categories'] = [];
 
-        return view('components.active-filters',compact('filters','category'));
+        if (request()->has('category')){
+
+            $categories = ItemCategory::whereIn('slug',request()->category)->get();
+
+            $filters['categories'] = $categories->unique('id')->keyBy('id');
+
+        }
+
+
+
+        return view('components.active-filters',compact('filters'));
     }
 }

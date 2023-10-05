@@ -13,12 +13,16 @@ Route::group(['as' => 'front.'], function () {
 
     Route::get('item/{slug}', [Front\ItemController::class, 'show'])->name('item.show');
     Route::get('villas/{slug}', [Front\CategoryController::class, 'show'])->name('category.show');
-    Route::get('category/remove-filter', [Front\CategoryController::class, 'remove_filter_from_url'])->name('category.remove-filter');
     Route::post('attribute-values/get', [Front\AttributeValueController::class, 'get'])->name('attribute-values.get');
     Route::get('page/{slug}', [Front\PageController::class, 'show'])->name('page.show');
     Route::get('contact', [Front\PageController::class, 'contact'])->name('page.contact');
     Route::post('contact/post', [Front\PageController::class, 'contact_post'])->name('page.contact.post');
+
+    // Search and category routes
+    Route::get('search/remove-filter', [Front\SearchController::class, 'remove_filter_from_url'])->name('search.remove_filter_from_url');
     Route::get('search', [Front\SearchController::class, 'index'])->name('search.index');
+    Route::get('search/{category}', [Front\SearchController::class, 'index'])->name('search.category');
+
 });
 
 Route::middleware('auth')->group(function () {

@@ -19,7 +19,7 @@
     @include('front.layouts.navigation')
     @yield('content')
 
-    <div class="footer py-10">
+    <div class="footer py-10 mt-10">
         <x-container class="grid grid-cols-4 text-white ">
             <div>
                 <ul>
@@ -55,7 +55,6 @@
             </div>
         </x-container>
     </div>
-
 </div>
 </body>
 </html>

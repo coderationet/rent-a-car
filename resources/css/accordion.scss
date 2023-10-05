@@ -1,5 +1,5 @@
 .accordion-item{
-    @apply border rounded bg-white p-4 mb-4;
+    @apply border bg-white p-4 mb-4;
 }
 .accordion-item .accordion-collapse{
     @apply  max-h-0 overflow-hidden transition-all duration-300 ease-in-out;

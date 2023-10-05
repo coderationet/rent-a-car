@@ -22,13 +22,13 @@
                 </div>
                 <div class="flex-1 flex flex-col">
                     <label for="category" class="text-gray-600">Kategori</label>
-                    <select name="category"
+                    <select name="category[]"
                             required
                             class="border-0 border-r p-3 px-4">
                         <option value="">Kategori Seç</option>
-                        <option value="">Araba</option>
-                        <option value="">Motor</option>
-                        <option value="">ATV</option>
+                        @foreach($categories as $category)
+                            <option value="{{$category->slug}}">{{$category->name}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="flex-2 flex flex-col justify-end align-bottom">
@@ -51,28 +51,28 @@
         </p>
     </x-container>
     <x-container class="flex justify-between mt-4 gap-7">
-        <a href="{{ route('front.search.index')}}" class="flex-1 shadow rounded overflow-hidden rounded overflow-hidden">
+        <a href="{{ route('front.search.category','cars')}}" class="flex-1 shadow rounded overflow-hidden rounded overflow-hidden">
             <img src="{{ asset('assets/img/813ef1b94de3c0efeed2fc6ff26ff0dd.png') }}" class="w-full">
             <div class="p-3">
                 <h3 class="font-bold text-xl">Araba</h3>
                 <p class="text-gray-500">Uygun fiyatlarla kiralık araçlar</p>
             </div>
         </a>
-        <a href="{{ route('front.search.index')}}" class="flex-1 shadow rounded overflow-hidden">
+        <a href="{{ route('front.search.category','atv')}}" class="flex-1 shadow rounded overflow-hidden">
             <img src="{{ asset('assets/img/813ef1b94de3c0efeed2fc6ff26ff0dd.png') }}" class="w-full">
             <div class="p-3">
                 <h3 class="font-bold text-xl">ATV</h3>
                 <p class="text-gray-500">Uygun fiyatlarla kiralık araçlar</p>
             </div>
         </a>
-        <a href="{{ route('front.search.index')}}" class="flex-1 shadow rounded overflow-hidden">
+        <a href="{{ route('front.search.category','bycicles')}}" class="flex-1 shadow rounded overflow-hidden">
             <img src="{{ asset('assets/img/813ef1b94de3c0efeed2fc6ff26ff0dd.png') }}" class="w-full">
             <div class="p-3">
                 <h3 class="font-bold text-xl">Bisiklet</h3>
                 <p class="text-gray-500">Uygun fiyatlarla kiralık araçlar</p>
             </div>
         </a>
-        <a  href="{{ route('front.search.index')}}" class="flex-1 shadow rounded overflow-hidden">
+        <a  href="{{ route('front.search.category','motors')}}" class="flex-1 shadow rounded overflow-hidden">
             <img src="{{ asset('assets/img/813ef1b94de3c0efeed2fc6ff26ff0dd.png') }}" class="w-full">
             <div class="p-3">
                 <h3 class="font-bold text-xl">Motor</h3>

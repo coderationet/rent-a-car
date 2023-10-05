@@ -1,5 +1,5 @@
 import './bootstrap';
-
+import './search.js';
 
 $('.accordion-header').click(function () {
 

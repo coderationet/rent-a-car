@@ -13,6 +13,20 @@
                     </div>
                 </div>
             </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button">
+                        {{__('admin/category.categories')}}
+                    </button>
+                </h2>
+                <div class="accordion-collapse show">
+                    <div class="accordion-body">
+                        {!! \App\Helpers\HierarchicalListingHelper::get_listing_html($categories,$selected_categories,'category[]','slug') !!}
+                    </div>
+                </div>
+            </div>
+
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button" type="button">
@@ -57,7 +71,7 @@
                     </div>
                 </div>
             @endforeach
-            <button type="button" class="bg-blue-500 p-2 text-white w-full hover:bg-blue-600"
+            <button type="submit" class="bg-blue-500 p-2 text-white w-full hover:bg-blue-600"
                     id="filter-form-submit">{{__('front/category.filter')}}</button>
         </div>
     </form>

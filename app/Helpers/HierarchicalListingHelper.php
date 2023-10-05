@@ -4,16 +4,16 @@ namespace App\Helpers;
 class HierarchicalListingHelper
 {
     // hierarchically listing for checkboxes
-    public static function get_listing_html($items, $selected_ids = [],$input_name = 'categories[]')
+    public static function get_listing_html($items, $selected_ids = [],$input_name = 'categories[]',$value_key = "id")
     {
         $html = '';
 
         foreach ($items as $item) {
             $selected = '';
-            if (in_array($item->id, $selected_ids)) {
+            if (in_array($item->$value_key, $selected_ids)) {
                 $selected = 'checked';
             }
-            $html .= '<li style="list-style: none"><input type="checkbox" name="'.$input_name.'" value="' . $item->id . '" ' . $selected . '> ' . $item->name . '</li>';
+            $html .= '<li style="list-style: none"><input type="checkbox" name="'.$input_name.'" value="' . $item->$value_key . '" ' . $selected . '> ' . $item->name . '</li>';
             if (count($item->children)) {
                 $html .= '<ul style="margin-left:20px;padding: 0">';
                 $html .= self::get_listing_html($item->children()->orderBy('name','asc')->get(), $selected_ids,$input_name);

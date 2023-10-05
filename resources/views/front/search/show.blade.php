@@ -3,34 +3,34 @@
 @section('content')
     @include('front.breadcrumbs', ['breadcrumbs' => [
         [
-            'name' => 'Home',
+            'name' => __('front/general.home'),
             'url' => route('front.home')
         ],
         [
-            'name' => "Search",
+            'name' => __('admin/general.search'),
             'url' => route('front.search.index')
         ]
     ]])
     <div class="container category-page page">
-        <div class="flex">
+        <div class="flex gap-5">
             <div class="w-1/4 mb-3">
-                <x-filters :items="$items" :slug="$category->slug ?? null"  />
+                <x-filters :items="$items" :slug="isset($category->slug) ? $category->slug : null"  />
             </div>
-            <div class="col-md-9">
+            <div class="w-3/4">
                 <x-active-filters  :category="$category"/>
-                <div class="">
+                <div class="flex flex-col">
                     @foreach($items as $item)
-                        <div class="item bg-white rounded p-3 border mb-3">
-                            <div class="row">
-                                <div class="col-md-4">
+                        <div class="item bg-white p-3 border mb-5">
+                            <div class="flex">
+                                <div class="w-1/4">
                                     <a href="{{route('front.item.show',$item->slug)}}">
                                         <img src="{{asset('storage/media/'.$item->thumbnail->name)}}" alt=""
                                              class="img-fluid">
                                     </a>
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="row">
-                                        <div class="col-md-9">
+                                <div class="w-3/4">
+                                    <div class="111">
+                                        <div>
                                             <a href="{{route('front.item.show',$item->slug)}}"
                                                class="text-decoration-none text-black">
                                                 <h2>{{$item->title}}</h2>
@@ -55,12 +55,12 @@
                             </div>
                         </div>
                     @endforeach
+                        @if($items->hasPages())
+                            <div class="">
+                                {{$items->links()}}
+                            </div>
+                        @endif
                 </div>
-                @if($items->hasPages())
-                    <div class="bg-white rounded p-3 border text-center pb-0 pagination">
-                        {{$items->links()}}
-                    </div>
-                @endif
             </div>
         </div>
     </div>
