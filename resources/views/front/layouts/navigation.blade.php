@@ -14,19 +14,20 @@
                     <img src="{{ asset('assets/img/icons8-whatsapp-24.png') }}" class="w-4 h-4"/>
                     <a href="tel:+905555555555">+90 555 555 55 55</a>
                 </li>
-                <li>
-                    <a href="">Sipariş Takibi</a>
-                </li>
+
             </ul>
         </div>
-        <div class="flex justify-end items-center p-2 bg-primary text-white gap-2 flex-1 min-h-[33px]">
-{{--            <span>Dil : </span>--}}
-{{--            <a class="hover-primary border hover:border-white hover:bg-white cursor-pointer p-1 py-0.5"--}}
-{{--               href="">TR</a>--}}
-{{--            <a class="hover-primary border hover:border-white hover:bg-white cursor-pointer p-1 py-0.5"--}}
-{{--               href="">EN</a>--}}
-{{--            <a class="hover-primary border hover:border-white hover:bg-white cursor-pointer p-1 py-0.5"--}}
-{{--               href="">RU</a>--}}
+        <div class="hide md:flex justify-end items-center p-2 bg-primary text-white gap-2 flex-1">
+
+            <a href="{{route('front.home')}}">Rezervasyonlarım</a>
+
+            {{--            <span>Dil : </span>--}}
+            {{--            <a class="hover-primary border hover:border-white hover:bg-white cursor-pointer p-1 py-0.5"--}}
+            {{--               href="">TR</a>--}}
+            {{--            <a class="hover-primary border hover:border-white hover:bg-white cursor-pointer p-1 py-0.5"--}}
+            {{--               href="">EN</a>--}}
+            {{--            <a class="hover-primary border hover:border-white hover:bg-white cursor-pointer p-1 py-0.5"--}}
+            {{--               href="">RU</a>--}}
         </div>
     </div>
 </div>
@@ -67,8 +68,11 @@
                     method="POST"
                     class="hover-primary  flex gap-2 justify-center items-center" id="logout-form">
                     @csrf
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" onclick="document.getElementById('logout-form').submit()" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                         onclick="document.getElementById('logout-form').submit()" viewBox="0 0 24 24"
+                         stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"/>
                     </svg>
                     <button type="submit" class="hover-primary  flex gap-2 justify-center items-center">
                         Logout
