@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Option;
-use App\Http\Controllers\Front\Controller;
+use App\Http\Controllers\Controller;
 use App\Models\Media;
 use Illuminate\Http\Request;
 

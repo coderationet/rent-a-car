@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Helpers\AttributeHelper;
+use App\Http\Controllers\Controller;
 use App\Models\Item;
 
 class ItemController extends Controller

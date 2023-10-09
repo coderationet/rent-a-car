@@ -1,5 +1,6 @@
 import './bootstrap';
 import './search.js';
+import './item-slider.js';
 
 $('.accordion-header').click(function () {
 

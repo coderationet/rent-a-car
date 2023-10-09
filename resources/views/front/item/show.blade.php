@@ -1,25 +1,19 @@
-@extends('layouts.app')
+@extends('front.layouts.app')
 @section('title', $item->title)
 @section('content')
-    @include('breadcrumbs', ['breadcrumbs' => [
+    @include('front.breadcrumbs', ['breadcrumbs' => [
         [
             'name' => __('front/general.home'),
-            'url' => route('home')
+            'url' => route('front.home')
         ],
         [
             'name' => $item->title,
             'url' => route('front.item.show', $item->slug)
         ]
     ]])
-    <div class="container item-page">
-        <div class="row">
-            <div class="col-md-9">
+    <div class="container flex flex-col md:flex-row gap-3 item-page">
+            <div class="w-full md:w-3/4 md:lex flex-col bg-white">
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title m-0">
-                            {{ $item->title}}
-                        </h3>
-                    </div>
                     <div class="card-body">
                         <!-- Slider main container -->
                         <div class="swiper item-slider">
@@ -27,7 +21,7 @@
                             <div class="swiper-wrapper">
                                 @foreach([$item->thumbnail, ...$item->gallery] as $image)
                                     <div class="swiper-slide text-center">
-                                        <img src="{{ asset('storage/media/' . $image->name ) }}" loading="lazy" alt="{{ $item->title }}" class="slider-image">
+                                        <img src="{{ route('front.image.show',[$image->id,'big']) }}" loading="lazy" alt="{{ $item->title }}" class="slider-image">
                                     </div>
                                 @endforeach
                             </div>
@@ -43,17 +37,18 @@
                         </div>
                     </div>
                     <div class="card-footer fs-5 p-4">
+                        <h2 class="text-2xl mb-3">{{$item->title}}</h2>
                         {!! $item->description !!}
                     </div>
                 </div>
-                <div class="card mt-4">
+                <div class="card p-3">
                     <div class="card-header">
                         <h5 class="card-title mb-0">
                             {{ __('front/item-informations.title') }}
                         </h5>
                     </div>
                     <div class="card-body">
-                        <table class="table-bordered w-100 ">
+                        <table class="table-bordered w-100">
                             <thead>
                             <tr>
                                 <th class="col-md-3 p-2">{{ __('front/item-informations.name') }}</th>
@@ -71,10 +66,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="w-full md:w-1/4   flex flex-col">
                 @include('front.item.contact-informations')
                 @include('front.item.appointment-form',['item' => $item])
             </div>
-        </div>
     </div>
 @endsection

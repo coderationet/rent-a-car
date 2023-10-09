@@ -24,7 +24,7 @@
                             <div class="flex">
                                 <div class="w-1/4">
                                     <a href="{{route('front.item.show',$item->slug)}}">
-                                        <img src="{{asset('storage/media/'.$item->thumbnail->name)}}" alt=""
+                                        <img src="{{route('front.image.show',['image_id' => $item->thumbnail->id,'size' => 'small'])}}" alt=""
                                              class="img-fluid">
                                     </a>
                                 </div>

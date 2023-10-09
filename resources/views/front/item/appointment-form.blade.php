@@ -1,4 +1,4 @@
-<div class="row mt-4">
+<div class="bg-white mt-4 p-3">
     <div class="col-md-12">
         <div class="card bg-light">
             <div class="card-header">

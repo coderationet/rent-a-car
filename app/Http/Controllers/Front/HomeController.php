@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Http\Controllers\Controller;
 use App\Models\ItemCategory;
+
 
 class HomeController extends Controller
 {

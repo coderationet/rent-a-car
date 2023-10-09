@@ -6,7 +6,7 @@
 @import "form.scss";
 @import "accordion.scss";
 @import "breadcrumbs.scss";
-
+@import "table.scss";
 
 @tailwind base;
 @tailwind components;

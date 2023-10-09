@@ -20,4 +20,8 @@ return [
             "is_open" => true,
         ]
     ],
+    'allowed_image_sizes' =>[
+        'big' => '790x400',
+        'small' => '190x120'
+    ]
 ];

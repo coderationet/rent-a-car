@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['as' => 'front.'], function () {
+
     Route::controller(Front\HomeController::class)->group(function () {
         Route::get('/', 'index')->name('home');
     });
 
+    Route::get('image/{image_id}/{size}/image.webp', [Front\ImageController::class, 'show'])->name('image.show');
     Route::get('item/{slug}', [Front\ItemController::class, 'show'])->name('item.show');
     Route::get('villas/{slug}', [Front\CategoryController::class, 'show'])->name('category.show');
     Route::post('attribute-values/get', [Front\AttributeValueController::class, 'get'])->name('attribute-values.get');
