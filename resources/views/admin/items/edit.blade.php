@@ -1,23 +1,16 @@
-@extends('admin.layouts.app')
+@extends('admin.layouts.general')
 @section('content')
     <div class="content-wrapper">
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">{{__('admin/general.dashboard')}}</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">{{__('admin/general.home')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('admin/item.items')}}</li>
-                            <li class="breadcrumb-item active">{{__('admin/item.new_item')}}</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
         <section class="content">
+
+
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">{{__('admin/general.home')}}</a></li>
+                    <li class="breadcrumb-item active">{{__('admin/item.items')}}</li>
+                    <li class="breadcrumb-item active">{{__('admin/item.new_item')}}</li>
+                </ol>
+
+
             <div class="container-fluid">
                 <form action="{{isset($item) ? route('admin.items.update',$item->id)  : route('admin.items.store')}}"
                       method="post">

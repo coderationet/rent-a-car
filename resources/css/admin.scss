@@ -4,6 +4,17 @@
         width: 250px;
         background: #f1f1f1;
         min-height: 100vh;
+        .nav-item {
+            .nav-treeview{
+                display: none;
+                background-color: #fff;
+            }
+            &.active{
+                .nav-treeview{
+                    display: block;
+                }
+            }
+        }
         ul{
             list-style: none;
             padding: 0;
