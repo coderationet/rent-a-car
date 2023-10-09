@@ -13,6 +13,7 @@ Route::group(['as' => 'front.'], function () {
     });
 
     Route::get('image/{image_id}/{size}/image.webp', [Front\ImageController::class, 'show'])->name('image.show');
+    Route::get('image/{image_id}/{size}/{mode}/image.webp', [Front\ImageController::class, 'show'])->name('image.show.mode');
     Route::get('item/{slug}', [Front\ItemController::class, 'show'])->name('item.show');
     Route::get('villas/{slug}', [Front\CategoryController::class, 'show'])->name('category.show');
     Route::post('attribute-values/get', [Front\AttributeValueController::class, 'get'])->name('attribute-values.get');

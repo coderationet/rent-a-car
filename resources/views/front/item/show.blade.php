@@ -21,7 +21,7 @@
                             <div class="swiper-wrapper">
                                 @foreach([$item->thumbnail, ...$item->gallery] as $image)
                                     <div class="swiper-slide text-center">
-                                        <img src="{{ route('front.image.show',[$image->id,'big']) }}" loading="lazy" alt="{{ $item->title }}" class="slider-image">
+                                        <img src="{{ route('front.image.show.mode',[$image->id,'big','fill']) }}" loading="lazy" alt="{{ $item->title }}" class="slider-image">
                                     </div>
                                 @endforeach
                             </div>

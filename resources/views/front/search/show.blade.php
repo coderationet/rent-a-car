@@ -24,7 +24,8 @@
                             <div class="flex gap-3">
                                 <div class="w-1/4">
                                     <a href="{{route('front.item.show',$item->slug)}}">
-                                        <img src="{{route('front.image.show',['image_id' => $item->thumbnail->id,'size' => 'small'])}}" alt=""
+                                        <img src="{{route('front.image.show.mode',['image_id' => $item->thumbnail->id,'size' => 'small','mode' => 'stretch'])}}" alt=""
+                                             loading="lazy"
                                              class="img-fluid">
                                     </a>
                                 </div>
