@@ -37,4 +37,8 @@ class ItemCategory extends Model
     public function items(){
         return $this->belongsToMany(Item::class, 'category_item_map', 'category_id', 'item_id');
     }
+
+    public function thumbnail(){
+        return $this->belongsTo(Media::class, 'image_id');
+    }
 }

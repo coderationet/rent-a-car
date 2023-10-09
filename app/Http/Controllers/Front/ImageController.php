@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\League;
 use App\Models\Media;
 use League\Glide\Server;
 use League\Glide\ServerFactory;

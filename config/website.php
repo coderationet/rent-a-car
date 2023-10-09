@@ -22,6 +22,7 @@ return [
     ],
     'allowed_image_sizes' =>[
         'big' => '790x400',
+        'large' => '250x250',
         'small' => '190x120'
     ]
 ];

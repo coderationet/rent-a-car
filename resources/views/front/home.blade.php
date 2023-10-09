@@ -51,34 +51,15 @@
         </p>
     </x-container>
     <x-container class="flex justify-between mt-4 gap-7">
-        <a href="{{ route('front.search.category','cars')}}" class="flex-1 shadow rounded overflow-hidden rounded overflow-hidden">
-            <img src="{{ asset('assets/img/813ef1b94de3c0efeed2fc6ff26ff0dd.png') }}" class="w-full">
-            <div class="p-3">
-                <h3 class="font-bold text-xl">Araba</h3>
-                <p class="text-gray-500">Uygun fiyatlarla kiralık araçlar</p>
-            </div>
-        </a>
-        <a href="{{ route('front.search.category','atv')}}" class="flex-1 shadow rounded overflow-hidden">
-            <img src="{{ asset('assets/img/813ef1b94de3c0efeed2fc6ff26ff0dd.png') }}" class="w-full">
-            <div class="p-3">
-                <h3 class="font-bold text-xl">ATV</h3>
-                <p class="text-gray-500">Uygun fiyatlarla kiralık araçlar</p>
-            </div>
-        </a>
-        <a href="{{ route('front.search.category','bycicles')}}" class="flex-1 shadow rounded overflow-hidden">
-            <img src="{{ asset('assets/img/813ef1b94de3c0efeed2fc6ff26ff0dd.png') }}" class="w-full">
-            <div class="p-3">
-                <h3 class="font-bold text-xl">Bisiklet</h3>
-                <p class="text-gray-500">Uygun fiyatlarla kiralık araçlar</p>
-            </div>
-        </a>
-        <a  href="{{ route('front.search.category','motors')}}" class="flex-1 shadow rounded overflow-hidden">
-            <img src="{{ asset('assets/img/813ef1b94de3c0efeed2fc6ff26ff0dd.png') }}" class="w-full">
-            <div class="p-3">
-                <h3 class="font-bold text-xl">Motor</h3>
-                <p class="text-gray-500">Uygun fiyatlarla kiralık araçlar</p>
-            </div>
-        </a>
+        @foreach($categories as $category)
+            <a href="{{ route('front.search.category',$category->slug)}}" class="flex-1 shadow rounded overflow-hidden rounded overflow-hidden bg-white">
+                <img src="{{ route('front.image.show',[$category->id,'large']) }}" class="w-full">
+                <div class="p-3">
+                    <h3 class="font-bold text-xl">{{$category->name}}</h3>
+                    <p class="text-gray-500">{{$category->short_description}}</p>
+                </div>
+            </a>
+        @endforeach
     </x-container>
     <div class="bg-gray-300 mt-7 py-7">
         <x-container class="flex flex-col justify-center items-center pb-7">

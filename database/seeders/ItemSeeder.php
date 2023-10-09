@@ -35,15 +35,48 @@ class ItemSeeder extends Seeder
         $location->values()->create(['value' => 'Bursa']);
 
 
-        // categories For Sale, For Rent, For Holiday
-        $for_sale_category = ItemCategory::create(['name' => 'Araba', 'slug' => 'cars']);
-        $for_rent_category = ItemCategory::create(['name' => 'Bisiklet', 'slug' => 'bycicles']);
-        $for_holiday_category = ItemCategory::create(['name' => 'Motor', 'slug' => 'motors']);
-        $for_holiday_category = ItemCategory::create(['name' => 'ATV', 'slug' => 'atv']);
+        $car_thumbnail = Media::create([
+            'name' => 'default/category-car.png',
+            'type' => 'image',
+        ]);
 
+        // categories For Sale, For Rent, For Holiday
+        $cars = ItemCategory::create(['name' => 'Araba', 'slug' => 'cars','short_description' => 'Araba kategorisi açıklaması']);
+        $cars->image_id = $car_thumbnail->id;
+        $cars->save();
+
+        $car_thumbnail = Media::create([
+            'name' => 'default/category-bicycles.webp',
+            'type' => 'image',
+        ]);
+        $bicycles = ItemCategory::create(['name' => 'Bisiklet', 'slug' => 'bicycles','short_description' => 'Bisiklet kategorisi açıklaması']);
+        $bicycles->image_id = $car_thumbnail->id;
+        $bicycles->save();
+
+        $moto_thumbnail = Media::create([
+            'name' => 'default/category-motobike.jpg',
+            'type' => 'image',
+        ]);
+        $moto = ItemCategory::create(['name' => 'Motor', 'slug' => 'motors','short_description' => 'Motor kategorisi açıklaması']);
+        $moto->image_id = $moto_thumbnail->id;
+        $moto->save();
+
+
+        $atv_thumbnail = Media::create([
+            'name' => 'default/category-atv.jpg',
+            'type' => 'image',
+        ]);
+        $atv = ItemCategory::create(['name' => 'ATV', 'slug' => 'atv','short_description' => 'ATV kategorisi açıklaması']);
+        $atv->image_id = $atv_thumbnail->id;
+        $atv->save();
 
         $thumbnail = Media::create([
             'name' => 'default/thumbnail.webp',
+            'type' => 'image',
+        ]);
+
+        $item_thumbnail = Media::create([
+            'name' => 'default/default-item-thumb.jpg',
             'type' => 'image',
         ]);
 
@@ -56,7 +89,7 @@ class ItemSeeder extends Seeder
                 'slug' => 'car-'.$i,
                 'description' => 'Car '. $i . ' description',
                 'price' => rand(1000, 100000),
-                'thumbnail_id' => $thumbnail->id,
+                'thumbnail_id' => $item_thumbnail->id,
             ]);
 
             $item->categories()->attach($category_id);

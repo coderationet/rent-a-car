@@ -21,7 +21,7 @@
                 <div class="flex flex-col">
                     @foreach($items as $item)
                         <div class="item bg-white p-3 border mb-5">
-                            <div class="flex">
+                            <div class="flex gap-3">
                                 <div class="w-1/4">
                                     <a href="{{route('front.item.show',$item->slug)}}">
                                         <img src="{{route('front.image.show',['image_id' => $item->thumbnail->id,'size' => 'small'])}}" alt=""
@@ -33,7 +33,7 @@
                                         <div>
                                             <a href="{{route('front.item.show',$item->slug)}}"
                                                class="text-decoration-none text-black">
-                                                <h2>{{$item->title}}</h2>
+                                                <h2 class="text-xl">{{$item->title}}</h2>
                                             </a>
                                             <p class="text-gray fs-12">{{$item->attributeValues[0]->value}}</p>
                                             <div class="d-flex gap-1">
