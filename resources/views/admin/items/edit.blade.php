@@ -4,11 +4,11 @@
         <section class="content">
 
 
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">{{__('admin/general.home')}}</a></li>
-                    <li class="breadcrumb-item active">{{__('admin/item.items')}}</li>
-                    <li class="breadcrumb-item active">{{__('admin/item.new_item')}}</li>
-                </ol>
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">{{__('admin/general.home')}}</a></li>
+                <li class="breadcrumb-item active">{{__('admin/item.items')}}</li>
+                <li class="breadcrumb-item active">{{__('admin/item.new_item')}}</li>
+            </ol>
 
 
             <div class="container-fluid">
@@ -18,121 +18,112 @@
                     @if(isset($item))
                         @method('PUT')
                     @endif
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card card-primary">
+                    <div class="flex gap-5">
+                        <div class="w-3/4 flex flex-col gap-5">
+                            <div class="card card-primary">
 
-                                        <div class="card-header">
-                                            <h3 class="card-title">{{__('admin/general.add_new')}}</h3>
-                                        </div>
+                                <div class="card-header">
+                                    <h3 class="card-title">{{__('admin/general.add_new')}}</h3>
+                                </div>
 
-                                        <div class="card-body item-form">
-                                            <div class="form-group">
-                                                <label for="title">{{__('admin/general.title')}}</label>
-                                                <input type="text" class="form-control" id="title"
-                                                       value="{{isset($item) ? $item->title : ''}}"
-                                                       name="title"
-                                                       required
-                                                       placeholder="{{__('admin/general.title')}}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="slug">{{__('admin/general.slug')}}</label>
-                                                <input type="text" class="form-control" id="slug"
-                                                       value="{{isset($item) ? $item->slug : ''}}"
-                                                       name="slug"
-                                                       required
-                                                       placeholder="{{__('admin/general.slug')}}">
-                                                <div class="alert alert-success d-none mt-2"></div>
-                                                <div class="alert alert-danger d-none mt-2"></div>
-                                            </div>
-                                            <!-- description part -->
-                                            <div class="form-group">
-                                                <label for="description">{{__('admin/general.description')}}</label>
-                                                <textarea class="form-control custom-editor" id="description" rows="3"
-                                                          name="description"
-                                                          required
-                                                          placeholder="Açıklama Giriniz">{{isset($item) ? $item->description : ''}}</textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">
-                                                {{isset($item) ? __('admin/general.update') : __('admin/general.add_new')}}
-                                            </button>
-                                        </div>
-
+                                <div class="card-body item-form">
+                                    <div class="form-group">
+                                        <label for="title">{{__('admin/general.title')}}</label>
+                                        <input type="text" class="form-control" id="title"
+                                               value="{{isset($item) ? $item->title : ''}}"
+                                               name="title"
+                                               required
+                                               placeholder="{{__('admin/general.title')}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="slug">{{__('admin/general.slug')}}</label>
+                                        <input type="text" class="form-control" id="slug"
+                                               value="{{isset($item) ? $item->slug : ''}}"
+                                               name="slug"
+                                               required
+                                               placeholder="{{__('admin/general.slug')}}">
+                                        <div class="alert alert-success d-none mt-2"></div>
+                                        <div class="alert alert-danger d-none mt-2"></div>
+                                    </div>
+                                    <!-- description part -->
+                                    <div class="form-group">
+                                        <label for="description">{{__('admin/general.description')}}</label>
+                                        <textarea class="form-control custom-editor" id="description" rows="3"
+                                                  name="description"
+                                                  required
+                                                  placeholder="Açıklama Giriniz">{{isset($item) ? $item->description : ''}}</textarea>
                                     </div>
                                 </div>
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{isset($item) ? __('admin/general.update') : __('admin/general.add_new')}}
+                                    </button>
+                                </div>
+
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
-                                    @include('admin.items._attribute_values',[
-                                        "item_attributes" => $item_attributes,
-                                    ])
-                                </div>
+                                @include('admin.items._attribute_values',[
+                                    "item_attributes" => $item_attributes,
+                                ])
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title">
-                                                {{__('admin/general.featured_image')}}
-                                            </h3>
-                                        </div>
-                                        <div class="card-body">
-                                            @include('admin.media_library._input',[
-                                                    "input_name"=>"thumbnail_id",
-                                                    "relation" => "thumbnail",
-                                                    "item" => isset($item) ? $item : null,
-                                                    "multiple_file" => false
-                                            ])
-                                        </div>
+                        <div class="w-1/4 flex flex-col gap-5">
+                            <div class="flex flex-col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            {{__('admin/general.featured_image')}}
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        @include('admin.media_library._input',[
+                                                "input_name"=>"thumbnail_id",
+                                                "relation" => "thumbnail",
+                                                "item" => isset($item) ? $item : null,
+                                                "multiple_file" => false
+                                        ])
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title">
-                                                {{__('admin/general.gallery')}}
-                                            </h3>
-                                        </div>
-                                        <div class="card-body">
-                                            @include('admin.media_library._input',[
-                                                    "input_name"=>"gallery_ids",
-                                                    "relation" => "gallery",
-                                                    "multiple_file" => true,
-                                                    "item" => isset($item) ? $item : null
-                                            ])
-                                        </div>
+
+                            <div class="flex flex-col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            {{__('admin/general.gallery')}}
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        @include('admin.media_library._input',[
+                                                "input_name"=>"gallery_ids",
+                                                "relation" => "gallery",
+                                                "multiple_file" => true,
+                                                "item" => isset($item) ? $item : null
+                                        ])
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title">
-                                                {{__('admin/category.categories')}}
-                                            </h3>
-                                        </div>
-                                        <div class="card-body category-listing-block">
-                                            {!! \App\Helpers\HierarchicalListingHelper::get_listing_html($categories,$selected_categories,'categories[]') !!}
-                                        </div>
-                                        <div class="card-footer">
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                    id="create-new-category-button"
-                                                    data-target="#create-new-category-modal">
-                                                {{__('admin/category.create_new_category')}}
-                                            </button>
-                                        </div>
+
+                            <div class=" flex flex-col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            {{__('admin/category.categories')}}
+                                        </h3>
+                                    </div>
+                                    <div class="card-body category-listing-block">
+                                        {!! \App\Helpers\HierarchicalListingHelper::get_listing_html($categories,$selected_categories,'categories[]') !!}
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="button" class="btn btn-primary mt-3" data-toggle="modal"
+                                                id="create-new-category-button"
+                                                data-target="#create-new-category-modal">
+                                            {{__('admin/category.create_new_category')}}
+                                        </button>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -145,7 +136,7 @@
 
     <!-- Modal to create new category dialog -->
     <!-- Modal -->
-    <div class="modal fade" id="create-new-category-modal" tabindex="-1" role="dialog"
+    <div class="modal fade hidden" id="create-new-category-modal" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -160,7 +151,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary create-new-category-ajax">{{__('admin/general.add_new')}}</button>
+                    <button type="button"
+                            class="btn btn-primary create-new-category-ajax">{{__('admin/general.add_new')}}</button>
                 </div>
             </div>
         </div>
@@ -169,13 +161,15 @@
 
 
     <script src="{{asset('assets/admin/summernote/custom-image-dialog.plugin.js')}}"></script>
+
     @include('admin.js.summernote-turkish')
+
     <script type="module">
 
-        $('.item-form #title').change(function (){
+        $('.item-form #title').change(function () {
             // if slug is empty then set slug value
             // doesnt allow space and special chars except -
-            if($('.item-form #slug').val() == ''){
+            if ($('.item-form #slug').val() == '') {
                 $('.item-form #slug').val($(this).val().replace(/[^a-z0-9\s]/gi, '-').replace(/[_\s]/g, '-').toLowerCase());
             }
 
@@ -192,15 +186,15 @@
                 except_post_id = '{{$item->id}}';
             @endif
 
-            $.get("{{route('admin.items.get_item')}}?slug="+$(this).val()+"&except_post_id="+except_post_id,function (data) {
+            $.get("{{route('admin.items.get_item')}}?slug=" + $(this).val() + "&except_post_id=" + except_post_id, function (data) {
 
-                if(data.exists === true){
+                if (data.exists === true) {
 
                     $('.item-form .alert-success').addClass('d-none');
                     $('.item-form .alert-danger').removeClass('d-none');
                     $('.item-form .alert-danger').html(data.msg);
 
-                }else {
+                } else {
 
                     $('.item-form .alert-success').removeClass('d-none');
                     $('.item-form .alert-danger').addClass('d-none');
@@ -210,14 +204,14 @@
             });
         });
 
-        $(document).on('click','.create-new-category-ajax',function () {
+        $(document).on('click', '.create-new-category-ajax', function () {
             var form_data = '';
             // add csrf token to form data get token from meta
             form_data = form_data + '&_token=' + $('meta[name="csrf-token"]').attr('content');
             // add name to form data
             form_data = form_data + '&name=' + $('#create-new-category-modal #category').val();
             // add parent_id to form data
-            form_data = form_data + '&parent_id=' + $('#create-new-category-modal #parent_id').val() ?? null ;
+            form_data = form_data + '&parent_id=' + $('#create-new-category-modal #parent_id').val() ?? null;
             // add return_type to form data
             form_data = form_data + '&response_type=json';
             // send selected categories
@@ -267,7 +261,7 @@
 
             });
 
-            $(document).on('click','')
+            $(document).on('click', '')
 
             // Summernote
             $('#description').summernote({

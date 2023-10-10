@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{isset($title) ? $title . ' - ' . config('app.name', 'Laravel') : config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,7 +18,6 @@
 <div class="min-h-screen bg-gray-100">
     @include('front.layouts.navigation')
     @yield('content')
-
     <div class="footer py-10 mt-10">
         <x-container class="grid grid-cols-4 text-white ">
             <div>

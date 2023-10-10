@@ -13,6 +13,27 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{asset('assets/admin/plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('assets/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+    <style>
+        .select2-container .select2-selection--single {
+            height: unset;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #007bff !important;
+            border-color: #006fe6 !important;
+            color: #fff !important;
+        }
+    </style>
+
+
+    <link rel="stylesheet" href="{{asset('assets/admin/plugins/summernote/summernote-bs4.min.css')}}">
+
+
 </head>
 <body>
 
@@ -24,6 +45,17 @@
         @yield("content")
     </div>
 </div>
+
+<!-- Jquery -->
+<script src="{{asset('assets/admin/plugins/jquery/jquery.min.js')}}" defer></script>
+
+<!-- Select2 script -->
+<script src="{{asset('assets/admin/plugins/select2/js/select2.min.js')}}" defer></script>
+
+<!-- Select2 script -->
+<script src="{{asset('assets/admin/plugins/summernote/summernote.min.js')}}"></script>
+
 @stack('extra-footer')
+
 </body>
 </html>

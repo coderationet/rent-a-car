@@ -6,7 +6,7 @@
         <select
             name="attribute_values[]"
             class="form-control multiple-attribute-values"
-
+            data-attribute-value-url="{{route('admin.item-attributes.ajax_data')}}}}"
             @if($item_attribute['type'] == "multiselect")
                 multiple=""
             @endif

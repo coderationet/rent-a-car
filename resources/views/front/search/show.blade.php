@@ -1,4 +1,6 @@
-@extends('front.layouts.app')
+@extends('front.layouts.app',[
+    'title' => $category->name
+])
 {{--@section('title', $category->name)--}}
 @section('content')
     @include('front.breadcrumbs', ['breadcrumbs' => [
@@ -14,19 +16,21 @@
     <div class="container category-page page">
         <div class="flex gap-5">
             <div class="w-1/4 mb-3">
-                <x-filters :items="$items" :slug="isset($category->slug) ? $category->slug : null"  />
+                <x-filters :items="$items" :slug="isset($category->slug) ? $category->slug : null"/>
             </div>
             <div class="w-3/4">
-                <x-active-filters  :category="$category"/>
+                <x-active-filters :category="$category"/>
                 <div class="flex flex-col">
                     @foreach($items as $item)
                         <div class="item bg-white p-3 border mb-5">
                             <div class="flex gap-3">
                                 <div class="w-1/4">
                                     <a href="{{route('front.item.show',$item->slug)}}">
-                                        <img src="{{route('front.image.show.mode',['image_id' => $item->thumbnail->id,'size' => 'small','mode' => 'stretch'])}}" alt=""
-                                             loading="lazy"
-                                             class="img-fluid">
+                                        <img
+                                            src="{{route('front.image.show.mode',['image_id' => $item->thumbnail->id,'size' => 'small','mode' => 'stretch'])}}"
+                                            alt=""
+                                            loading="lazy"
+                                            class="img-fluid">
                                     </a>
                                 </div>
                                 <div class="w-3/4">
@@ -56,11 +60,11 @@
                             </div>
                         </div>
                     @endforeach
-                        @if($items->hasPages())
-                            <div class="">
-                                {{$items->links()}}
-                            </div>
-                        @endif
+                    @if($items->hasPages())
+                        <div class="">
+                            {{$items->links()}}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
