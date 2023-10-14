@@ -59,7 +59,7 @@
 @pushonce('extra-footer')
 
     <!-- Modal Create Attribute Value -->
-    <div class="modal fade" id="add-new-attribute-value-modal" tabindex="-1" role="dialog"
+    <div class="modal fade hidden" id="add-new-attribute-value-modal" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -87,7 +87,7 @@
     </div>
 
     <!-- Modal Create Attribute -->
-    <div class="modal fade" id="add-new-attribute-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade hidden" id="add-new-attribute-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

@@ -39,7 +39,7 @@
 </tr>
 
 @pushonce('extra-footer')
-    <script>
+    <script type="module">
         $(function () {
             $(document).on('click', '.delete-attribute', function () {
                 // delete attribute row

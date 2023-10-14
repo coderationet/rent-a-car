@@ -1,5 +1,5 @@
 @extends('front.layouts.app',[
-    'title' => $category->name
+    'title' => isset($category->name) ? $category->name : null,
 ])
 {{--@section('title', $category->name)--}}
 @section('content')

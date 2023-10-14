@@ -27,11 +27,15 @@ class Filters extends Component
 
         $min_price = 0;
         $max_price = 100000;
+
         $filter_attributes = config('website.filter_attributes');
-        $attributes = cache('filter_attributes', function () use ($filter_attributes) {
-            return Attribute::with('values')->whereIn('id', collect($filter_attributes)->pluck('id'))->get();
+
+        $attributes = cache()->remember('filter_attributes',0, function () use ($filter_attributes) {
+            return Attribute::whereIn('id', collect($filter_attributes)->pluck('id'))->with('values')->get();
         });
+
         $open_attributes = [];
+
         foreach ($filter_attributes as $attribute) {
             if ($attribute['is_open'] == true) {
                 $open_attributes[] = $attribute['id'];
@@ -56,7 +60,7 @@ class Filters extends Component
         });
 
         $categories = cache()->remember('all_categories',60 * 60 * 24, function () {
-            return ItemCategory::whereNull('parent_id')->orderBy('name','ASC')->get();
+            return ItemCategory::with('children','parent')->whereNull('parent_id')->orderBy('name','ASC')->get();
         });
 
         $selected_categories = [];

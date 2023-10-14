@@ -6,11 +6,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="{{asset('assets/admin/bootstrap5/dist/css/bootstrap.min.css')}}">
-
+    <link rel="stylesheet" href="{{asset('assets/admin/plugins/bootstrap/css/bootstrap.min.css')}}">
 </head>
 <body>
-<div class="row m-0 p-0">
+<div class="min-h-screen">
     <div class="col-md-12  m-0 p-0" style="height: 100vh">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -63,7 +62,7 @@
     </div>
 </div>
 <script src="{{asset('assets/admin/plugins/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('assets/admin/bootstrap5/dist/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script>
     $(function () {
 

@@ -160,7 +160,7 @@
 
 
 
-    <script src="{{asset('assets/admin/summernote/custom-image-dialog.plugin.js')}}"></script>
+    <script src="{{asset('assets/admin/summernote/custom-image-dialog.plugin.js')}}" defer></script>
 
     @include('admin.js.summernote-turkish')
 

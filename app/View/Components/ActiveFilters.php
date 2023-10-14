@@ -49,12 +49,15 @@ class ActiveFilters extends Component
             }
         }
 
+        $filters['filter_attributes'] = count($filter_attributes) ? Attribute::whereIn('slug',$filter_attributes)->get() : [];
+        if (count($filters['filter_attributes'])){
+            $filters['filter_attributes'] = $filters['filter_attributes']->unique('id')->keyBy('id');
+        }
 
-        $filters['filter_attributes'] = Attribute::whereIn('slug',$filter_attributes)->get();
-        $filters['filter_attributes'] = $filters['filter_attributes']->unique('id')->keyBy('id');
-
-        $filters['filter_values'] = AttributeValue::whereIn('id',$filter_values)->get();
-        $filters['filter_values'] = $filters['filter_values']->unique('id')->keyBy('id');
+        $filters['filter_values'] = count($filter_values) ? AttributeValue::whereIn('id',$filter_values)->get() : [];
+        if (count($filters['filter_values'])){
+            $filters['filter_values'] = $filters['filter_values']->unique('id')->keyBy('id');
+        }
 
         $filters['categories'] = [];
 

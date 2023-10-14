@@ -18,7 +18,7 @@
 <div class="min-h-screen bg-gray-100">
     @include('front.layouts.navigation')
     @yield('content')
-    <div class="footer py-10 mt-10">
+    <div class="footer py-10">
         <x-container class="grid grid-cols-4 text-white ">
             <div>
                 <ul>

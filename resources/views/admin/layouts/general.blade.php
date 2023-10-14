@@ -31,8 +31,6 @@
     </style>
 
 
-    <link rel="stylesheet" href="{{asset('assets/admin/plugins/summernote/summernote-bs4.min.css')}}">
-
 
 </head>
 <body>
@@ -45,15 +43,6 @@
         @yield("content")
     </div>
 </div>
-
-<!-- Jquery -->
-<script src="{{asset('assets/admin/plugins/jquery/jquery.min.js')}}" defer></script>
-
-<!-- Select2 script -->
-<script src="{{asset('assets/admin/plugins/select2/js/select2.min.js')}}" defer></script>
-
-<!-- Select2 script -->
-<script src="{{asset('assets/admin/plugins/summernote/summernote.min.js')}}"></script>
 
 @stack('extra-footer')
 

@@ -15,7 +15,6 @@ class SearchController extends Controller
 
         $items = Item::query();
 
-
         if ($category) {
             $category = [$category]; // category slug array
         }
@@ -31,6 +30,7 @@ class SearchController extends Controller
             });
         }
 
+
         $request_attributes = [];
 
         foreach (request()->all() as $key => $value) {
@@ -44,7 +44,7 @@ class SearchController extends Controller
 
         $filter_attributes = config('website.filter_attributes');
 
-        $attributes = cache('filter_attributes', function () use ($filter_attributes) {
+        $attributes = cache()->remember('filter_attributes',1, function () use ($filter_attributes) {
             return Attribute::with('values')->whereIn('id', collect($filter_attributes)->pluck('id'))->get();
         });
 
@@ -68,14 +68,10 @@ class SearchController extends Controller
             $items = $items->where('price', '<=', request()->max_price);
         }
 
+        $items = $items->with('thumbnail','attributeValues','categories')->paginate(12)->withQueryString();
 
-        $item_count = $items->count();
+        return view('front.search.show', compact('category', 'items'));
 
-
-        $items = $items->paginate(12)->withQueryString();
-
-
-        return view('front.search.show', compact('category', 'items', 'item_count'));
     }
 
     function remove_filter_from_url()

@@ -82,7 +82,7 @@ class ItemSeeder extends Seeder
 
         for ($i=1; $i<100;$i++){
 
-            $category_id = rand(1,3);
+            $category_id = rand(1,4);
             // create item
             $item = Item::create([
                 'title' => 'Car '.$i,
