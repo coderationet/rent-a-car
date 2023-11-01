@@ -128,32 +128,4 @@ class MediaLibraryController extends Controller
             return round($size);
         }
     }
-
-    function media_block_html(Request $request){
-
-        $data = [];
-
-        if($request->has('input_name')){
-            $data['input_name'] = $request->post('input_name');
-        }
-
-        // relation
-        if($request->has('relation')){
-            $data['relation'] = $request->post('relation');
-        }
-
-        // item
-        $data['item'] = null;
-        if($request->has('item')){
-            $data['item'] = $request->post('item');
-        }
-
-        // multiple_file
-        $data['multiple_file'] = false;
-        if($request->has('multiple_file')){
-            $data['multiple_file'] = $request->post('multiple_file');
-        }
-
-        return view('admin.media_library._input',$data)->render();
-    }
 }

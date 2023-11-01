@@ -6,28 +6,30 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="{{asset('assets/admin/plugins/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/bootstrap5/dist/css/bootstrap.min.css')}}">
+
 </head>
 <body>
-<div class="min-h-screen">
+<div class="row m-0 p-0">
     <div class="col-md-12  m-0 p-0" style="height: 100vh">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="new-tab" data-bs-toggle="tab" data-bs-target="#new" type="button"
-                        role="tab" aria-controls="home" aria-selected="true">{{__('admin/general.add_new')}}
+                        role="tab" aria-controls="home" aria-selected="true">Yeni Ekle
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="library-tab" data-bs-toggle="tab" data-bs-target="#library" type="button"
-                        role="tab" aria-controls="library" aria-selected="false">{{__('admin/media_library.media_library')}}
+                        role="tab" aria-controls="library" aria-selected="false">Kütüphane
                 </button>
             </li>
         </ul>
         <div class="tab-content h-100" id="myTabContent">
             <div class="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
-                <div style="width: 100%;height: 100vh;display: flex;flex-direction:column;justify-content: center;align-items: center">
+                <div
+                    style="width: 100%;height: 100vh;display: flex;flex-direction:column;justify-content: center;align-items: center">
                     <span><b>Max Size: {{$max_size}}MB</b></span>
-                    <button class="btn btn-primary" id="new-image">{{__('admin/general.add_new')}}</button>
+                    <button class="btn btn-primary" id="new-image">Yeni İçerik Ekle</button>
                     <input type="file" id="new-image-input" style="display: none">
                 </div>
 
@@ -35,7 +37,7 @@
             <div class="tab-pane fade " id="library" role="tabpanel" aria-labelledby="library-tab">
                 <div class="row bg-blue text-center m-0 p-0"
                      style="display:flex; justify-content: center; align-items: center; width: 100%;text-align: center;background: #353dff; color:#fff">
-                    <span>{{__('admin/media_library.choose_file')}}</span>
+                    <span>Dosya Seçiniz</span>
                 </div>
                 <div class="row image-items">
                     @foreach($items as $file)
@@ -46,8 +48,11 @@
                             @if($file->type == 'image')
                                 <img src="{{asset('storage/media/'.$file->name)}}" alt="" class="img-fluid"
                                      style="max-height: 250px">
-                            @else
+                            @elseif($file->type == 'video')
                                 <img src="{{asset('storage/images/video-thumb.jpg')}}" alt="" class="img-fluid"
+                                     style="max-height: 250px">
+                            @elseif($file->type == 'application')
+                                <img src="{{asset('storage/images/file.jpg')}}" alt="" class="img-fluid"
                                      style="max-height: 250px">
                             @endif
                             <span>{{$file->name}}</span>
@@ -61,8 +66,8 @@
         </div>
     </div>
 </div>
-<script src="{{asset('assets/admin/plugins/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('assets/admin/adminlte/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('assets/admin/bootstrap5/dist/js/bootstrap.bundle.js')}}"></script>
 <script>
     $(function () {
 
@@ -82,7 +87,7 @@
                 $('.image-items').prepend(`
                 <div class="col-md-3 file-to-pick new-image" style="text-align: center; border:1px solid #eee">
                     <img src="{{asset('storage/images/default-thumb.jpg')}}" alt="" class="img-fluid" style="max-height: 250px">
-                    <span>{{__('admin/general.loading')}}...</span>
+                    <span>Yükleniyor...</span>
                     <div class="progress">
                       <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -118,6 +123,8 @@
                             $('.new-image img').attr('src', data.file.url);
                         } else if (data.file.type == 'video') {
                             $('.new-image img').attr('src', '{{asset('storage/images/video-thumb.jpg')}}');
+                        } else if (data.file.type == 'application') {
+                            $('.new-image img').attr('src', '{{asset('storage/images/file.jpg')}}');
                         }
 
                         // add file name
@@ -171,6 +178,13 @@
                 $(parent).find('#' + element_id).parent().find('.gc-library-preview-container').html(`
                     <video src="${file_url}" controls style="width: 100%; height: 100%"></video>
                 `);
+            } else if ($(this).attr('data-file-type') == 'application') {
+                $(parent).find('#' + element_id).parent().find('.gc-library-preview-container').html(`
+                    <div style="display:flex;flex-direction:column; padding : 10px;">
+                        <img src="{{asset('storage/images/file.jpg')}}" alt="" class="img-fluid" style="max-height: 250px">
+                        <a href="${file_url}" target="_blank" class="btn btn-primary btn-sm">İndir</a>
+                    </div>
+                `);
             }
 
             // close modal
@@ -194,9 +208,9 @@
             let current_file_ids = $(parent).find('input[name=' + element_id + ']').val();
 
 
-            if(current_file_ids == ''){
+            if (current_file_ids == '') {
                 current_file_ids = [];
-            }else{
+            } else {
                 current_file_ids = current_file_ids.split(',');
             }
 
@@ -213,7 +227,8 @@
             let container = $(parent).find('input[name=' + element_id + ']').parent();
             container.find('.thumbnail').remove();
             container.find('.gc-library-preview-container').removeClass('no-image');
-            container.find('.gc-library-preview-container').addClass('has-image');;
+            container.find('.gc-library-preview-container').addClass('has-image');
+            ;
 
 
             let file_url = $(this).attr('data-file-url');
@@ -276,7 +291,7 @@
         background: #ddd;
     }
 
-    .progress{
+    .progress {
         width: 100%;
     }
 

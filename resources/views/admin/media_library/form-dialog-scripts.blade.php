@@ -1,4 +1,4 @@
-<div class="modal hidden" id="gc-media-library-dialog" tabindex="-1" role="dialog"
+<div class="modal fade" id="gc-media-library-dialog" tabindex="-1" role="dialog"
      aria-labelledby="gc-media-library-dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<script type="module">
+<script>
 
     function gc_library_element(element) {
 
@@ -20,18 +20,19 @@
     }
 
     function gc_single_library_element(element) {
-
         element.css('display', 'none');
 
-        if ($(element).attr('value') == '' && $('.gc-library-preview-container[data-element-id="' + element.attr('name') + '"]').length === 0) {
+        console.log(element);
+
+        if ($(element).attr('value') == '') {
             element.after(`
         <div class="gc-library-preview-container single-image no-image" data-element-id="${element.attr('name')}">
             <img class="thumbnail" src="{{asset('storage/images/default-thumb.jpg')}}"/>
-            <!-- <span class=" placeholder-name"> {{__('admin/media_library.choose_image')}} </span> -->
+            <!-- <span class=" placeholder-name"> Resim Seçiniz </span> -->
         </div>
         <div class="gc-image-preview-container-buttons">
-            <button type="button" class="btn btn-primary btn-sm add-new single-image" data-element-id="${element.attr('name')}"> {{__('admin/general.add_new')}} </button>
-            <button type="button" class="btn btn-primary btn-sm remove single-image" data-element-id="${element.attr('name')}"> {{__('admin/general.remove')}} </button>
+            <button type="button" class="btn btn-primary btn-sm add-new single-image" data-element-id="${element.attr('name')}"> Yeni Ekle </button>
+            <button type="button" class="btn btn-primary btn-sm remove single-image" data-element-id="${element.attr('name')}"> Kaldır </button>
         </div>
         `);
         }
@@ -45,26 +46,17 @@
             element.after(`
         <div class="gc-library-preview-container multiple-image no-image" data-element-id="${element.attr('name')}">
             <img class="thumbnail" src="{{asset('storage/images/default-thumb.jpg')}}"/>
-            <!-- <span class=" placeholder-name"> {{__('admin/media_library.choose_image')}} </span>  -->
+            <!-- <span class=" placeholder-name"> Resim Seçiniz </span>  -->
         </div>
         <div class="gc-image-preview-container-buttons">
-            <button type='button' class="btn btn-primary btn-sm multiple-image add-new" data-element-id="${element.attr('id')}"> {{__('admin/general.add_new')}} </button>
+            <button type='button' class="btn btn-primary btn-sm multiple-image add-new" data-element-id="${element.attr('id')}"> Yen Ekle </button>
         </div>
         `);
 
             // add new button
         }
-    }
 
-    var gc_media_library = function() {
-        let library_elements = $('.gc-image-library-field');
-        // foreach for elements
-        library_elements.each(function (index, element) {
-            gc_library_element($(element));
-        });
     }
-
-    gc_media_library();
 
     $(function () {
 
@@ -86,6 +78,15 @@
             element.parent().remove();
         });
 
+        function gc_media_library() {
+            let library_elements = $('.gc-image-library-field');
+            // foreach for elements
+            library_elements.each(function (index, element) {
+                gc_library_element($(element));
+            });
+        }
+
+        gc_media_library();
 
         // multiple
 
@@ -125,6 +126,8 @@
             preview_container.removeClass('has-image');
             preview_container.find('img').remove();
             preview_container.find('video').remove();
+            preview_container.find('a').remove();
+
 
             preview_container.append(`
                 <img class="" src="{{asset('storage/images/default-thumb.jpg')}}"/>

@@ -1,4 +1,4 @@
-<script type="module">
+<script>
     (function ($) {
         $.extend($.summernote.lang, {
             'tr-TR': {

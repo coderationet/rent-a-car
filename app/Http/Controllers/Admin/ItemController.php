@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\AttributeHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute;
+use App\Models\AttributeValue;
 use App\Models\Item;
+
 use App\Models\ItemCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\DB;
 class ItemController extends Controller
 {
     public function index()

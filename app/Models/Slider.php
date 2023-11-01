@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slider extends Model
 {
-    use HasFactory;
     protected $guarded = ['id'];
     public $timestamps = false;
     public function sliderImages()

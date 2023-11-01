@@ -1,20 +1,22 @@
 <script type="module">
     $('#name').change(function (){
-
-
         // if slug is empty then set slug value
         // doesnt allow space and special chars except -
         if($('#slug').val() == ''){
-            $('#slug').val($(this).val().replace(/[^a-z0-9\s]/gi, '-').replace(/[_\s]/g, '-').toLowerCase());
+            $.get('{{route('admin.generate-slug')}}',{title:$(this).val()},function (data){
+                $('#slug').val(data.slug);
+            });
         }
+    });
 
-
+    $('#slug').change(function (){
+        // doesnt allow space and special chars except -
+        $.get('{{route('admin.generate-slug')}}',{title:$(this).val()},function (data){
+            $('#slug').val(data.slug);
+        });
     });
 
     $('#slug').keyup(function (e) {
-
-        // doesnt allow space and special chars except -
-        $(this).val($(this).val().replace(/[^a-z0-9\s]/gi, '-').replace(/[_\s]/g, '-').toLowerCase());
 
         var except_post_id = '';
 

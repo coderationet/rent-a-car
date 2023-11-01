@@ -7,6 +7,8 @@
 @import "accordion.scss";
 @import "breadcrumbs.scss";
 @import "table.scss";
+@import "select2/dist/css/select2.min.css";
+@import "select2.scss";
 
 @tailwind base;
 @tailwind components;
@@ -45,4 +47,8 @@
 
 .header-container{
     background-color: #fff;
+}
+
+.page{
+    padding-bottom: 10px;
 }

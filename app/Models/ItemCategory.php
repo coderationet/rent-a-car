@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ItemCategory extends Model
 {
-    use HasFactory;
     protected $guarded = ['id'];
 
     public function children(){
@@ -41,4 +40,5 @@ class ItemCategory extends Model
     public function thumbnail(){
         return $this->belongsTo(Media::class, 'image_id');
     }
+
 }

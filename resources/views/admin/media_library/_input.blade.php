@@ -1,5 +1,4 @@
 @php
-    // input_name,relation,multiple_file,item
     $multiple_file = isset($multiple_file) && $multiple_file ;
 @endphp
 @if($multiple_file)
@@ -28,6 +27,13 @@
                             Your browser does not support the video tag.
                         </video>
                     @endif
+                    @if($media_item->type == 'application')
+                        <div>
+                            <img src="{{asset('storage/media/default/file.jpg')}}">
+                            <a href="{{asset('storage/media/'.$media_item->name)}}"
+                               target="_blank" class="btn btn-primary btn-sm">İndir</a>
+                        </div>
+                    @endif
                     <div class="remove-item" data-element-id="{{$input_name}}" data-file-id="{{$media_item->id}}">Sil
                     </div>
                 </div>
@@ -35,7 +41,7 @@
         </div>
         <div class="gc-image-preview-container-buttons">
             <button type="button" class="btn btn-primary btn-sm multiple-image add-new"
-                    data-element-id="{{$input_name}}"> {{__('admin/general.add_new')}}
+                    data-element-id="{{$input_name}}"> Yeni Ekle
             </button>
         </div>
     @endif
@@ -63,16 +69,14 @@
         </div>
         <div class="gc-image-preview-container-buttons">
             <button type="button" class="btn btn-primary btn-sm add-new single-image" data-element-id="{{$input_name}}">
-                {{__('admin/general.add_new')}}
+                Yeni Ekle
             </button>
             <button type="button" class="btn btn-primary btn-sm remove single-image" data-element-id="{{$input_name}}">
-                {{__('admin/general.remove')}}
+                Kaldır
             </button>
         </div>
     @endif
 @endif
 @pushonce('extra-footer')
-    @if(!isset($no_script) || !$no_script)
-        @include("admin.media_library.form-dialog-includes")
-    @endif
+    @include('admin.media_library.form-dialog-includes')
 @endpushonce

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\AttributeValue;
 use Illuminate\Http\Request;
 
+use App\Models\Attribute;
+
 class ItemAttributeValueController extends Controller
 {
     /**

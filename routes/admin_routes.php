@@ -3,14 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin;
 
+Route::group(['middleware' => ['auth','role:admin'],'prefix' => 'admin', 'as' => 'admin.'],function () {
 
-Route::group(['as' => 'admin.','prefix' => "admin",'middleware' => ['auth']],function (){
-
-    Route::get('/', function () {
-        return redirect()->route('admin.dashboard');
-    })->name('dashboard');
-
-    Route::get('/dashboard', [Admin\DashboardController::class,'index'])->name('dashboard');
+    Route::get('/', [Admin\DashboardController::class, 'index'])->name('dashboard');
 
     // Users
     Route::get('users/data', [Admin\UserController::class,'data'])->name('users.data');
@@ -59,7 +54,14 @@ Route::group(['as' => 'admin.','prefix' => "admin",'middleware' => ['auth']],fun
     Route::get('blogs/data',[Admin\BlogController::class,'data'])->name('blogs.data');
     Route::resource('blogs',Admin\BlogController::class);
 
+    // Menu Link
+    Route::get('menu-links/data', [Admin\MenuLinkController::class,'data'])->name('menu-links.data');
+    Route::resource('menu-links', Admin\MenuLinkController::class);
+
     // Settings
     Route::resource('settings', Admin\SiteSettingController::class);
-});
 
+
+    // Helpers
+    Route::get('generate-slug',Admin\Helpers\SlugGeneratorController::class)->name('generate-slug');
+});

@@ -6,29 +6,33 @@
     </div>
     <div class="card-body">
         <div class="form-group">
-            {{--            @if(config('website.strict_attributes') === false)--}}
-            <div class="flex justify-between mb-5">
-
-                    <select name="attribute_id" id="attribute_id"
-                            class="form-control">
-                        <option
-                            value="">{{__('admin/general.add_new')}}</option>
-                    </select>
-
-                <div class="flex gap-3">
-                    <button type="button" class="btn btn-primary w-100"
-                            id="add_attribute">
-                        {{__('admin/general.add_new')}}
-                    </button>
-
-                    <button type="button" class="btn btn-primary w-100"
-                            id="create_attribute">
-                        {{__('admin/general.create_new')}}
-                    </button>
-
+{{--            @if(config('website.strict_attributes') === false)--}}
+                <div class="row mb-3">
+                    <div class="col-md-9">
+                        <select name="attribute_id" id="attribute_id"
+                                class="form-control">
+                            <option
+                                value="">{{__('admin/general.add_new')}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-primary w-100"
+                                        id="add_attribute">
+                                    {{__('admin/general.add_new')}}
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-primary w-100"
+                                        id="create_attribute">
+                                    {{__('admin/general.create_new')}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            {{--            @endif--}}
+{{--            @endif--}}
             <div class="row">
                 <table class="table table-bordered">
                     <thead>
@@ -59,7 +63,7 @@
 @pushonce('extra-footer')
 
     <!-- Modal Create Attribute Value -->
-    <div class="modal fade hidden" id="add-new-attribute-value-modal" tabindex="-1" role="dialog"
+    <div class="modal fade" id="add-new-attribute-value-modal" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -87,7 +91,7 @@
     </div>
 
     <!-- Modal Create Attribute -->
-    <div class="modal fade hidden" id="add-new-attribute-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="add-new-attribute-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -121,38 +125,36 @@
             border-radius: 0.2rem !important;
         }
     </style>
-    <script type="module">
+    <script>
 
+        function select2_update() {
 
+            $('#attribute_id').select2({
+                ajax: {
+                    url: '{{route('admin.item-attributes.ajax_data')}}',
+                    dataType: 'json',
+                    cache: false
+                }
+            });
+
+            $('.multiple-attribute-values').select2({
+                width: '100%',
+                ajax: {
+                    url: '{{route('admin.item-attribute-values.ajax_data')}}',
+                    dataType: 'json',
+                    data: function (params) {
+                        let query = {
+                            search: params.term,
+                            attribute_id: $(this).data('attribute-id')
+                        }
+                        return query;
+                    },
+                    cache: false
+                }
+            });
+        }
 
         $(function () {
-            function select2_update() {
-
-                $('#attribute_id').select2({
-                    ajax: {
-                        url: '{{route('admin.item-attributes.ajax_data')}}',
-                        dataType: 'json',
-                        cache: false
-                    }
-                });
-
-                $('.multiple-attribute-values').select2({
-                    width: '100%',
-                    ajax: {
-                        url: '{{route('admin.item-attribute-values.ajax_data')}}',
-                        dataType: 'json',
-                        data: function (params) {
-                            let query = {
-                                search: params.term,
-                                attribute_id: $(this).data('attribute-id')
-                            }
-                            return query;
-                        },
-                        cache: false
-                    }
-                });
-            }
-
             select2_update();
             $(document).on('click','.add-new-attribute-value',function () {
                 $('#add-new-attribute-value-modal').find('#value').val('');
