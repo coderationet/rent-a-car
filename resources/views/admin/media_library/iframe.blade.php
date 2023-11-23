@@ -41,10 +41,16 @@
                 </div>
                 <div class="row image-items">
                     @foreach($items as $file)
-                        <div class="col-md-3 file-to-pick" style="text-align: center; border:1px solid #eee"
+                        <div class="col-md-3 file-to-pick"
+                             style="text-align: center; border:1px solid #eee"
                              data-file-id="{{$file->id}}" data-file-type="{{$file->type}}"
                              data-file-url="{{asset('storage/media/'.$file->name)}}"
                              data-file-name="{{$file->name}}">
+                            <div class="remove-item"
+                                 data-remove-url="{{route('admin.media-library.destroy',$file->id)}}"
+                                 style="position: absolute; top: 10px; right: 10px; cursor: pointer; color: #fff; background: #ff0000; padding: 5px 10px; border-radius: 5px">
+                                Sil
+                            </div>
                             @if($file->type == 'image')
                                 <img src="{{asset('storage/media/'.$file->name)}}" alt="" class="img-fluid"
                                      style="max-height: 250px">
@@ -65,10 +71,11 @@
             </div>
         </div>
     </div>
+    npm
 </div>
-<script src="{{asset('assets/admin/adminlte/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('assets/admin/bootstrap5/dist/js/bootstrap.bundle.js')}}"></script>
-<script>
+<script type="module">
     $(function () {
 
         var is_multiple = null;
@@ -86,6 +93,7 @@
 
                 $('.image-items').prepend(`
                 <div class="col-md-3 file-to-pick new-image" style="text-align: center; border:1px solid #eee">
+                    <div class="remove-item" style="position: absolute; top: 10px; right: 10px; cursor: pointer; color: #fff; background: #ff0000; padding: 5px 10px; border-radius: 5px">Sil</div>
                     <img src="{{asset('storage/images/default-thumb.jpg')}}" alt="" class="img-fluid" style="max-height: 250px">
                     <span>Yükleniyor...</span>
                     <div class="progress">
@@ -135,6 +143,7 @@
                         $('.new-image').attr('data-file-name', data.file.name);
                         $('.new-image').attr('data-file-url', data.file.url);
 
+                        $('.new-image .remove-item').data('remove-url', data.file.remove_url);
 
                         // add file id
                         $('.new-image').attr('data-file-id', data.file.id);
@@ -270,6 +279,24 @@
         tab.show()
 
         @endif
+
+        $(document).on('click','.remove-item', function () {
+            let confirm = window.confirm('Silmek istediğinize emin misiniz?');
+            let file_id = $(this).parent().data('file-id');
+            if (confirm) {
+                $.post($(this).data('remove-url'), {_token: '{{csrf_token()}}', _method:'DELETE'}, function (data) {
+                    if (data.success === true) {
+
+                        console.log($('.file-to-pick[data-file-id=' + file_id + ']'));
+                        console.log(('.file-to-pick[data-file-id=' + file_id + ']'));
+
+                        $('.file-to-pick[data-file-id=' + file_id + ']').remove();
+                    }
+                });
+            }
+
+        });
+
     });
 </script>
 <style>
@@ -284,6 +311,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        position: relative;
     }
 
     .file-to-pick:hover {

@@ -14,7 +14,8 @@ class Filters extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public $items
+        public $items,
+        public $categoryids,
     )
     {}
 
@@ -30,7 +31,7 @@ class Filters extends Component
 
         $filter_attributes = config('website.filter_attributes');
 
-        $attributes = cache()->remember('filter_attributes',0, function () use ($filter_attributes) {
+        $attributes = cache()->remember('filter_attributes',60, function () use ($filter_attributes) {
             return Attribute::whereIn('id', collect($filter_attributes)->pluck('id'))->with('values')->get();
         });
 
@@ -49,6 +50,7 @@ class Filters extends Component
             if (request()->has('attribute_'.$attribute->slug)) {
                 $is_open = true;
             }
+
             if (in_array($attribute->id, $open_attributes)) {
                 $is_open = true;
             }
@@ -59,15 +61,11 @@ class Filters extends Component
 
         });
 
-        $categories = cache()->remember('all_categories',60 * 60 * 24, function () {
+        $categories = cache()->remember('all_categories',60, function () {
             return ItemCategory::with('children','parent')->whereNull('parent_id')->orderBy('name','ASC')->get();
         });
 
-        $selected_categories = [];
-
-        if (request()->has('category')) {
-            $selected_categories = request()->category;
-        }
+        $selected_categories = $this->categoryids;
 
         return view('components.filters', [
             'items' => $items,

@@ -24,7 +24,7 @@
 
         console.log(element);
 
-        if ($(element).attr('value') == '') {
+        if ($(element).attr('value') == '' && $('.gc-library-preview-container[data-element-id="' + element.attr('name') + '"]').length === 0) {
             element.after(`
         <div class="gc-library-preview-container single-image no-image" data-element-id="${element.attr('name')}">
             <img class="thumbnail" src="{{asset('storage/images/default-thumb.jpg')}}"/>
@@ -42,7 +42,7 @@
     function gc_multiple_library_element(element) {
         element.css('display', 'none');
 
-        if ($(element).attr('value') == '') {
+        if ($(element).attr('value') == '' && $('.gc-library-preview-container[data-element-id="' + element.attr('name') + '"]').length === 0) {
             element.after(`
         <div class="gc-library-preview-container multiple-image no-image" data-element-id="${element.attr('name')}">
             <img class="thumbnail" src="{{asset('storage/images/default-thumb.jpg')}}"/>

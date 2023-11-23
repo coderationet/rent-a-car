@@ -9,4 +9,5 @@ import 'summernote/dist/summernote-lite.min.css';
 
 window.$ = window.jQuery = $;
 window.jQuery = $;
+
 select2(jQuery)

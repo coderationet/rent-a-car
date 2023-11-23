@@ -1,14 +1,19 @@
+@import "select2/dist/css/select2.min.css";
+@import "select2.scss";
+@import "jquery-ui/dist/themes/base/jquery-ui.min.css";
+@import "jquery-ui/dist/themes/base/theme.css";
+@import "datatables.net-dt/css/jquery.dataTables.min.css";
+
 @import "admin.scss";
 @import "admin_buttons.scss";
 @import "media_library.scss";
-@import "datatables.net-dt/css/jquery.dataTables.min.css";
 @import "dataTables.scss";
 @import "form.scss";
 @import "accordion.scss";
 @import "breadcrumbs.scss";
 @import "table.scss";
-@import "select2/dist/css/select2.min.css";
-@import "select2.scss";
+@import "search.scss";
+@import "items.scss";
 
 @tailwind base;
 @tailwind components;
@@ -50,5 +55,5 @@
 }
 
 .page{
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }

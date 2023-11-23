@@ -16,7 +16,7 @@
     <div class="container category-page page">
         <div class="flex gap-5">
             <div class="w-1/4 mb-3">
-                <x-filters :items="$items" :slug="isset($category->slug) ? $category->slug : null"/>
+                <x-filters :items="$items" :categoryids="isset($category) ? $category : null"/>
             </div>
             <div class="w-3/4">
                 <x-active-filters :category="$category"/>

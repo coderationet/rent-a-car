@@ -11,6 +11,7 @@ class CategoryController extends Controller
 {
     public function show($slug)
     {
+
         $category = ItemCategory::where('slug', $slug)->firstOrFail();
 
         $items = Item::query();

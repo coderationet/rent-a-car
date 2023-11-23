@@ -12,6 +12,7 @@ use App\Models\ItemCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+
 class ItemController extends Controller
 {
     public function index()
@@ -22,13 +23,13 @@ class ItemController extends Controller
 
     public function create()
     {
-        $categories = ItemCategory::whereNull('parent_id')->orderBy('name','ASC')->get();
+        $categories = ItemCategory::whereNull('parent_id')->orderBy('name', 'ASC')->get();
         $selected_categories = [];
         $strict_attributes = config('website.strict_attributes');
 
-        $item_attributes = AttributeHelper::defaultItemAttributes(null,config('website.default_attributes'));
+        $item_attributes = AttributeHelper::defaultItemAttributes(null, config('website.default_attributes'));
 
-        return view('admin.items.edit', compact('categories','strict_attributes','selected_categories','item_attributes'));
+        return view('admin.items.edit', compact('categories', 'strict_attributes', 'selected_categories', 'item_attributes'));
     }
 
     /**
@@ -71,7 +72,7 @@ class ItemController extends Controller
 
         $attribute_values = [];
         // attribute_values
-        if ($request->has('attribute_values')){
+        if ($request->has('attribute_values')) {
             $attribute_values = $request->attribute_values;
         }
         //
@@ -89,7 +90,6 @@ class ItemController extends Controller
         $item->categories()->sync($categories);
 
 
-
         // redirect to items.index
         return redirect()->route('admin.items.index')->with('success', 'İlan Kaydedildi');
 
@@ -103,14 +103,15 @@ class ItemController extends Controller
         //
     }
 
-    public function get_item(){
+    public function get_item()
+    {
 
         $item = Item::query();
 
         //except_post_id
-        if (request()->has('except_post_id')){
+        if (request()->has('except_post_id')) {
             $except_post_id = request()->get('except_post_id');
-            $item = $item->where('id','!=',$except_post_id);
+            $item = $item->where('id', '!=', $except_post_id);
         }
 
 
@@ -129,10 +130,10 @@ class ItemController extends Controller
         $item = $item->first();
 
         if ($item) {
-            return response()->json(['exists' => true,'item' => $item,'msg' => __('admin/item.msg.slug_exists')]);
+            return response()->json(['exists' => true, 'item' => $item, 'msg' => __('admin/item.msg.slug_exists')]);
         }
 
-        return response()->json(['exists' => false,'msg' => __('admin/item.msg.slug_not_exists')]);
+        return response()->json(['exists' => false, 'msg' => __('admin/item.msg.slug_not_exists')]);
 
     }
 
@@ -145,18 +146,18 @@ class ItemController extends Controller
 
         $item_attributes = [];
 
-        if (config('website.strict_attributes') == true){
+        if (config('website.strict_attributes') == true) {
             $item_attributes = AttributeHelper::defaultItemAttributes($item);
-        }else{
+        } else {
             $item_attributes = AttributeHelper::itemAttributes($item);
         }
 
 
-        $categories = ItemCategory::whereNull('parent_id')->orderBy('name','ASC')->get();
+        $categories = ItemCategory::whereNull('parent_id')->orderBy('name', 'ASC')->get();
 
         $selected_categories = $item->categories->pluck('id')->toArray();
 
-        return view('admin.items.edit', compact('item','item_attributes','categories','selected_categories'));
+        return view('admin.items.edit', compact('item', 'item_attributes', 'categories', 'selected_categories'));
     }
 
     /**
@@ -189,7 +190,7 @@ class ItemController extends Controller
 
         $attribute_values = [];
         // attribute_values
-        if ($request->has('attribute_values')){
+        if ($request->has('attribute_values')) {
             $attribute_values = $request->attribute_values;
         }
 
@@ -209,7 +210,7 @@ class ItemController extends Controller
 
         // check if slug is exsits
         $slug = $request->slug;
-        $item_check = Item::where('slug', $slug)->where('id','!=',$id)->first();
+        $item_check = Item::where('slug', $slug)->where('id', '!=', $id)->first();
         if ($item_check) {
             return redirect()->back()->with('error', __('admin/item.msg.slug_exists'));
         }
@@ -241,9 +242,14 @@ class ItemController extends Controller
         // column 0 search value
         $columns = request()->get('columns');
 
-        if(isset($columns[1]['search']['value'])){
-            $search = $columns[1]['search']['value'];
-            $items->where('title','LIKE',"%{$search}%");
+        $search = request()->get('search');
+
+        // search on 2. and 3. columns
+        if ($search['value']) {
+            $items = $items->where(function ($query) use ($search) {
+                $query->where('title', 'like', '%' . $search['value'] . '%')
+                    ->orWhere('description', 'like', '%' . $search['value'] . '%');
+            });
         }
 
 
@@ -265,17 +271,21 @@ class ItemController extends Controller
         $order_by = 'id';
         $order_dir = 'desc';
 
-        if(request()->has('order')){
+        if (request()->has('order')) {
             $order = $columns[request()->get('order')[0]['column']]['data'];
             $order_by = $order;
             $order_dir = request()->get('order')[0]['dir'];
         }
 
-        $items = $items->orderBy($order_by,$order_dir)->offset($offset)->limit($limit)->get()->map(function ($item) {
+        if ($order_by == 'actions') {
+            $order_by = 'id';
+        }
+
+        $items = $items->orderBy($order_by, $order_dir)->offset($offset)->limit($limit)->get()->map(function ($item) {
             return [
                 "id" => $item->id,
                 "title" => $item->title,
-                "short_description" => str(strip_tags($item->description))->limit(50),
+                "description" => str(strip_tags($item->description))->limit(50),
                 "actions" => view('admin.items.actions', compact('item'))->render()
             ];
         });
@@ -287,7 +297,8 @@ class ItemController extends Controller
         return response()->json($response);
     }
 
-    public function attribute_value_row_html(){
+    public function attribute_value_row_html()
+    {
         $attribute_id = request()->get('attribute_id');
         $attribute = Attribute::findOrFail($attribute_id);
         $item_attribute = [

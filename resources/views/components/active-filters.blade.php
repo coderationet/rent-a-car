@@ -23,7 +23,7 @@
                                     class="p-2">{{$category['name'] }}</button>
                             <button type="button" class="border-l p-2 hover:bg-gray-300 remove-filter"
                                     data-url="{{route('front.search.remove_filter_from_url')}}"
-                                    data-attribute-value-id="{{$category['slug']}}">
+                                    data-attribute-value-id="{{$category['id']}}">
                                 @include('icons.trash', ['class' => 'w-4 h-4'])
                             </button>
                         </div>

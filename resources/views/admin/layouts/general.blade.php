@@ -33,7 +33,7 @@
     <!-- CSRF -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @if(config('app.debug'))
+    @if(config('app.debug') && config('app.url') == 'https://cars.test')
         @vite('admin')
     @endif
 
@@ -65,27 +65,32 @@
 {{--             alt="AdminLTELogo" height="60" width="60">--}}
 {{--    </div>--}}
 
+    <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-
+        <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{route('front.home')}}" class="nav-link" target="_blank">{{__('admin/general.home')}}</a>
-            </li>
-        </ul>
-
-        <ul class="navbar-nav ml-auto">
-            <!-- website link -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('front.home')}}" role="button">
+                <a href="{{route('front.home')}}" class="nav-link" target="_blank">
                     <i class="fas fa-home"></i>
+                    Ana Sayfa
                 </a>
             </li>
         </ul>
-
-
+        <!-- Logout -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <form action="{{route('logout')}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Çıkış Yap
+                    </button>
+                </form>
+            </li>
+        </ul>
     </nav>
 
 

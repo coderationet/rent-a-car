@@ -19,39 +19,8 @@
     @include('front.layouts.navigation')
     @yield('content')
     <div class="footer py-10">
-        <x-container class="grid grid-cols-4 text-white ">
-            <div>
-                <ul>
-                    <li class="font-bold mb-5">Company</li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Careers</a></li>
-                </ul>
-            </div>
-            <div>
-                <ul>
-                    <li class="font-bold">Company</li>
-                    <li class=""><a href="#">About</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Careers</a></li>
-                </ul>
-            </div>
-            <div>
-                <ul>
-                    <li class="font-bold">Company</li>
-                    <li class=""><a href="#">About</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Careers</a></li>
-                </ul>
-            </div>
-            <div>
-                <ul>
-                    <li class="font-bold">Company</li>
-                    <li class=""><a href="#">About</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Careers</a></li>
-                </ul>
-            </div>
+        <x-container class="grid grid-cols-4 text-white">
+            <x-footer />
         </x-container>
     </div>
 </div>

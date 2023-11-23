@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Page;
 
 class PageController extends Controller
 {
     public function show($slug){
         $page = cache()->remember('page_'.$slug, 60, function () use ($slug) {
-            return \App\Models\Page::where('slug', $slug)->first();
+            return Page::where('slug', $slug)->first();
         });
         return view('front.page.show', compact('page'));
     }

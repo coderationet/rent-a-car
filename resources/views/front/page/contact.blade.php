@@ -7,57 +7,43 @@
     ]])
 
     <div class="container page">
-        <div class="row">
-            <div class="col-md-3">
+        <div class="flex flex-row gap-3">
+            <div class="w-1/4 bg-white p-3 h-max">
                 <x-page-sidebar :page="$page"/>
             </div>
-            <div class="col-md-9">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h1 class="mb-3">{{$page->name}}</h1>
-                        <div class="mb-3">
-                            @if(session()->has('error'))
-                                <div class="alert alert-danger">
-                                    {{session()->get('error')}}
-                                </div>
-                            @endif
-                            @if(session()->has('success'))
-                                <div class="alert alert-success">
-                                    {{session()->get('success')}}
-                                </div>
-                            @endif
-                            <form action="{{route('front.page.contact.post')}}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                @include('admin.form._input',[
-                                    'input_name' => 'name',
-                                    'title' => __('admin/general.name'),
-                                    'placeholder' => __('admin/general.name'),
-                                    'item' => null,
-                                    'classes' => 'mb-3',
-                                    'required' => true,
-                                    'value' => old('name')
-                                ])
-                                @include('admin.form._input',[
-                                    'input_name' => 'email',
-                                    'title' => __('admin/general.email'),
-                                    'placeholder' => __('admin/general.email'),
-                                    'item' => null,
-                                    'classes' => 'mb-3',
-                                    'required' => true,
-                                    'value' => old('email')
-                                ])
-                                <!-- message select -->
-                                <div class="form-group">
-                                    <label for="message">{{__('front/general.message')}}</label>
-                                    <textarea name="message" required id="message" class="form-control" style="min-height: 200px">{{old('message')}}</textarea>
-                                </div>
-                                <!-- submit -->
-                                <div class="form-group mt-3">
-                                    <button type="submit" class="btn btn-primary">{{__('front/general.send')}}</button>
-                                </div>
-                            </form>
+            <div class="w-3/4 bg-white p-3">
+                <h1 class="text-2xl mb-4">{{$page->name}}</h1>
+                <div class="mb-3">
+                    @if(session()->has('error'))
+                        <div class="alert alert-danger">
+                            {{session()->get('error')}}
                         </div>
-                    </div>
+                    @endif
+                    @if(session()->has('success'))
+                        <div class="alert alert-success">
+                            {{session()->get('success')}}
+                        </div>
+                    @endif
+                    <form action="{{route('front.page.contact.post')}}" method="post" enctype="multipart/form-data" class="flex gap-5 flex-col">
+                        @csrf
+                        <!-- name -->
+                        <div class="flex flex-col gap-3">
+                            <label for="name">{{__('front/general.name')}}</label>
+                            <input type="text" name="name" required id="name" class="form-control"
+                                   value="{{old('name')}}">
+                        </div>
+                        <!-- message select -->
+                        <div class="flex flex-col gap-3 ">
+                            <label for="message">{{__('front/general.message')}}</label>
+                            <textarea name="message" required id="message" class="form-control"
+                                      style="min-height: 200px">{{old('message')}}</textarea>
+                        </div>
+                        <!-- submit -->
+                        <div class="form-group mt-3">
+                            <button type="submit"
+                                    class="primary-bg hover:bg-blue-500 p-3 px-5 text-white rounded">{{__('front/general.send')}}</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

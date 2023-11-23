@@ -47,6 +47,7 @@ class MediaLibraryController extends Controller
                     'id' => $media->id,
                     'type' => $type,
                     'name' => $filename,
+                    'remove_url' => route('admin.media-library.destroy', $media->id),
                 ],
             ]);
         }
@@ -81,7 +82,16 @@ class MediaLibraryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $media = Media::findOrFail($id);
+        // delete file
+        $file = storage_path('app/public/media/' . $media->name);
+        if (file_exists($file)) {
+            unlink($file);
+        }
+        $media->delete();
+        return response()->json([
+            'success' => true,
+        ]);
     }
 
     public function iframe()

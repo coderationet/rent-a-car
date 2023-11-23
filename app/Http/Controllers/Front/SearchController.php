@@ -5,31 +5,32 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use App\Models\Item;
+use App\Models\ItemCategory;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function index(Request $request, $category = null)
+    public function index(Request $request, $category_ = null)
     {
-
 
         $items = Item::query();
 
-        if ($category) {
-            $category = [$category]; // category slug array
+        $category = $request->has('category') ? [...$request->get('category')] : []; // category slug array
+
+        if($category_){
+            $category_ = ItemCategory::where('slug', $category_)->first();
         }
 
-        if (!$category) {
-            $category = $request->get('category') ? [...$request->get('category')] : []; // category slug array
+        if($category_){
+            $category[] = $category_->id;
         }
 
         if (count($category)) {
             // convert nested arrays to single array
             $items = $items->whereHas('categories', function ($query) use ($category) {
-                $query->whereIn('item_categories.slug', $category);
+                $query->whereIn('item_categories.id', $category);
             });
         }
-
 
         $request_attributes = [];
 
@@ -44,7 +45,7 @@ class SearchController extends Controller
 
         $filter_attributes = config('website.filter_attributes');
 
-        $attributes = cache()->remember('filter_attributes',1, function () use ($filter_attributes) {
+        $attributes = cache()->remember('filter_attributes', 60, function () use ($filter_attributes) {
             return Attribute::with('values')->whereIn('id', collect($filter_attributes)->pluck('id'))->get();
         });
 
@@ -68,7 +69,7 @@ class SearchController extends Controller
             $items = $items->where('price', '<=', request()->max_price);
         }
 
-        $items = $items->with('thumbnail','attributeValues','categories')->paginate(12)->withQueryString();
+        $items = $items->with('thumbnail', 'attributeValues', 'categories')->paginate(12)->withQueryString();
 
         return view('front.search.show', compact('category', 'items'));
 

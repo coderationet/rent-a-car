@@ -61,9 +61,10 @@ class ActiveFilters extends Component
 
         $filters['categories'] = [];
 
-        if (request()->has('category')){
 
-            $categories = ItemCategory::whereIn('slug',request()->category)->get();
+        if (count($this->category)){
+
+            $categories = ItemCategory::whereIn('id',$this->category)->get();
 
             $filters['categories'] = $categories->unique('id')->keyBy('id');
 
