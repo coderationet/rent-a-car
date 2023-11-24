@@ -50,6 +50,7 @@ class ActiveFilters extends Component
         }
 
         $filters['filter_attributes'] = count($filter_attributes) ? Attribute::whereIn('slug',$filter_attributes)->get() : [];
+
         if (count($filters['filter_attributes'])){
             $filters['filter_attributes'] = $filters['filter_attributes']->unique('id')->keyBy('id');
         }
@@ -64,13 +65,15 @@ class ActiveFilters extends Component
 
         if (count($this->category)){
 
-            $categories = ItemCategory::whereIn('id',$this->category)->get();
+            $category_ids = $this->category;
+
+            $categories = cache()->remember('query_filter_categories_'.md5(implode(',',$category_ids)), 60, function () use ($category_ids) {
+                return ItemCategory::with('children')->whereIn('id', $category_ids)->get();
+            });
 
             $filters['categories'] = $categories->unique('id')->keyBy('id');
 
         }
-
-
 
         return view('components.active-filters',compact('filters'));
     }

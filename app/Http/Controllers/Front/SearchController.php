@@ -25,6 +25,9 @@ class SearchController extends Controller
             $category[] = $category_->id;
         }
 
+        // remove null or empty values
+        $category = array_filter($category);
+
         if (count($category)) {
             // convert nested arrays to single array
             $items = $items->whereHas('categories', function ($query) use ($category) {
@@ -69,7 +72,9 @@ class SearchController extends Controller
             $items = $items->where('price', '<=', request()->max_price);
         }
 
-        $items = $items->with('thumbnail', 'attributeValues', 'categories')->paginate(12)->withQueryString();
+        $items = cache()->remember('query_search_items_' . md5(request()->fullUrl()), config('cache.app_cache_ttl'), function () use ($items) {
+            return $items->with('thumbnail', 'attributeValues', 'categories')->paginate(12)->withQueryString();
+        });
 
         return view('front.search.show', compact('category', 'items'));
 

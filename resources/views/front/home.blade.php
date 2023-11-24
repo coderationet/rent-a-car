@@ -10,24 +10,21 @@
                            name="date-start"
                            class="border-0 border-r p-3 px-4"
                            value="{{request()->has('date-start') ? request()->get('date-start') : ''}}"
-                           required
                            placeholder="Başlangıç Tarihi">
                 </div>
                 <div class="flex-1 flex flex-col">
                     <label for="end_date" class="text-gray-600">Bitiş</label>
                     <input type="date" name="date-end" class="border-0 border-r p-3 px-4 "
                            value="{{request()->has('date-end') ? request()->get('date-end') : ''}}"
-                           required
                            placeholder="Bitiş Tarihi">
                 </div>
                 <div class="flex-1 flex flex-col">
                     <label for="category" class="text-gray-600">Kategori</label>
                     <select name="category[]"
-                            required
                             class="border-0 border-r p-3 px-4">
-                        <option value="">Kategori Seç</option>
+                        <option value="">Tümü</option>
                         @foreach($categories as $category)
-                            <option value="{{$category->slug}}">{{$category->name}}</option>
+                            <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
                     </select>
                 </div>

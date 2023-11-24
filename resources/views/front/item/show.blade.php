@@ -48,13 +48,13 @@
                         </h5>
                     </div>
                     <div class="card-body">
-                        <table class="table-bordered w-100">
+                        <table class="table-bordered w-full">
                             <thead>
                             <tr>
                                 <th class="col-md-3 p-2">{{ __('front/item-informations.name') }}</th>
                                 <th class="col-md-9 p-2">{{ __('front/item-informations.values') }}</th>
                             </tr>
-                            <tbody >
+                            <tbody>
                             @foreach($attributes as $attribute)
                                 <tr>
                                     <td class="col-md-3 p-2">{{ $attribute['name'] }}</td>
