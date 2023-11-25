@@ -12,8 +12,9 @@ class PageController extends Controller
 {
     public function show($slug){
         $page = cache()->remember('page_'.$slug, 60, function () use ($slug) {
-            return Page::where('slug', $slug)->first();
+            return Page::where('slug', $slug)->firstOrFail();
         });
+
         return view('front.page.show', compact('page'));
     }
 

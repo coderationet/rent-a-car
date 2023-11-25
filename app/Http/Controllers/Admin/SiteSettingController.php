@@ -26,13 +26,12 @@ class SiteSettingController extends Controller
             'logo_id' => Option::get('logo_id'),
         ];
 
-        if ($data['logo_id'] != null){
+        if ($data['logo_id'] != null && $data['logo_id'] != ''){
             $data['logo_id'] = [];
             $data['logo_id']['logo_id'] = Option::get('logo_id');
             $data['logo_id']['image'] = Media::find(Option::get('logo_id'));
             $data['logo_id'] = json_decode(json_encode($data['logo_id']));
         }
-
 
         return view('admin.setting.index',$data);
     }

@@ -12,7 +12,7 @@
         ]
     ]])
     <div class="container flex flex-col md:flex-row gap-3 item-page">
-            <div class="w-full md:w-3/4 md:lex flex-col bg-white">
+            <div class="w-full flex-1 md:lex flex-col bg-white">
                 <div class="card">
                     <div class="card-body">
                         <!-- Slider main container -->
@@ -66,9 +66,11 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full md:w-1/4   flex flex-col">
-                @include('front.item.contact-informations')
-                @include('front.item.appointment-form',['item' => $item])
+            <div class="w-full appointment-form-sidebar flex flex-col">
+                <div class="sticky">
+                    @include('front.item.contact-informations')
+                    @include('front.item.appointment-form',['item' => $item])
+                </div>
             </div>
     </div>
 @endsection

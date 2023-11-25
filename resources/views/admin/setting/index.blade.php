@@ -91,7 +91,7 @@
                                         <label for="home_touch_up_image_id">
                                             {{__('admin/general.logo')}}
                                         </label>
-                                        @include('admin.media_library._input',['input_name' => 'logo_id','relation' => 'image','item' => $logo_id])
+                                        @include('admin.media_library._input',['input_name' => 'logo_id','relation' => 'image','item' => empty($logo_id) ? null : $logo_id])
                                     </div>
 
                                 </div>

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('key', 191)->index()->unique();
             $table->text('value')->nullable()->default(null);
+            $table->enum('autoload', ['yes', 'no'])->default('no')->index();
         });
     }
 

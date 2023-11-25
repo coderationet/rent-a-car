@@ -1,20 +1,20 @@
 @extends('front.layouts.app')
 @section('content')
     <div class="home-search-bg z-0  flex flex-col justify-center items-center">
-        <form action="{{route('front.search.index')}}" class="w-1/3 flex justify-center items-center">
+        <form data-validate-url="{{route('front.validate-home-search')}}" action="{{route('front.search.index')}}" class="w-1/3 flex justify-center flex-col items-center" id="home-search-form">
             <div class="flex justify-center items-end w-full">
                 <div class="flex-1 flex flex-col">
                     <label for="start_date" class="text-gray-600">Başlangıç</label>
                     <input type="date"
                            id="start_date"
-                           name="date-start"
+                           name="start_date"
                            class="border-0 border-r p-3 px-4"
                            value="{{request()->has('date-start') ? request()->get('date-start') : ''}}"
                            placeholder="Başlangıç Tarihi">
                 </div>
                 <div class="flex-1 flex flex-col">
                     <label for="end_date" class="text-gray-600">Bitiş</label>
-                    <input type="date" name="date-end" class="border-0 border-r p-3 px-4 "
+                    <input type="date" name="end_date" class="border-0 border-r p-3 px-4 "
                            value="{{request()->has('date-end') ? request()->get('date-end') : ''}}"
                            placeholder="Bitiş Tarihi">
                 </div>
@@ -29,15 +29,20 @@
                     </select>
                 </div>
                 <div class="flex-2 flex flex-col justify-end align-bottom">
-                    <button type="submit" class="bg-white p-3 px-4 primary-bg text-white w-max">Ara</button>
+                    <button type="submit" class="bg-white p-3 px-4 primary-bg text-white w-max home-search-button">Ara</button>
                 </div>
             </div>
+            <div class="w-full">
+                <div class="home-search-errors w-full">
+
+                </div>
+                <p class="text-white text-center mt-3">
+                    Tarihleri belirleyin, aracınızı seçin ve hemen kiralayın.
+                </p>
+            </div>
+
         </form>
-        <div>
-            <p class="text-white text-center mt-3">
-                Tarihleri belirleyin, aracınızı seçin ve hemen kiralayın.
-            </p>
-        </div>
+
     </div>
     <x-container class="flex flex-col justify-center items-center mt-7">
         <h1 class="text-2xl font-bold">

@@ -11,4 +11,11 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    resolve: {
+        alias: {
+            'moment': 'moment/moment.js',
+            // 'jquery': 'jquery/dist/jquery.js',
+            // '$': 'jquery/dist/jquery.js',
+        },
+    },
 });

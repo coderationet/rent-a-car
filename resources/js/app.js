@@ -1,6 +1,7 @@
 import './bootstrap';
 import './search.js';
-import './item-slider.js';
+import './item.js';
+import './home.js';
 
 $('.accordion-header').click(function () {
 
@@ -13,7 +14,6 @@ $('.accordion-header').click(function () {
         let innerHeight = $(this).parent().find('.accordion-collapse').prop('scrollHeight');
         $(this).parent().find('.accordion-collapse').css('max-height', innerHeight + 'px');
     }
-
 
     $(this).parent().find('.accordion-collapse').toggleClass('show');
 

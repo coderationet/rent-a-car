@@ -1,9 +1,7 @@
-@import "select2/dist/css/select2.min.css";
 @import "select2.scss";
 @import "jquery-ui/dist/themes/base/jquery-ui.min.css";
 @import "jquery-ui/dist/themes/base/theme.css";
-@import "datatables.net-dt/css/jquery.dataTables.min.css";
-
+@import "jquery-date-range-picker/dist/daterangepicker.min.css";
 @import "admin.scss";
 @import "admin_buttons.scss";
 @import "media_library.scss";
@@ -14,6 +12,7 @@
 @import "table.scss";
 @import "search.scss";
 @import "items.scss";
+@import "general.scss";
 
 @tailwind base;
 @tailwind components;
@@ -56,4 +55,38 @@
 
 .page{
     padding-bottom: 20px;
+}
+
+#data-range-container{
+    position: relative!important;
+}
+
+.calendar-icon{
+    width: 10%;
+}
+
+#date-range{
+    width: 85%;
+    border: 1px solid #e2e8f0;
+
+}
+
+.date-picker-wrapper .footer{
+    background-color: unset;
+}
+
+.date-picker-wrapper.has-gap .month-wrapper{
+    min-width: 436px!important;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.appointment-form-sidebar{
+    width: 300px;
+}
+
+.sticky{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 10px;
 }
