@@ -13,8 +13,9 @@ class SettingSeeder extends Seeder
      */
     public function run(): void
     {
-        Option::update('site_title', 'Rent A Car System','yes');
 
+        Option::update('site_title', 'Rent A Car System','yes');
+        Option::update('default_payment_gateway', 'bank_transfer','yes');
         Option::autoload();
 
     }

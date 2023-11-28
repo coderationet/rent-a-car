@@ -82,17 +82,16 @@
         <!-- Logout -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <form action="{{route('logout')}}" method="post">
+                <form action="{{route('logout')}}" method="post" id="logout-form">
                     @csrf
                     <button type="submit" class="btn btn-danger btn-sm">
                         <i class="fas fa-sign-out-alt"></i>
-                        Çıkış Yap
+                        {{__('admin/general.logout')}}
                     </button>
                 </form>
             </li>
         </ul>
     </nav>
-
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
@@ -168,12 +167,13 @@
 
 <script src="{{route('front.home')}}/assets/adminlte/dist/js/adminlte.js?v=3.2.0"></script>
 
-{{--<script src="{{route('front.home')}}/assets/adminlte/dist/js/demo.js"></script>--}}
-
 <script src="{{route('front.home')}}/assets/adminlte/dist/js/pages/dashboard.js"></script>
 
 <!-- Select2 script -->
 <script src="{{asset('assets/adminlte/plugins/select2/js/select2.min.js')}}"></script>
+
+<!-- inputmask script -->
+<script src="{{asset('assets/adminlte/plugins/inputmask/jquery.inputmask.min.js')}}"></script>
 
 @stack('extra-footer')
 

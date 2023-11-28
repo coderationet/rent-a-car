@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Settings;
 
+use App\Helpers\Option;
 use App\Http\Controllers\Controller;
 use App\Models\Media;
 use Illuminate\Http\Request;
-use App\Helpers\Option;
 
-class SiteSettingController extends Controller
+class GeneralSettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,7 +33,10 @@ class SiteSettingController extends Controller
             $data['logo_id'] = json_decode(json_encode($data['logo_id']));
         }
 
-        return view('admin.setting.index',$data);
+        $data['active_tab'] = 'general';
+
+        return view('admin.setting.index',['settings' => $data]);
+
     }
 
     /**
@@ -100,7 +103,7 @@ class SiteSettingController extends Controller
         Option::update('logo_image',$logo);
 
         // redirect to index page
-        return redirect()->route('admin.settings.index')->with('success','Site settings updated successfully.');
+        return redirect()->route('admin.settings.general-settings.index')->with('success','Site settings updated successfully.');
     }
 
     /**

@@ -10,6 +10,8 @@ const item_slider = new Swiper('.item-slider', {
 const configObject = {
     // lookBehind: true,
     language: 'auto',
+    // seperator
+    separator: ' - ',
 }
 
 if (document.querySelector('#date-range')) {

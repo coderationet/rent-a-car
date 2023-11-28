@@ -5,9 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rezervation extends Model
+class Reservation extends Model
 {
     use HasFactory;
+
+    const STATUS_PENDING = 'pending';
+
+    const STATUS_CREATED = 'created';
+
+    protected $guarded = ['id'];
 
     public function item(){
         return $this->belongsTo(Item::class);

@@ -11,4 +11,5 @@ return  [
     'youtube_url' => 'Youtube URL',
     'footer_html' => 'Footer HTML',
     'header_html' => 'Header HTML',
+    "default_payment_gateway" => "Default Payment Gateway",
 ];

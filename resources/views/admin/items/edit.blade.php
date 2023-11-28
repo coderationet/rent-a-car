@@ -54,6 +54,15 @@
                                                 <div class="alert alert-success d-none mt-2"></div>
                                                 <div class="alert alert-danger d-none mt-2"></div>
                                             </div>
+                                            <!-- Price -->
+                                            <div class="form-group">
+                                                <label for="price">{{__('admin/general.price')}}</label>
+                                                <input type="number" class="form-control" id="price"
+                                                       value="{{isset($item) ? $item->price : ''}}"
+                                                       name="price"
+                                                       required
+                                                       placeholder="{{__('admin/general.price')}}">
+                                            </div>
                                             <!-- description part -->
                                             <div class="form-group">
                                                 <label for="description">{{__('admin/general.description')}}</label>
@@ -299,7 +308,7 @@
                     ['view', ['codeview']],
                 ]
             });
-        })
+        });
     </script>
     <style>
         .category-listing-block {

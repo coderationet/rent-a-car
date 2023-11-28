@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin;
+use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth','role:admin'],'prefix' => 'admin', 'as' => 'admin.'],function () {
 
@@ -58,9 +58,13 @@ Route::group(['middleware' => ['auth','role:admin'],'prefix' => 'admin', 'as' =>
     Route::get('menu-links/data', [Admin\MenuLinkController::class,'data'])->name('menu-links.data');
     Route::resource('menu-links', Admin\MenuLinkController::class);
 
-    // Settings
-    Route::resource('settings', Admin\SiteSettingController::class);
+    Route::group(['prefix' => 'setting','as' => 'settings.'],function (){
 
+        Route::resource('general-settings', Admin\Settings\GeneralSettingController::class);
+
+        Route::resource('payment-settings', Admin\Settings\PaymentSettingController::class);
+
+    });
 
     // Helpers
     Route::get('generate-slug',Admin\Helpers\SlugGeneratorController::class)->name('generate-slug');

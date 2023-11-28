@@ -7,9 +7,8 @@
                 </h5>
             </div>
             <div>
-                <form action="{{route('front.page.contact.post')}}" method="post" enctype="multipart/form-data"
+                <form action="{{route('front.appointment.driver_info_step')}}" method="get" enctype="multipart/form-data"
                       class="flex gap-5 flex-col">
-                    @csrf
                     <div class="data-range-container rounded border text-black flex gap-3 open-calendar justify-around p-2 items-center">
                         <div class="calendar-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -20,17 +19,30 @@
                         </div>
                         <input type="text" id="date-range" name="daterange" autocomplete="off"
                                class="flex-1 mw-3/4 rounded"
+                               required
+                               value="{{old('daterange') ? old('daterange') : $date_value}}"
                                placeholder="Select A Date Range">
                     </div>
                     <p class="text-sm">
                         Select a date range for your appointment.
                     </p>
+                    <input type="hidden" name="item_id" value="{{$item->id}}">
+                    @if(session()->has('errors'))
+                        <ul class="error_list">
+                            @foreach($errors->all() as $error)
+                                <li>
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
                     <div class="mt-3">
                         <button type="submit" class="bg-blue-600 text-white text-bold p-2 w-full">
                             {{__('front/appointment-form.book_now')}}
                         </button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>

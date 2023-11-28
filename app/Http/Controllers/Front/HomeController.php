@@ -12,9 +12,7 @@ class HomeController extends Controller
     public function index()
     {
 
-//        Artisan::call('cache:clear');
-
-        $categories = cache()->remember('all_categories', 60*60, function () {
+        $categories = cache()->remember('all_categories', config('cache.app_cache_ttl'), function () {
             return ItemCategory::with('thumbnail')->orderBy('name', 'asc')->get();
         });
 

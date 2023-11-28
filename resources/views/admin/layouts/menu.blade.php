@@ -164,10 +164,20 @@
 
     <!-- settings page -->
     <li class="nav-item {{Route::is('admin.settings.*') ? 'menu-open' : ''}}">
-        <a href="{{route('admin.settings.index')}}" class="nav-link {{Route::is('admin.settings.*') ? 'active' : ''}}">
+        <a href="{{route('admin.settings.general-settings.index')}}" class="nav-link {{Route::is('admin.settings.*') ? 'active' : ''}}">
             <i class="nav-icon fas fa-cogs"></i>
             <p>
                 {{__('admin/settings.settings')}}
+            </p>
+        </a>
+    </li>
+
+    <!-- Logout -->
+    <li class="nav-item">
+        <a href="#" class="nav-link" onclick="document.getElementById('logout-form').submit()">
+            <i class="nav-icon fas fa-sign-out-alt"></i>
+            <p>
+                {{__('admin/general.logout')}}
             </p>
         </a>
     </li>

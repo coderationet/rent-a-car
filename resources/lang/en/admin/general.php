@@ -57,6 +57,7 @@ return [
     "password" => "Password",
     "repeat_password" => "Repeat Password",
     "insert_slug" => "Insert Slug",
+    "price" => "Price",
     "msg" => [
         "invalid_data" => "Invalid Data",
     ]

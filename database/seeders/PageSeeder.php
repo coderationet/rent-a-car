@@ -17,5 +17,11 @@ class PageSeeder extends Seeder
             'slug' => 'about',
             'content' => 'This is about page',
         ]);
+
+        $terms = \App\Models\Page::create([
+            'name' => 'Terms',
+            'slug' => 'terms',
+            'content' => 'This is terms page',
+        ]);
     }
 }

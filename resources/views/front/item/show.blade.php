@@ -69,7 +69,7 @@
             <div class="w-full appointment-form-sidebar flex flex-col">
                 <div class="sticky">
                     @include('front.item.contact-informations')
-                    @include('front.item.appointment-form',['item' => $item])
+                    @include('front.item.appointment-form',['item' => $item,'date_value' => $date_value])
                 </div>
             </div>
     </div>

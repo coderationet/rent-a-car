@@ -1,7 +1,6 @@
 @extends('front.layouts.app',[
-    'title' => isset($category->name) ? $category->name : null,
+    'title' => isset($title) ? $title : null,
 ])
-{{--@section('title', $category->name)--}}
 @section('content')
     @include('front.breadcrumbs', ['breadcrumbs' => [
         [
@@ -25,7 +24,7 @@
                         <div class="item bg-white p-3 border mb-5">
                             <div class="flex gap-3">
                                 <div class="w-1/4">
-                                    <a href="{{route('front.item.show',$item->slug)}}">
+                                    <a href="{{route('front.item.show',$item->slug) . $date_string}}">
                                         <img
                                             src="{{route('front.image.show.mode',['image_id' => $item->thumbnail->id,'size' => 'small','mode' => 'stretch'])}}"
                                             alt=""

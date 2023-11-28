@@ -15,7 +15,13 @@ class SearchController extends Controller
 
         $items = Item::query();
 
-        $category = $request->has('category') ? [...$request->get('category')] : []; // category slug array
+        $category = $request->filled('category') ? [...$request->get('category')] : []; // category slug array
+
+        foreach ($category as $key => $cat) {
+            if ($cat == null){
+                unset($category[$key]);
+            }
+        }
 
         if($category_){
             $category_ = ItemCategory::where('slug', $category_)->first();
@@ -54,6 +60,7 @@ class SearchController extends Controller
 
         $attributes = $attributes->keyBy('slug');
 
+
         foreach (request()->all() as $key => $value) {
             if (str_contains($key, 'attribute_') && isset($attributes[explode('attribute_', $key)[1]])) {
                 $items = $items->whereHas('attributeValues', function ($query) use ($value) {
@@ -61,6 +68,7 @@ class SearchController extends Controller
                 });
             }
         }
+
 
         // min_price
         if (request()->has('min_price') && request()->min_price != 0) {
@@ -72,11 +80,37 @@ class SearchController extends Controller
             $items = $items->where('price', '<=', request()->max_price);
         }
 
+        // start_date & end_date
+        if (request()->filled('start_date') && request()->filled('end_date')) {
+            $items = $items->whereDoesntHave('reservations', function ($query) {
+                $query->where('start_date', '<=', request()->start_date)
+                    ->where('end_date', '>=', request()->end_date)
+                    ->where('status', 'approved');
+            });
+        }
+
         $items = cache()->remember('query_search_items_' . md5(request()->fullUrl()), config('cache.app_cache_ttl'), function () use ($items) {
             return $items->with('thumbnail', 'attributeValues', 'categories')->paginate(12)->withQueryString();
         });
 
-        return view('front.search.show', compact('category', 'items'));
+        $title = 'Search';
+
+        if (count($category)){
+
+            $title_cached = cache()->remember('category_title_' . md5(implode(',', $category)), config('cache.app_cache_ttl'), function () use ($category) {
+                return implode(', ',ItemCategory::whereIn('id', $category)->pluck('name')->toArray());
+            });
+
+            $title .= ' in ' . $title_cached;
+        }
+
+        $date_string = '';
+
+        if (request()->filled('start_date') && request()->filled('end_date')) {
+            $date_string = '?start_date=' . request()->start_date . '&end_date=' . request()->end_date;
+        }
+
+        return view('front.search.show', compact('category', 'items','title','date_string'));
 
     }
 

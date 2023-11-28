@@ -20,8 +20,11 @@ Route::group(['as' => 'front.'], function () {
     Route::get('image/{image_id}/{size}/image.webp', [Front\ImageController::class, 'show'])->name('image.show');
     Route::get('image/{image_id}/{size}/{mode}/image.webp', [Front\ImageController::class, 'show'])->name('image.show.mode');
 
+    // Category routes
     Route::get('item/{slug}', [Front\ItemController::class, 'show'])->name('item.show');
     Route::post('attribute-values/get', [Front\AttributeValueController::class, 'get'])->name('attribute-values.get');
+
+    // Page routes
     Route::get('page/{slug}', [Front\PageController::class, 'show'])->name('page.show');
     Route::get('contact', [Front\PageController::class, 'contact'])->name('page.contact');
     Route::post('contact/post', [Front\PageController::class, 'contact_post'])->name('page.contact.post');
@@ -33,11 +36,17 @@ Route::group(['as' => 'front.'], function () {
 
     // Appointment routes
     Route::controller(Front\AppointmentController::class)->group(function () {
-        Route::get('appointment/driver-info', 'driver_info_step')->name('driver_info_step');
-        Route::post('appointment/payment/store', 'payment_store')->name('payment_step');
-        Route::get('appointment/payment/options', 'payment_options')->name('payment.show');
-        Route::get('appointment/payment/result', 'payment_result')->name('payment.result');
-    })->name('appointment.');
+        Route::get('appointment/driver-info', 'driver_info_step')->name('appointment.driver_info_step');
+        Route::post('appointment/driver-info-store', 'driver_info_store')->name('appointment.driver_info_store');
+    });
+
+    // Payment Routes
+    Route::controller(Front\PaymentController::class)->group(function () {
+        Route::get('payment/options', 'payment_options')->name('payment.options');
+        Route::post('payment/store', 'payment_store')->name('payment.store');
+        Route::get('payment/result', 'payment_result')->name('payment.result');
+        Route::any('payment/{payment_gateway_id}/callback', 'payment_callback')->name('payment.callback');
+    });
 
 });
 

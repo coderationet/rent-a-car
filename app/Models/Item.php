@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
@@ -28,6 +28,10 @@ class Item extends Model
 
     public function categories(){
         return $this->belongsToMany(ItemCategory::class, 'category_item_map', 'item_id', 'category_id');
+    }
+
+    public function reservations(){
+        return $this->hasMany(Reservation::class, 'item_id');
     }
 }
 

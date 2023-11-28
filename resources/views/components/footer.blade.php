@@ -10,7 +10,7 @@
     <ul>
         <li class="font-bold mb-3">Categories</li>
         @foreach($categories as $category)
-            <li><a href="{{route('front.category.show', $category->slug)}}">{{$category->name}}</a></li>
+            <li><a href="{{route('front.search.index').'/'.$category->slug}}">{{$category->name}}</a></li>
         @endforeach
     </ul>
 </div>

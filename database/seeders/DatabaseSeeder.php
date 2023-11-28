@@ -25,9 +25,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ItemSeeder::class);
         $this->call(PageSeeder::class);
 
-        Artisan::call('config:cache');
-        Artisan::call('route:cache');
-        Artisan::call('view:cache');
+//        Artisan::call('config:cache');
+//        Artisan::call('route:cache');
+//        Artisan::call('view:cache');
 
     }
 }
