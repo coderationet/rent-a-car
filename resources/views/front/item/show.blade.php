@@ -11,8 +11,8 @@
             'url' => route('front.item.show', $item->slug)
         ]
     ]])
-    <div class="container flex flex-col md:flex-row gap-3 item-page">
-            <div class="w-full flex-1 md:lex flex-col bg-white">
+    <div class="container flex flex-col md:flex-row gap-5 item-page">
+            <div class="w-full flex-1 md:flex flex-col gap-4">
                 <div class="card">
                     <div class="card-body">
                         <!-- Slider main container -->

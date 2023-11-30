@@ -1,7 +1,9 @@
 import './bootstrap';
+import 'jquery-ui/dist/jquery-ui.min.js';
 import './search.js';
 import './item.js';
 import './home.js';
+import './driver-info.js'
 
 $('.accordion-header').click(function () {
 

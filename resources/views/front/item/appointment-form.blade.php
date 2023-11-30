@@ -1,15 +1,15 @@
-<div class="bg-white mt-4 p-3">
+<div class="mt-4">
     <div>
-        <div class="card bg-light">
-            <div class="mb-5">
-                <h5>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
                     {{ __('front/appointment-form.title') }}
                 </h5>
             </div>
-            <div>
+            <div class="card-body">
                 <form action="{{route('front.appointment.driver_info_step')}}" method="get" enctype="multipart/form-data"
                       class="flex gap-5 flex-col">
-                    <div class="data-range-container rounded border text-black flex gap-3 open-calendar justify-around p-2 items-center">
+                    <div class="data-range-container rounded border text-black flex gap-5 open-calendar justify-around p-2 items-center">
                         <div class="calendar-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                  stroke="currentColor" class="w-8 h-8">

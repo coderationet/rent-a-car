@@ -13,10 +13,28 @@
 @import "search.scss";
 @import "items.scss";
 @import "general.scss";
+@import "buttons.scss";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* card component */
+.card {
+    @apply bg-white rounded-lg shadow-lg p-8 flex flex-col gap-8;
+}
+.card-body{
+    @apply flex-1 flex flex-col gap-4;
+}
+.card-footer{
+    @apply flex items-center justify-between gap-4;
+}
+.card-title{
+    @apply text-2xl font-bold;
+}
+.card-header{
+    @apply flex items-center justify-between;
+}
 
 *{
     box-sizing: border-box;
@@ -71,6 +89,10 @@
 
 }
 
+.date-picker-wrapper{
+    border-radius: 10px;
+    background-color: #dfe4ea;
+}
 .date-picker-wrapper .footer{
     background-color: unset;
 }

@@ -1,4 +1,3 @@
-import 'jquery-ui/dist/jquery-ui.min.js';
 
 $(document).on('click','.remove-filter', function () {
 
@@ -23,16 +22,18 @@ $(document).on('click','.remove-filter', function () {
 var queryString = location.search
 let params = new URLSearchParams(queryString)
 
-$("#price-range").slider({
-    step: 100,
-    range: true,
-    min: 0,
-    max: 100000,
-    values: [params.get('min_price') ?? 0, params.get('max_price') ?? 100000],
-    slide: function (event, ui) {
-        $('#min_price').val(ui.values[0]);
-        $('#max_price').val(ui.values[1]);
-    }
+$(function (){
+    $("#price-range").slider({
+        step: 100,
+        range: true,
+        min: 0,
+        max: 100000,
+        values: [params.get('min_price') ?? 0, params.get('max_price') ?? 100000],
+        slide: function (event, ui) {
+            $('#min_price').val(ui.values[0]);
+            $('#max_price').val(ui.values[1]);
+        }
+    });
 });
 
 // $("#priceRange").val($("#price-range").slider("values", 0) + " - " + $("#price-range").slider("values", 1));

@@ -12,3 +12,21 @@ form{
         color: #dc3545;
     }
 }
+.validated-form{
+    input,textarea{
+        border-color: #ced4da;
+    }
+    label{
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+    label.error{
+        color: #dc3545;
+        font-size: 0.7rem;
+        margin-top: 0.25rem;
+    }
+    input.error{
+        border-color: #dc3545;
+    }
+}
