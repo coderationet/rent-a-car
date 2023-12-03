@@ -116,46 +116,46 @@
                         </svg>
                         Billing Information
                         (Optional)
-                        <input type="hidden" name="enable_billing" class="enable_billing" value="0">
+                        <input type="hidden" name="enable_billing" class="enable_billing" value="{{old('enable_billing') ? old('enable_billing')  : '0'}}" >
                     </div>
-                    <div class="flex justify-start items-center gap-3 hidden billing-type-area">
+                    <div class="flex justify-start items-center gap-3 {{old('enable_billing') ? ''  : 'hidden'}}  billing-type-area">
                         <label>Billing Type</label>
                         <!-- radio -->
-                        <input type="radio" checked value="individual" name="billing_type" class="billing-type-radio-button" id="individual-billing-type">
+                        <input type="radio" checked value="individual" name="billing_type" {{old('billing_type') && old('billing_type') == 'individual' ? 'checked' : '' }} class="billing-type-radio-button" id="individual-billing-type">
                         <label>Individual</label>
-                        <input type="radio" value="company" name="billing_type" class="billing-type-radio-button" id="company-billing-type">
+                        <input type="radio" value="company" name="billing_type" {{old('billing_type') && old('billing_type') == 'company' ? 'checked' : ''}} class="billing-type-radio-button" id="company-billing-type">
                         <label>Company</label>
                     </div>
-                    <div class="billing-tab individual-billing hidden flex flex-col gap-3">
+                    <div class="billing-tab individual-billing {{old('billing_type') && old('billing_type') == 'individual' ? '' : 'hidden'}} flex flex-col gap-3">
                         <!-- country, city, district -->
                         <div class="flex gap-3">
                             <!-- country -->
                             <div class="w-full md:w-1/3 flex flex-col">
                                 <label for="billing_country">Country</label>
-                                <input type="text" name="individual_billing_country" value="{{ old('billing_country') }}"
+                                <input type="text" name="individual_billing_country" value="{{ old('individual_billing_country') }}"
                                        id="billing_country"
                                        placeholder="Country">
-                                @error('billing_country')
+                                @error('individual_billing_country')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <!-- city -->
                             <div class="w-full md:w-1/3 flex flex-col">
                                 <label for="billing_city">City</label>
-                                <input type="text" name="individual_billing_city" value="{{ old('billing_city') }}"
+                                <input type="text" name="individual_billing_city" value="{{ old('individual_billing_city') }}"
                                        id="billing_city"
                                        placeholder="City">
-                                @error('billing_city')
+                                @error('individual_billing_city')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <!-- district -->
                             <div class="w-full md:w-1/3 flex flex-col">
                                 <label for="billing_district">District</label>
-                                <input type="text" name="individual_billing_district" value="{{ old('billing_district') }}"
+                                <input type="text" name="individual_billing_district" value="{{ old('individual_billing_district') }}"
                                        id="billing_district"
                                        placeholder="District">
-                                @error('billing_district')
+                                @error('individual_billing_district')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -165,14 +165,14 @@
                             <div class="w-full flex flex-col ">
                                 <label for="billing_address">Address</label>
                                 <textarea name="individual_billing_address" id="individual_billing_address" cols="30" rows="5"
-                                          placeholder="Address">{{ old('billing_address') }}</textarea>
-                                @error('billing_address')
+                                          placeholder="Address">{{ old('individual_billing_address') }}</textarea>
+                                @error('individual_billing_address')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                     </div>
-                    <div class="billing-tab company-billing hidden flex flex-col gap-3">
+                    <div class="billing-tab company-billing {{old('billing_type') && old('billing_type') == 'company' ? '' : 'hidden'}} flex flex-col gap-3">
                         <!-- company name -->
                         <div class="flex gap-3">
                             <div class="w-full flex flex-col ">
@@ -201,7 +201,7 @@
                         <div class="flex gap-3">
                             <!-- country -->
                             <div class="w-full md:w-1/3 flex flex-col">
-                                <label for="company_illing_country">Country</label>
+                                <label for="company_billing_country">Country</label>
                                 <input type="text" name="company_billing_country" value="{{ old('company_billing_country') }}"
                                        id="company_billing_country"
                                        placeholder="Country">
@@ -211,7 +211,7 @@
                             </div>
                             <!-- city -->
                             <div class="w-full md:w-1/3 flex flex-col">
-                                <label for="billing_city">City</label>
+                                <label for="company_billing_city">City</label>
                                 <input type="text" name="company_billing_city" value="{{ old('company_billing_city') }}"
                                        id="billing_city"
                                        placeholder="City">

@@ -25,6 +25,11 @@ class ActiveFilters extends Component
     public function render(): View|Closure|string
     {
 
+        // if request doesnt have any ? in url
+        if (!request()->has('min_price') && !request()->has('max_price') && !request()->has('attribute_')) {
+            return '';
+        }
+
         $filters = [];
 
         if (request()->has('min_price') && request()->min_price != 0) {

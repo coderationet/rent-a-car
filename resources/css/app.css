@@ -14,6 +14,7 @@
 @import "items.scss";
 @import "general.scss";
 @import "buttons.scss";
+@import "cc-card.scss";
 
 @tailwind base;
 @tailwind components;
@@ -73,6 +74,7 @@
 
 .page{
     padding-bottom: 20px;
+    padding-top: 20px;
 }
 
 #data-range-container{

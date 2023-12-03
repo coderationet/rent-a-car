@@ -15,6 +15,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "inputmask": "^5.0.8",
         "jquery": "^3.7.1",
         "jquery-date-range-picker": "^1.0.4",
         "jquery-ui": "^1.13.2",

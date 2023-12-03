@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => "Villa Informations",
+    'title' => "Car Informations",
     'name' => 'Name',
     'values' => 'Values',
 ];

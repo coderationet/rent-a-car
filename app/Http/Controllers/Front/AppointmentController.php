@@ -73,6 +73,16 @@ class AppointmentController extends Controller
 
         $data['status'] = Reservation::STATUS_CREATED;
 
+        $billing_type = $request->billing_type;
+
+        if ($validated_data['enable_billing'] == 1 && $validated_data['billing_type'] == 'individual') {
+            $data['invoice_type'] = $validated_data['billing_type'];
+            $data['invoice_company_type'] = $validated_data['billing_type'];
+            $data['country'] = $validated_data['individual_billing_country'];
+            $data['city'] = $validated_data['individual_billing_city'];
+            $data['district'] = $validated_data['individual_billing_district'];
+        }
+
         $appointment = Reservation::create($data);
 
         return redirect()->route('front.payment.options', ['appointment_id' => $appointment->id]);

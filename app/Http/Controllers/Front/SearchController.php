@@ -119,7 +119,6 @@ class SearchController extends Controller
 
         $ref = request()->headers->get('referer');
 
-
         $query_params = explode('?', $ref)[1];
 
         $query_params = explode('&', $query_params);

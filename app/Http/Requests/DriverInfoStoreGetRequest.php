@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class DriverInfoStoreGetRequest extends FormRequest
 {
@@ -31,6 +32,37 @@ class DriverInfoStoreGetRequest extends FormRequest
             'item_id' => 'required|integer|exists:items,id',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
+            'enable_billing' => 'required',
+            'billing_type' => 'required_if:enable_billing,1',
+            // individual_billing_country will be required if enable_billing is 1 and billing_type is individual both at the same time
+            // https://laravel.com/docs/10.x/validation#rule-required-if
+            'individual_billing_country' => Rule::requiredIf(function () {
+                return request()->enable_billing == 1 && request()->billing_type == 'individual';
+            }),
+            'individual_billing_city' => Rule::requiredIf(function () {
+                return request()->enable_billing == 1 && request()->billing_type == 'individual';
+            }),
+            'individual_billing_district' =>Rule::requiredIf(function () {
+                return request()->enable_billing == 1 && request()->billing_type == 'individual';
+            }),
+            'individual_billing_address' => Rule::requiredIf(function () {
+                return request()->enable_billing == 1 && request()->billing_type == 'individual';
+            }),
+            'company_name' => Rule::requiredIf(function () {
+                return request()->enable_billing == 1 && request()->billing_type == 'company';
+            }),
+            'tax_number' => Rule::requiredIf(function () {
+                return request()->enable_billing == 1 && request()->billing_type == 'company';
+            }),
+            'company_billing_country' => Rule::requiredIf(function () {
+                return request()->enable_billing == 1 && request()->billing_type == 'company';
+            }),
+            'company_billing_city' => Rule::requiredIf(function () {
+                return request()->enable_billing == 1 && request()->billing_type == 'company';
+            }),
+            'company_billing_district' => Rule::requiredIf(function () {
+                return request()->enable_billing == 1 && request()->billing_type == 'company';
+            }),
         ];
     }
 
@@ -39,6 +71,7 @@ class DriverInfoStoreGetRequest extends FormRequest
     */
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
     {
+//        $this->dd($validator->errors(),request()->all());
         $this->session()->flash('errors', $validator->errors());
         return redirect()->back()->withInput();
     }
