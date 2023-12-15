@@ -19,7 +19,7 @@ class ItemSeeder extends Seeder
     public function run(): void
     {
 
-        $brand = Attribute::create(['name' => 'Marka', 'type' => 'select', 'slug' => 'brand']);
+        $brand = Attribute::create(['name' => 'Brand', 'type' => 'select', 'slug' => 'brand']);
         $brand->values()->create(['value' => 'Fiat']);
         $brand->values()->create(['value' => 'Ford']);
         $brand->values()->create(['value' => 'Mercedes']);
@@ -28,7 +28,7 @@ class ItemSeeder extends Seeder
         $brand->values()->create(['value' => 'Volkswagen']);
         $brand->values()->create(['value' => 'Renault']);
 
-        $location = Attribute::create(['name' => 'Konum', 'type' => 'multiselect', 'slug' => 'location']);
+        $location = Attribute::create(['name' => 'Location', 'type' => 'multiselect', 'slug' => 'location']);
         $location->values()->create(['value' => 'İstanbul']);
         $location->values()->create(['value' => 'Ankara']);
         $location->values()->create(['value' => 'İzmir']);
@@ -41,7 +41,7 @@ class ItemSeeder extends Seeder
         ]);
 
         // categories For Sale, For Rent, For Holiday
-        $cars = ItemCategory::create(['name' => 'Araba', 'slug' => 'cars','short_description' => 'Araba kategorisi açıklaması']);
+        $cars = ItemCategory::create(['name' => 'Cars', 'slug' => 'cars','short_description' => 'Cars category description']);
         $cars->image_id = $car_thumbnail->id;
         $cars->save();
 
@@ -49,7 +49,7 @@ class ItemSeeder extends Seeder
             'name' => 'default/category-bicycles.webp',
             'type' => 'image',
         ]);
-        $bicycles = ItemCategory::create(['name' => 'Bisiklet', 'slug' => 'bicycles','short_description' => 'Bisiklet kategorisi açıklaması']);
+        $bicycles = ItemCategory::create(['name' => 'Bicycles', 'slug' => 'bicycles','short_description' => 'Bicycles category description']);
         $bicycles->image_id = $car_thumbnail->id;
         $bicycles->save();
 
@@ -57,7 +57,7 @@ class ItemSeeder extends Seeder
             'name' => 'default/category-motobike.jpg',
             'type' => 'image',
         ]);
-        $moto = ItemCategory::create(['name' => 'Motor', 'slug' => 'motors','short_description' => 'Motor kategorisi açıklaması']);
+        $moto = ItemCategory::create(['name' => 'Motors', 'slug' => 'motors','short_description' => 'Motors category description']);
         $moto->image_id = $moto_thumbnail->id;
         $moto->save();
 
@@ -66,7 +66,7 @@ class ItemSeeder extends Seeder
             'name' => 'default/category-atv.jpg',
             'type' => 'image',
         ]);
-        $atv = ItemCategory::create(['name' => 'ATV', 'slug' => 'atv','short_description' => 'ATV kategorisi açıklaması']);
+        $atv = ItemCategory::create(['name' => 'ATV', 'slug' => 'atv','short_description' => 'ATV category description']);
         $atv->image_id = $atv_thumbnail->id;
         $atv->save();
 

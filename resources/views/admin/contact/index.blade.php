@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('admin.layouts.general')
 @section('content')
     <div class="content-wrapper">
 

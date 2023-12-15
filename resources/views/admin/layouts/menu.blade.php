@@ -99,15 +99,15 @@
     </li>
 
     <!-- Menü Linkleri -->
-    <li class="nav-item">
-        <a href="{{route('admin.menu-links.index')}}"
-           class="nav-link {{Route::is('admin.menu-links.*') ? 'active' : ''}}">
-            <i class="nav-icon fas fa-link"></i>
-            <p>
-                {{__('admin/menu_links.menu_links')}}
-            </p>
-        </a>
-    </li>
+{{--    <li class="nav-item">--}}
+{{--        <a href="{{route('admin.menu-links.index')}}"--}}
+{{--           class="nav-link {{Route::is('admin.menu-links.*') ? 'active' : ''}}">--}}
+{{--            <i class="nav-icon fas fa-link"></i>--}}
+{{--            <p>--}}
+{{--                {{__('admin/menu_links.menu_links')}}--}}
+{{--            </p>--}}
+{{--        </a>--}}
+{{--    </li>--}}
 
 
     <!-- İletişim -->
