@@ -21,18 +21,18 @@
                 <x-active-filters :category="$category"/>
                 <div class="flex flex-col">
                     @foreach($items as $item)
-                        <div class="item bg-white p-3 border mb-5">
+                        <div class="card bg-white p-3 border mb-5">
                             <div class="flex gap-3">
-                                <div class="w-1/4">
+                                <div class="w-1/3">
                                     <a href="{{route('front.item.show',$item->slug) . $date_string}}">
                                         <img
                                             src="{{route('front.image.show.mode',['image_id' => $item->thumbnail->id,'size' => 'small','mode' => 'stretch'])}}"
                                             alt=""
                                             loading="lazy"
-                                            class="img-fluid">
+                                            class="w-full">
                                     </a>
                                 </div>
-                                <div class="w-3/4">
+                                <div class="w-2/3">
                                     <div class="111">
                                         <div>
                                             <a href="{{route('front.item.show',$item->slug)}}"

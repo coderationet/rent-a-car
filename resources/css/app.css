@@ -22,7 +22,7 @@
 
 /* card component */
 .card {
-    @apply bg-white rounded-lg shadow-lg p-8 flex flex-col gap-8;
+    @apply bg-white rounded shadow p-6 flex flex-col gap-8;
 }
 .card-body{
     @apply flex-1 flex flex-col gap-4;
@@ -42,7 +42,7 @@
 }
 .container {
     @apply mx-auto px-4;
-    max-width: 1100px;
+    max-width: 1300px;
 }
 .header{
     @apply flex items-center justify-between ;
