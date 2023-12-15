@@ -90,7 +90,7 @@ class SearchController extends Controller
         }
 
         $items = cache()->remember('query_search_items_' . md5(request()->fullUrl()), config('cache.app_cache_ttl'), function () use ($items) {
-            return $items->with('thumbnail', 'attributeValues', 'categories')->paginate(12)->withQueryString();
+            return $items->with('thumbnail', 'attributeValues', 'categories')->paginate(12)->appends(request()->query());
         });
 
         $title = 'Search';
