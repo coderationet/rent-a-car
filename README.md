@@ -7,3 +7,4 @@
 - [ ] Newsletter
 - [ ] Social media integration
 - [ ] Payment gateway integration
+- [ ] User profile reservations etc.
