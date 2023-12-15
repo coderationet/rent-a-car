@@ -9,6 +9,9 @@ class Reservation extends Model
 {
     use HasFactory;
 
+    const STATUS_PAID = 'paid';
+    const STATUS_FAILED = 'failed';
+
     const STATUS_PENDING = 'pending';
 
     const STATUS_CREATED = 'created';

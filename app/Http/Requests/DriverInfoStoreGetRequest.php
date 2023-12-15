@@ -34,6 +34,7 @@ class DriverInfoStoreGetRequest extends FormRequest
             'end_date' => 'required|date',
             'enable_billing' => 'required',
             'billing_type' => 'required_if:enable_billing,1',
+            'payment_option' => 'required',
             // individual_billing_country will be required if enable_billing is 1 and billing_type is individual both at the same time
             // https://laravel.com/docs/10.x/validation#rule-required-if
             'individual_billing_country' => Rule::requiredIf(function () {

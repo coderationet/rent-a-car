@@ -23,4 +23,9 @@ class ReservationHelper{
         return $delete;
 
     }
+
+    public static function generate_code($reservation_id){
+        $code = 'R'.md5(time().uniqid().$reservation_id);
+        return $code;
+    }
 }

@@ -45,6 +45,7 @@ Route::group(['as' => 'front.'], function () {
         Route::get('payment/options', 'payment_options')->name('payment.options');
         Route::post('payment/store', 'payment_store')->name('payment.store');
         Route::get('payment/result', 'payment_result')->name('payment.result');
+        Route::get('payment/bank-transfer-instructions/{appointment_id}', 'bank_transfer_instructions')->name('payment.bank_transfer_instructions');
         Route::any('payment/{payment_gateway_id}/callback', 'payment_callback')->name('payment.callback');
     });
 

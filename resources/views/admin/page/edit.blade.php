@@ -42,7 +42,7 @@
                                          'input_name'=>'slug',
                                          'title'=>__('admin/general.slug'),
                                          'placeholder'=>__('admin/general.insert_slug'),
-                                         'item' => $attribute ?? null,
+                                         'item' => $page ?? null,
                                          'with_alerts' => true
                                      ])
                                     <div class="form-group">
@@ -80,6 +80,8 @@
                     ['style', ['bold', 'italic', 'underline', 'clear']],
                     ['font', ['strikethrough', 'superscript', 'subscript']],
                     ['view', ['codeview']],
+                    ['table', ['table']],
+                    ['help', ['help']]
                 ]
             });
         });

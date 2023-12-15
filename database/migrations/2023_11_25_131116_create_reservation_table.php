@@ -20,6 +20,9 @@ return new class extends Migration {
             $table->date('end_date');
             $table->enum('status', ['created','pending', 'approved', 'declined']);
 
+            // code
+            $table->string('code')->nullable();
+
             // pick_up_location_id
             $table->unsignedBigInteger('pick_up_location_id')->nullable();
 

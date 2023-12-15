@@ -73,6 +73,8 @@ class AppointmentController extends Controller
 
         $data['status'] = Reservation::STATUS_CREATED;
 
+        $data['payment_method'] = $validated_data['payment_option'];
+
         $billing_type = $request->billing_type;
 
         if ($validated_data['enable_billing'] == 1 && $validated_data['billing_type'] == 'individual') {
@@ -83,7 +85,19 @@ class AppointmentController extends Controller
             $data['district'] = $validated_data['individual_billing_district'];
         }
 
+        if ($data['payment_method'] == 'bank_transfer'){
+            $data['status'] = Reservation::STATUS_PENDING;
+        }
+
         $appointment = Reservation::create($data);
+
+        $data['code'] = ReservationHelper::generate_code($appointment->id);
+
+        $appointment->update($data);
+
+        if ($data['payment_method'] == 'bank_transfer'){
+            return redirect()->route('front.payment.bank_transfer_instructions', ['appointment_id' => $appointment->id]);
+        }
 
         return redirect()->route('front.payment.options', ['appointment_id' => $appointment->id]);
 

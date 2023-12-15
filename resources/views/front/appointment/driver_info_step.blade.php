@@ -94,6 +94,22 @@
                     </div>
                 </div>
                 <div class="card-footer">
+                    <!-- Payment Options Credit Cart/Debit Cart or Bank Transfer -->
+                    <div class="flex gap-3 w-full">
+                        <div class="w-full md:w-full flex flex-col">
+                            <label for="payment_option">Payment Option</label>
+                            <select name="payment_option" id="payment_option" class="w-full" required>
+{{--                                <option value="">Select Payment Option</option>--}}
+{{--                                <option value="credit_card" {{old('payment_option') && old('payment_option') == 'credit_card' ? 'selected' : ''}}>Credit Card</option>--}}
+                                <option value="bank_transfer" {{old('payment_option') && old('payment_option') == 'bank_transfer' ? 'selected' : ''}} selected>Bank Transfer</option>
+                            </select>
+                            @error('payment_option')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
                     <div class="w-full md:w-1/2 flex flex-col justify-center items-end">
                         <!-- total price span -->
                         <span class="text-2xl font-bold">Total Price: <span
