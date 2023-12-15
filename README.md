@@ -3,3 +3,7 @@
 - [ ] Language customization
 - [ ] Currency customization
 - [ ] User permissions and roles
+- [ ] Blog
+- [ ] Newsletter
+- [ ] Social media integration
+- [ ] Payment gateway integration
