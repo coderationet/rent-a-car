@@ -6,4 +6,8 @@ return [
     'my_reservation' => 'My Reservations',
     'all_vehicles' => 'All Vehicles',
     'about_us' => 'About Us',
+    'account' => 'Account',
+    'login' => 'Login',
+    'register' => 'Register',
+    'logout' => 'Logout',
 ];

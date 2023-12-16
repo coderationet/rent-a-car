@@ -14,8 +14,6 @@
         <textarea name="site_description" id="site_description"
                   class="form-control">{{$site_description}}</textarea>
     </div>
-
-
     <div class="form-group">
         <label for="facebook_url">{{__('admin/settings.facebook_url')}}</label>
         <input type="text" name="facebook_url" id="facebook_url"
