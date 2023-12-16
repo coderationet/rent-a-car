@@ -36,9 +36,13 @@
                             <div class="swiper-scrollbar"></div>
                         </div>
                     </div>
-                    <div class="card-footer fs-5 p-3">
-                        <h2 class="text-2xl mb-3">{{$item->title}}</h2>
-                        {!! $item->description !!}
+                    <div class="card-footer fs-5 p-3 ">
+
+                        <div class="flex flex-col justify-end items-start">
+                            <h2 class="text-2xl mb-3">{{$item->title}}</h2>
+                            {!! $item->description !!}
+                        </div>
+
                     </div>
                 </div>
                 <div class="card p-3">

@@ -60,5 +60,8 @@ return [
     "price" => "Price",
     "msg" => [
         "invalid_data" => "Invalid Data",
-    ]
+    ],
+    'item_name' => 'Item Name',
+    'user_name' => 'User Name',
+    "status" => "Status",
 ];

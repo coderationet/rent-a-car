@@ -46,6 +46,17 @@
         </ul>
     </li>
 
+    <!-- Reservations -->
+    <li class="nav-item">
+        <a href="{{route('admin.reservations.index')}}"
+           class="nav-link {{Route::is('admin.reservations.*') ? 'active' : ''}}">
+            <i class="nav-icon fas fa-calendar-check"></i>
+            <p>
+                {{__('admin/reservations.reservations')}}
+            </p>
+        </a>
+    </li>
+
 
     <!-- Pages -->
     <li class="nav-item {{Route::is('admin.pages.*') ? 'menu-open' : ''}}">

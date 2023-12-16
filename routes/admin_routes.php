@@ -19,6 +19,11 @@ Route::group(['middleware' => ['auth','role:admin'],'prefix' => 'admin', 'as' =>
     Route::get('items/data', [Admin\ItemController::class,'data'])->name('items.data');
     Route::resource('items', Admin\ItemController::class);
 
+    // Reservations
+    Route::get('reservations/data', [Admin\ReservationController::class,'data'])->name('reservations.data');
+    Route::resource('reservations', Admin\ReservationController::class);
+
+
     // Item Attributes
     Route::get('item-attributes/get-item-attribute',[Admin\ItemAttributeController::class,'get_item_attribute'])->name('item-attributes.get_item_attribute');
     Route::get('item-attributes/ajax-data',[Admin\ItemAttributeController::class,'ajax_data'])->name('item-attributes.ajax_data');
