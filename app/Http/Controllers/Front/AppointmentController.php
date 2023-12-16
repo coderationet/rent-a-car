@@ -89,6 +89,18 @@ class AppointmentController extends Controller
             $data['status'] = Reservation::STATUS_PENDING;
         }
 
+        // check if there is approbed reservation in this date range
+        $reservation = Reservation::where('item_id', $data['item_id'])
+            ->where('start_date', '<=', $data['start_date'])
+            ->where('end_date', '>=', $data['end_date'])
+            ->where('status','approved')
+            ->first();
+
+        if ($reservation){
+            return redirect()->back()->withErrors(['error' => 'There is approved reservation in this date range']);
+        }
+
+
         $appointment = Reservation::create($data);
 
         $data['code'] = ReservationHelper::generate_code($appointment->id);
