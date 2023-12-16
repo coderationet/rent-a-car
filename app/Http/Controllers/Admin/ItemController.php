@@ -296,6 +296,44 @@ class ItemController extends Controller
         return response()->json($response);
     }
 
+    public function ajax_data(){
+        // ajax data for select2
+        $items = Item::query();
+
+        if (request()->has('q')) {
+            $search = request()->get('q');
+            # search in brand + model + base_color + color_code combinated name
+            # search in product name
+            $items->where('name', 'LIKE', "%$search%");
+            # orwhere ID
+            $items->orWhere('id', $search);
+        }
+
+        if (request()->has('user_id')){
+            $items->where('id', request()->get('user_id'));
+        }
+
+        $offset = 0;
+
+        if (request()->has('page')) {
+            $offset = (request()->get('page') - 1) * 20;
+        }
+
+        $items = $items->limit(20)->offset($offset)->get();
+
+        $response = [];
+
+        foreach ($items as $item) {
+            $response[] = [
+                "id" => $item->id,
+                "text" => $item->title,
+            ];
+        }
+        return response()->json([
+            'results' => $response
+        ]);
+    }
+
     public function attribute_value_row_html()
     {
         $attribute_id = request()->get('attribute_id');

@@ -21,7 +21,7 @@
                 <x-active-filters :category="$category"/>
                 <div class="flex flex-col">
                     @foreach($items as $item)
-                        <div class="card bg-white p-3 border mb-5">
+                        <div class="rounded bg-white p-3 border mb-5">
                             <div class="flex gap-3">
                                 <div class="w-1/3">
                                     <a href="{{route('front.item.show',$item->slug) . $date_string}}">

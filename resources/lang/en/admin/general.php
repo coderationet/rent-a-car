@@ -64,4 +64,5 @@ return [
     'item_name' => 'Item Name',
     'user_name' => 'User Name',
     "status" => "Status",
+    "user" => "User",
 ];

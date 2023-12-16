@@ -132,13 +132,21 @@ class UserController extends Controller
             # search in brand + model + base_color + color_code combinated name
             # search in product name
             $users->where('name', 'LIKE', "%$search%");
+            # orwhere ID
+            $users->orWhere('id', $search);
         }
 
         if (request()->has('user_id')){
             $users->where('id', request()->get('user_id'));
         }
 
-        $users = $users->limit(20)->offset(0)->get();
+        $offset = 0;
+
+        if (request()->has('page')) {
+            $offset = (request()->get('page') - 1) * 20;
+        }
+
+        $users = $users->limit(20)->offset($offset)->get();
 
         $response = [];
         foreach ($users as $user) {

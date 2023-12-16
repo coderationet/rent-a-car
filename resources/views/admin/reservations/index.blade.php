@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">{{__('admin/general.dashboard')}}</h1>
+                        <h1 class="m-0">{{__('admin/reservations.reservations')}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title pt-2">{{__('admin/reservations.reservations')}}</h3>
-                                <a href="{{route('admin.items.create')}}" class="btn btn-primary float-right">{{__('admin/general.create_new')}}</a>
+                                <a href="{{route('admin.reservations.create')}}" class="btn btn-primary float-right">{{__('admin/general.create_new')}}</a>
                             </div>
                             <div class="card-body">
                                 <table id="reservations" class="table table-bordered table-hover">

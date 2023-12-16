@@ -5,13 +5,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">{{__('admin/general.dashboard')}}</h1>
+                        <h1 class="m-0">{{__('admin/general.create_new')}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">{{__('admin/general.home')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('admin/item.items')}}</li>
-                            <li class="breadcrumb-item active">{{__('admin/item.new_item')}}</li>
+                            <li class="breadcrumb-item active">{{__('admin/reservations.reservations')}}</li>
+                            <li class="breadcrumb-item active">{{isset($reservation) ? __('admin/reservations.update_reservation') : __('admin/reservations.create_new_reservation')}}</li>
                         </ol>
                     </div>
                 </div>
@@ -19,14 +19,14 @@
         </div>
         <section class="content">
             <div class="container-fluid">
-                <form action="{{isset($item) ? route('admin.items.update',$item->id)  : route('admin.items.store')}}"
+                <form action="{{isset($reservation) ? route('admin.items.update',$reservation->id)  : route('admin.items.store')}}"
                       method="post">
                     @csrf
-                    @if(isset($item))
+                    @if(isset($reservation))
                         @method('PUT')
                     @endif
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card card-primary">
@@ -37,119 +37,172 @@
 
                                         <div class="card-body item-form">
                                             <div class="form-group">
-                                                <label for="title">{{__('admin/general.title')}}</label>
-                                                <input type="text" class="form-control" id="title"
-                                                       value="{{isset($item) ? $item->title : ''}}"
-                                                       name="title"
-                                                       required
-                                                       placeholder="{{__('admin/general.title')}}">
+                                                <!-- user -->
+                                                <label for="user">{{__('admin/general.user')}}</label>
+                                                <select name="user_id" id="user" class="form-control user-data-select2">
+                                                    <option value="">{{__('admin/general.select')}}</option>
+                                                    @if(isset($reservation->user))
+                                                        <option value="{{$reservation->user->user_id}}" selected>{{$reservation->user->name}}</option>
+                                                    @endif
+                                                </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="slug">{{__('admin/general.slug')}}</label>
-                                                <input type="text" class="form-control" id="slug"
-                                                       value="{{isset($item) ? $item->slug : ''}}"
-                                                       name="slug"
-                                                       required
-                                                       placeholder="{{__('admin/general.slug')}}">
-                                                <div class="alert alert-success d-none mt-2"></div>
-                                                <div class="alert alert-danger d-none mt-2"></div>
+                                                <!-- item -->
+                                                <label for="item">{{__('admin/item.item')}}</label>
+                                                <select name="item_id" id="item" class="form-control">
+                                                    <option value="">{{__('admin/general.select')}}</option>
+                                                    @if(isset($reservation->item))
+                                                        <option value="{{$reservation->item->id}}" selected>{{$reservation->item->title}}</option>
+                                                    @endif
+                                                </select>
                                             </div>
-                                            <!-- Price -->
                                             <div class="form-group">
-                                                <label for="price">{{__('admin/general.price')}}</label>
-                                                <input type="number" class="form-control" id="price"
-                                                       value="{{isset($item) ? $item->price : ''}}"
-                                                       name="price"
-                                                       required
-                                                       placeholder="{{__('admin/general.price')}}">
+                                                <!-- Start Date -->
+                                                <label for="start_date">{{__('admin/reservations.start_date')}}</label>
+                                                <input type="date" name="start_date" id="start_date" class="form-control" value="{{isset($reservation) ? $reservation->start_date : ''}}">
                                             </div>
-                                            <!-- description part -->
                                             <div class="form-group">
-                                                <label for="description">{{__('admin/general.description')}}</label>
-                                                <textarea class="form-control custom-editor" id="description" rows="3"
-                                                          name="description"
-                                                          required
-                                                          placeholder="Açıklama Giriniz">{{isset($item) ? $item->description : ''}}</textarea>
+                                                <!-- End Date -->
+                                                <label for="end_date">{{__('admin/reservations.end_date')}}</label>
+                                                <input type="date" name="end_date" id="end_date" class="form-control" value="{{isset($reservation) ? $reservation->end_date : ''}}">
                                             </div>
+                                            <div class="form-group">
+                                                <!-- Status -->
+                                                <label for="status">{{__('admin/reservations.status')}}</label>
+                                                <select name="status" id="status" class="form-control">
+                                                    <option value="">{{__('admin/general.select')}}</option>
+                                                    <option value="created" @if(isset($reservation->status) && $reservation->status == 'created') selected @endif>{{__('admin/reservations.created')}}</option>
+                                                    <option value="pending" @if(isset($reservation->status) && $reservation->status == 'pending') selected @endif>{{__('admin/reservations.pending')}}</option>
+                                                    <option value="approved" @if(isset($reservation->status) && $reservation->status == 'approved') selected @endif>{{__('admin/reservations.approved')}}</option>
+                                                    <option value="declined" @if(isset($reservation->status) && $reservation->status == 'declined') selected @endif>{{__('admin/reservations.declined')}}</option>
+                                               </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- Code -->
+                                                <label for="code">{{__('admin/reservations.code')}}</label>
+                                                <input type="text" name="code" id="code" class="form-control" value="{{isset($reservation) ? $reservation->code : ''}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- Notes -->
+                                                <label for="notes">{{__('admin/reservations.notes')}}</label>
+                                                <textarea name="notes" id="notes" cols="30" rows="10" class="form-control">{{isset($reservation) ? $reservation->notes : ''}}</textarea>
+                                            </div>
+                                            <!-- Payment Information -->
+                                            <h3>{{__('admin/reservations.driver_informations')}}</h3>
+                                            <!-- Driver Informations : email, user_name, user_address, user_phone, user_ip -->
+                                            <div class="form-group">
+                                                <!-- email -->
+                                                <label for="email">{{__('admin/general.email')}}</label>
+                                                <input type="text" name="email" id="email" class="form-control" value="{{isset($reservation) ? $reservation->email : ''}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- user_name -->
+                                                <label for="user_name">{{__('admin/reservations.user_name')}}</label>
+                                                <input type="text" name="user_name" id="user_name" class="form-control" value="{{isset($reservation) ? $reservation->user_name : ''}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- user_surname -->
+                                                <label for="user_surname">{{__('admin/reservations.user_surname')}}</label>
+                                                <input type="text" name="user_surname" id="user_surname" class="form-control" value="{{isset($reservation) ? $reservation->user_surname : ''}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- user_phone -->
+                                                <label for="user_phone">{{__('admin/reservations.user_phone')}}</label>
+                                                <input type="text" name="user_phone" id="user_phone" class="form-control" value="{{isset($reservation) ? $reservation->user_phone : ''}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- user_ip -->
+                                                <label for="user_ip">{{__('admin/reservations.user_ip')}}</label>
+                                                <input type="text" name="user_ip" id="user_ip" class="form-control" value="{{isset($reservation) ? $reservation->user_ip : ''}}">
+                                            </div>
+                                            <h3>{{__('admin/reservations.payment_information')}}</h3>
+                                            <!-- Payment Information: invoice_type,invoice_company_type,invoice_company_name,invoice_company_address,invoice_company_vat_number,tax_administration -->
+                                            <div class="form-group">
+                                                <!-- invoice_type -->
+                                                <label for="invoice_type">{{__('admin/reservations.invoice_type')}}</label>
+                                                <select name="invoice_type" id="invoice_type" class="form-control">
+                                                    <option value="">{{__('admin/general.select')}}</option>
+                                                    <option value="individual" @if(isset($reservation->invoice_type) && $reservation->invoice_type == 'individual') selected @endif>{{__('admin/reservations.individual')}}</option>
+                                                    <option value="company" @if(isset($reservation->invoice_type) && $reservation->invoice_type == 'company') selected @endif>{{__('admin/reservations.company')}}</option>
+                                                </select>
+                                            </div>
+{{--                                            <div class="form-group">--}}
+{{--                                                <!-- invoice_company_type -->--}}
+{{--                                                <label for="invoice_company_type">{{__('admin/reservations.invoice_company_type')}}</label>--}}
+{{--                                                <select name="invoice_company_type" id="invoice_company_type" class="form-control">--}}
+{{--                                                    <option value="">{{__('admin/general.select')}}</option>--}}
+{{--                                                    <option value="individual" @if(isset($reservation->invoice_company_type) && $reservation->invoice_company_type == 'individual') selected @endif>{{__('admin/reservations.individual')}}</option>--}}
+{{--                                                    <option value="company" @if(isset($reservation->invoice_company_type) && $reservation->invoice_company_type == 'company') selected @endif>{{__('admin/reservations.company')}}</option>--}}
+{{--                                                </select>--}}
+{{--                                            </div>--}}
+                                            <div class="form-group">
+                                                <!-- invoice_company_name -->
+                                                <label for="invoice_company_name">{{__('admin/reservations.invoice_company_name')}}</label>
+                                                <input type="text" name="invoice_company_name" id="invoice_company_name" class="form-control" value="{{isset($reservation) ? $reservation->invoice_company_name : ''}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- invoice_company_address -->
+                                                <label for="invoice_company_address">{{__('admin/reservations.invoice_company_address')}}</label>
+                                                <input type="text" name="invoice_company_address" id="invoice_company_address" class="form-control" value="{{isset($reservation) ? $reservation->invoice_company_address : ''}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- invoice_company_vat_number -->
+                                                <label for="invoice_company_vat_number">{{__('admin/reservations.invoice_company_vat_number')}}</label>
+                                                <input type="text" name="invoice_company_vat_number" id="invoice_company_vat_number" class="form-control" value="{{isset($reservation) ? $reservation->invoice_company_vat_number : ''}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- payment_id -->
+                                                <label for="payment_id">{{__('admin/reservations.payment_id')}}</label>
+                                                <input type="text" name="payment_id" id="payment_id" class="form-control" value="{{isset($reservation) ? $reservation->payment_id : ''}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- payment_method -->
+                                                <label for="payment_method">{{__('admin/reservations.payment_method')}}</label>
+                                                <input type="text" name="payment_method" id="payment_method" class="form-control" value="{{isset($reservation) ? $reservation->payment_method : ''}}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- payment_status -->
+                                                <label for="payment_status">{{__('admin/reservations.payment_status')}}</label>
+                                                <select name="payment_status" id="payment_status" class="form-control">
+                                                    <option value="">{{__('admin/general.select')}}</option>
+                                                    <option value="created" @if(isset($reservation->payment_status) && $reservation->payment_status == 'created') selected @endif>{{__('admin/reservations.created')}}</option>
+                                                    <option value="pending" @if(isset($reservation->payment_status) && $reservation->payment_status == 'pending') selected @endif>{{__('admin/reservations.pending')}}</option>
+                                                    <option value="approved" @if(isset($reservation->payment_status) && $reservation->payment_status == 'approved') selected @endif>{{__('admin/reservations.approved')}}</option>
+                                                    <option value="declined" @if(isset($reservation->payment_status) && $reservation->payment_status == 'declined') selected @endif>{{__('admin/reservations.declined')}}</option>
+                                                    <option value="refunded" @if(isset($reservation->payment_status) && $reservation->payment_status == 'refunded') selected @endif>{{__('admin/reservations.refunded')}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- payment_amount -->
+                                                <label for="payment_amount">{{__('admin/reservations.payment_amount')}}</label>
+                                                <input type="text" name="payment_amount" id="payment_amount" class="form-control" value="{{isset($reservation) ? $reservation->payment_amount : ''}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- payment_currency -->
+                                                <label for="payment_currency">{{__('admin/reservations.payment_currency')}}</label>
+                                                <input type="text" name="payment_currency" id="payment_currency" class="form-control" value="{{isset($reservation) ? $reservation->payment_currency : ''}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- payment_date -->
+                                                <label for="payment_date">{{__('admin/reservations.payment_date')}}</label>
+                                                <input type="date" name="payment_date" id="payment_date" class="form-control" value="{{isset($reservation) ? $reservation->payment_date : ''}}">
+                                            </div>
+
                                         </div>
+
 
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">
-                                                {{isset($item) ? __('admin/general.update') : __('admin/general.add_new')}}
+                                                {{isset($reservation) ? __('admin/general.update') : __('admin/general.add_new')}}
                                             </button>
                                         </div>
 
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    @include('admin.items._attribute_values',[
-                                        "item_attributes" => $item_attributes,
-                                    ])
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title">
-                                                {{__('admin/general.featured_image')}}
-                                            </h3>
-                                        </div>
-                                        <div class="card-body">
-                                            @include('admin.media_library._input',[
-                                                    "input_name"=>"thumbnail_id",
-                                                    "relation" => "thumbnail",
-                                                    "item" => isset($item) ? $item : null,
-                                                    "multiple_file" => false
-                                            ])
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title">
-                                                {{__('admin/general.gallery')}}
-                                            </h3>
-                                        </div>
-                                        <div class="card-body">
-                                            @include('admin.media_library._input',[
-                                                    "input_name"=>"gallery_ids",
-                                                    "relation" => "gallery",
-                                                    "multiple_file" => true,
-                                                    "item" => isset($item) ? $item : null
-                                            ])
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title">
-                                                {{__('admin/category.categories')}}
-                                            </h3>
-                                        </div>
-                                        <div class="card-body category-listing-block">
-                                            {!! \App\Helpers\HierarchicalListingHelper::get_listing_html($categories,$selected_categories,'categories[]') !!}
-                                        </div>
-                                        <div class="card-footer">
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                    id="create-new-category-button"
-                                                    data-target="#create-new-category-modal">
-                                                {{__('admin/category.create_new_category')}}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </form>
@@ -186,134 +239,29 @@
 
 
     <script src="{{asset('assets/admin/summernote/custom-image-dialog.plugin.js')}}"></script>
+
     @include('admin.js.summernote-turkish')
+
     <script type="module">
-
-        $('.item-form #title').change(function () {
-            if ($('.item-form #slug').val() == '') {
-                $.get('{{route('admin.generate-slug')}}', {title: $(this).val()}, function (data) {
-                    $('.item-form #slug').val(data.slug);
-                });
-            }
-        });
-
-        $('#slug').change(function (e) {
-            // doesnt allow space and special chars except -
-            $.get('{{route('admin.generate-slug')}}', {title: $(this).val()}, function (data) {
-                $('.item-form #slug').val(data.slug);
-            });
-        });
-
-        $('.item-form #slug').keyup(function (e) {
-
-
-            var except_post_id = '';
-
-            @if(isset($item))
-                except_post_id = '{{$item->id}}';
-            @endif
-
-            $.get("{{route('admin.items.get_item')}}?slug=" + $(this).val() + "&except_post_id=" + except_post_id, function (data) {
-
-                if (data.exists === true) {
-
-                    $('.item-form .alert-success').addClass('d-none');
-                    $('.item-form .alert-danger').removeClass('d-none');
-                    $('.item-form .alert-danger').html(data.msg);
-
-                } else {
-
-                    $('.item-form .alert-success').removeClass('d-none');
-                    $('.item-form .alert-danger').addClass('d-none');
-                    $('.item-form .alert-success').html(data.msg);
-
+        $(function(){
+            $('.user-data-select2').select2({
+                ajax: {
+                    url: '{{route('admin.users.ajax_data')}}',
+                    dataType: 'json'
                 }
             });
-        });
-
-        $(document).on('click', '.create-new-category-ajax', function () {
-            var form_data = '';
-            // add csrf token to form data get token from meta
-            form_data = form_data + '&_token=' + $('meta[name="csrf-token"]').attr('content');
-            // add name to form data
-            form_data = form_data + '&name=' + $('#create-new-category-modal #category').val();
-            // add parent_id to form data
-            form_data = form_data + '&parent_id=' + $('#create-new-category-modal #parent_id').val() ?? null;
-            // add return_type to form data
-            form_data = form_data + '&response_type=json';
-            // send selected categories
-            var selected_categories = [];
-            // get checked values from category-listing-block input checkbox
-            $('.category-listing-block input[type=checkbox]:checked').each(function () {
-                selected_categories.push($(this).val());
-            });
-            // add selected categories to form data
-            form_data = form_data + '&selected_categories=' + selected_categories;
-            $.ajax({
-                method: 'POST',
-                url: '{{route('admin.item-categories.store')}}',
-                data: form_data,
-                success: function (response) {
-                    if (response.status == 'success') {
-                        $(document).Toasts('create', {
-                            class: 'bg-success',
-                            title: '{{__('admin/general.success')}}',
-                            subtitle: '',
-                            body: response.msg
-                        });
-                        $('#create-new-category-modal').modal('hide');
-                        $('.category-listing-block').html(response.category_block_html);
-                    } else {
-                        $(document).Toasts('create', {
-                            class: 'bg-danger',
-                            title: '{{__('admin/general.error')}}',
-                            subtitle: '',
-                            body: response.msg
-                        });
-                    }
+            $('#item').select2({
+                ajax: {
+                    url: '{{route('admin.items.ajax_data')}}',
+                    dataType: 'json'
                 }
             });
-        });
-        $(function () {
 
-            $(document).on('click', '#create-new-category-button', function () {
-
-                var modal_body_html = $.ajax({
-                    method: 'GET',
-                    url: '{{route('admin.item-categories.new_category_form_html')}}',
-                    async: false
-                }).responseText;
-
-                $('#create-new-category-modal .modal-body').html(modal_body_html);
-
-            });
-
-            $(document).on('click', '')
-
-            // Summernote
-            $('#description').summernote({
-                // lang: 'tr-TR',
-                tabsize: 2,
-                minHeight: 300,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['fontname', ['fontname']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['insert', ['examplePlugin', 'link']],
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['view', ['codeview']],
-                ]
-            });
         });
     </script>
     <style>
-        .category-listing-block {
-            max-height: 400px;
-            overflow-y: scroll;
-        }
+
+
+
     </style>
 @endpush

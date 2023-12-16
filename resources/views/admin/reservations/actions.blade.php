@@ -1,8 +1,8 @@
 <!-- edit update delete action buttons for $item -->
-<a href="{{ route('admin.items.edit', $reservation->id) }}" class="btn btn-primary btn-xs">
+<a href="{{ route('admin.reservations.edit', $reservation->id) }}" class="btn btn-primary btn-xs">
     <i class="fa fa-edit"></i>
     {{__('admin/general.edit')}}</a>
-<form action="{{ route('admin.items.destroy', $reservation->id) }}" method="POST" style="display: inline-block;">
+<form action="{{ route('admin.reservations.destroy', $reservation->id) }}" method="POST" style="display: inline-block;">
     @csrf
     @method('DELETE')
     <button

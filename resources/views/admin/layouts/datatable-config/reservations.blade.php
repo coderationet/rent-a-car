@@ -4,8 +4,9 @@
             "paging": true,
             "processing": true,
             "serverSide": true,
-            "searching": false,
-            "lengthChange": false,
+            "searching": true,
+            "lengthChange": true,
+            "pageLength": 25,
             "order": [[0, "desc"]],
             "ajax": {
                 "url": "{{route('admin.reservations.data')}}",

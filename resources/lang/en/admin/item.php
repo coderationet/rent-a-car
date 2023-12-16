@@ -1,6 +1,7 @@
 <?php
 return [
     'items' => 'Items',
+    'item' => 'Item',
     'create_new_item' => 'Create New Item',
     'new_item' => 'New Item',
     'item_attributes' => 'Item Attributes',

@@ -183,8 +183,6 @@
         </div>
     </div>
 
-
-
     <script src="{{asset('assets/admin/summernote/custom-image-dialog.plugin.js')}}"></script>
     @include('admin.js.summernote-turkish')
     <script type="module">

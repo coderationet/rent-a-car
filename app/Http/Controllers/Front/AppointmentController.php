@@ -65,27 +65,22 @@ class AppointmentController extends Controller
 
         $data = $request->all();
 
-        $data['user_id'] = auth()->user()->id;
-
-        $data['session_id'] = session()->getId();
-
-        $data['payment_amount'] = $total_price;
-
-        $data['status'] = Reservation::STATUS_CREATED;
-
-        $data['payment_method'] = $validated_data['payment_option'];
+        $data['user_id']            = auth()->user()->id;
+        $data['session_id']         = session()->getId();
+        $data['payment_amount']     = $total_price;
+        $data['status']             = Reservation::STATUS_CREATED;
+        $data['payment_method']     = $validated_data['payment_option'];
 
         $billing_type = $request->billing_type;
 
         if ($validated_data['enable_billing'] == 1 && $validated_data['billing_type'] == 'individual') {
-            $data['invoice_type'] = $validated_data['billing_type'];
-            $data['invoice_company_type'] = $validated_data['billing_type'];
-            $data['country'] = $validated_data['individual_billing_country'];
-            $data['city'] = $validated_data['individual_billing_city'];
-            $data['district'] = $validated_data['individual_billing_district'];
+            $data['invoice_type']           = $validated_data['billing_type'];
+            $data['country']                = $validated_data['individual_billing_country'];
+            $data['city']                   = $validated_data['individual_billing_city'];
+            $data['district']               = $validated_data['individual_billing_district'];
         }
 
-        if ($data['payment_method'] == 'bank_transfer'){
+        if ($data['payment_method'] == 'bank_transfer') {
             $data['status'] = Reservation::STATUS_PENDING;
         }
 
@@ -93,12 +88,20 @@ class AppointmentController extends Controller
         $reservation = Reservation::where('item_id', $data['item_id'])
             ->where('start_date', '<=', $data['start_date'])
             ->where('end_date', '>=', $data['end_date'])
-            ->where('status','approved')
+            ->where('status', 'approved')
             ->first();
 
-        if ($reservation){
+        if ($reservation) {
             return redirect()->back()->withErrors(['error' => 'There is approved reservation in this date range']);
         }
+
+        $data['user_ip']        = $request->ip();
+        $data['user_phone']     = $request->phone;
+        $data['user_name']      = $request->first_name;
+        $data['user_surname']   = $request->last_name;
+        $data['date_of_birth']  = $request->day_of_birth;
+        $data['id_number']      = $request->identity_number;
+        $data['email']          = $request->email;
 
 
         $appointment = Reservation::create($data);
@@ -107,7 +110,7 @@ class AppointmentController extends Controller
 
         $appointment->update($data);
 
-        if ($data['payment_method'] == 'bank_transfer'){
+        if ($data['payment_method'] == 'bank_transfer') {
             return redirect()->route('front.payment.bank_transfer_instructions', ['appointment_id' => $appointment->id]);
         }
 

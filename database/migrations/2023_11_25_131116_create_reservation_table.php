@@ -23,6 +23,9 @@ return new class extends Migration {
             // code
             $table->string('code')->nullable();
 
+            // notes
+            $table->text('notes')->nullable();
+
             // pick_up_location_id
             $table->unsignedBigInteger('pick_up_location_id')->nullable();
 
@@ -32,19 +35,19 @@ return new class extends Migration {
             $table->string('user_surname')->nullable();
             $table->string('date_of_birth')->nullable();
             $table->string('id_number')->nullable();
-            $table->string('user_address')->nullable();
+//            $table->string('user_address')->nullable();
             $table->string('user_phone')->nullable();
             $table->string('user_ip')->nullable();
 
 
-            $table->string('country')->nullable();
-            $table->string('city')->nullable();
-            $table->string('district')->nullable();
-            $table->string('zip_code')->nullable();
+//            $table->string('country')->nullable();
+//            $table->string('city')->nullable();
+//            $table->string('district')->nullable();
+//            $table->string('zip_code')->nullable();
 
 
             $table->enum('invoice_type', ['individual', 'company'])->nullable();
-            $table->enum('invoice_company_type', ['individual', 'company'])->nullable();
+//            $table->enum('invoice_company_type', ['individual', 'company'])->nullable();
             $table->string('invoice_company_name')->nullable();
             $table->string('invoice_company_address')->nullable();
             $table->string('invoice_company_vat_number')->nullable();
@@ -53,11 +56,12 @@ return new class extends Migration {
 
             $table->string('payment_id')->nullable();
             $table->string('payment_method')->nullable();
-            $table->enum('payment_status', ['created','pending', 'paid', 'failed'])->nullable();
+            $table->enum('payment_status', ['created','pending', 'paid', 'failed','refunded'])->nullable();
             $table->string('payment_amount')->nullable();
             $table->string('payment_currency')->nullable();
             $table->string('payment_description')->nullable();
             $table->string('payment_error')->nullable();
+            $table->timestamp('payment_date')->nullable();
             $table->timestamps();
 
         });

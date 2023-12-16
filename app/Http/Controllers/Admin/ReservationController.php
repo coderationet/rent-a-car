@@ -22,7 +22,7 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.reservations.edit');
     }
 
     /**
@@ -46,7 +46,8 @@ class ReservationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $reservation = Reservation::with(['item','user'])->findOrFail($id);
+        return view('admin.reservations.edit', compact('reservation'));
     }
 
     /**
@@ -62,10 +63,14 @@ class ReservationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $reservation = Reservation::findOrFail($id);
+        $reservation->delete();
+
+        return redirect()->route('admin.reservations.index');
     }
 
     public function data(){
+
         $reservations = Reservation::query();
 
         $reservations = $reservations->with(['user','item']);
@@ -76,12 +81,20 @@ class ReservationController extends Controller
         $search = request()->get('search');
 
         // search on 2. and 3. columns
-//        if ($search['value']) {
-//            $reservations = $reservations->where(function ($query) use ($search) {
-//                $query->where('title', 'like', '%' . $search['value'] . '%')
-//                    ->orWhere('description', 'like', '%' . $search['value'] . '%');
-//            });
-//        }
+        if ($search['value']) {
+            $reservations = $reservations->where(function ($query) use ($search) {
+                // id  item->title  user->name
+                $query->where('id', 'like', '%' . $search['value'] . '%')
+                    ->orWhere('status', 'like', '%' . $search['value'] . '%')
+                    ->orWhereHas('item', function ($query) use ($search) {
+                        $query->where('title', 'like', '%' . $search['value'] . '%');
+                    })
+                    ->orWhereHas('user', function ($query) use ($search) {
+                        $query->where('name', 'like', '%' . $search['value'] . '%');
+                    });
+
+            });
+        }
 
 
         $count = $reservations->count();
@@ -95,7 +108,7 @@ class ReservationController extends Controller
 
         // data without column names
         // get page from url query parameter or set default
-        $limit = request()->get('length') ?? 10;
+        $limit = request()->get('length') ?? 25;
         $offset = request()->get('start') ?? 0;
 
         # default order desc by id
