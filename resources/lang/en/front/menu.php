@@ -10,4 +10,6 @@ return [
     'login' => 'Login',
     'register' => 'Register',
     'logout' => 'Logout',
+    'admin' => 'Admin',
+    'admin_panel' => 'Admin Panel',
 ];
