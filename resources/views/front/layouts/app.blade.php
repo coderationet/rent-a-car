@@ -19,7 +19,7 @@
     @include('front.layouts.navigation')
     @yield('content')
     <div class="footer py-10">
-        <x-container class="grid grid-cols-4 text-white">
+        <x-container class="flex flex-col gap-3 md:grid grid-cols-4 text-white ">
             <x-footer />
         </x-container>
     </div>

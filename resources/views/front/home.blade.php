@@ -1,9 +1,9 @@
 @extends('front.layouts.app')
 @section('content')
     <div class="home-search-bg z-0  flex flex-col justify-center items-center">
-        <form data-validate-url="{{route('front.validate-home-search')}}" action="{{route('front.search.index')}}" class="w-1/3 flex justify-center flex-col items-center" id="home-search-form">
-            <div class="flex justify-center items-end w-full">
-                <div class="flex-1 flex flex-col">
+        <form data-validate-url="{{route('front.validate-home-search')}}" action="{{route('front.search.index')}}" class="w-3/4 md:w-1/3 flex justify-center flex-col items-center mt-3 md:mt-0" id="home-search-form">
+            <div class="flex flex-col justify-center items-end gap-3 md:gap-0 md:flex-row w-full">
+                <div class="flex-1 flex flex-col w-full md:w-max">
                     <label for="start_date" class="text-gray-600">{{__('front/home.start')}}</label>
                     <input type="date"
                            id="start_date"
@@ -12,13 +12,13 @@
                            value="{{request()->has('date-start') ? request()->get('date-start') : ''}}"
                            placeholder="Başlangıç Tarihi">
                 </div>
-                <div class="flex-1 flex flex-col">
+                <div class="flex-1 flex flex-col w-full md:w-max">
                     <label for="end_date" class="text-gray-600">{{__('front/home.end')}}</label>
                     <input type="date" name="end_date" class="border-0 border-r p-3 px-4 "
                            value="{{request()->has('date-end') ? request()->get('date-end') : ''}}"
                            placeholder="Bitiş Tarihi">
                 </div>
-                <div class="flex-1 flex flex-col">
+                <div class="flex-1 flex flex-col w-full md:w-max">
                     <label for="category" class="text-gray-600">{{__('front/home.category')}}</label>
                     <select name="category[]"
                             class="border-0 border-r p-3 px-4">
@@ -28,8 +28,8 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="flex-2 flex flex-col justify-end align-bottom">
-                    <button type="submit" class="bg-white p-3 px-4 primary-bg text-white w-max home-search-button">{{__('front/home.search')}}</button>
+                <div class="flex-2 flex flex-col justify-end align-bottom w-full md:w-max">
+                    <button type="submit" class="bg-white p-3 px-4 primary-bg text-white w-full md:w-max home-search-button">{{__('front/home.search')}}</button>
                 </div>
             </div>
             <div class="w-full">
@@ -52,7 +52,7 @@
             {{__('front/home.vehicle_categories')}}
         </p>
     </x-container>
-    <x-container class="flex justify-between mt-4 gap-7">
+    <x-container class="flex flex-col md:flex-row justify-between mt-4 gap-7">
         @foreach($categories as $category)
             <a href="{{ route('front.search.category',$category->slug)}}" class="flex-1 shadow rounded overflow-hidden rounded overflow-hidden bg-white">
                 <img src="{{ route('front.image.show',[$category->id,'large']) }}" class="w-full">

@@ -1,4 +1,4 @@
-<div class="primary-bg">
+<div class="primary-bg hidden md:block">
     <div class="container flex justify-between items-center text-white text-sm">
         <div class="flex-1 flex justify-start items-center">
             <ul class="flex flex-row items-center justify-center gap-7">
@@ -31,17 +31,22 @@
         </div>
     </div>
 </div>
-<div class="shadow z-10 header-container">
-    <div class="container flex justify-between items-center header">
-        <div class="flex-1">
+<div class="shadow z-10 header-container p-3 pt-3 md:p-0 md:px-3">
+    <div class="container header flex flex-col gap-3 mb:pb-0 md:gap-0 md:flex-row md:justify-between md:items-center ">
+        <div class="flex-1 w-full md:w-max flex justify-between items-center">
             <a href="{{route('front.home')}}">
                 <h1 class="logo border w-max p-3 cursor-pointer">
                     NICE CARS
                 </h1>
             </a>
+            <div class="hamburger md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </div>
         </div>
-        <nav class="flex-1 ">
-            <ul class="flex gap-7 justify-center items-center ">
+        <nav class="flex-1 w-full md:w-max hidden md:block header-items">
+            <ul class="flex gap-3 flex-col md:flex-row md:gap-7 md:justify-center md:items-center ">
                 <li>
                     <a href="{{ route('front.search.index') }}" class="font-bold hover-primary">{{__('front/menu.all_vehicles')}}</a>
                 </li>
@@ -53,7 +58,7 @@
                 </li>
             </ul>
         </nav>
-        <div class="font-bold flex-1 flex justify-end items-center  gap-3">
+        <div class="font-bold flex-1 hidden flex flex-col justify-start items-start w-full md:w-max md:flex md:flex-row md:justify-end md:items-center gap-3  md:block header-items">
             <!-- Admin Panel if user is admin role -->
             @role('admin')
                 <a class="hover-primary  flex gap-2 justify-center items-center"

@@ -6,10 +6,10 @@
         ['name' => $page->name, 'url' => route('front.page.show', $page->slug)]
     ]])
     <div class="container page flex gap-5">
-        <div class="w-1/4 bg-white p-3 rounded h-max">
+        <div class="w-1/4 bg-white p-3 rounded h-max hidden md:block">
             <x-page-sidebar :page="$page"/>
         </div>
-        <div class="w-3/4 bg-white p-3">
+        <div class="w-full md:w-3/4 bg-white p-3">
             <h1 class="text-2xl">{{$page->name}}</h1>
             <div class="mb-3">
                 {!! $page->content !!}

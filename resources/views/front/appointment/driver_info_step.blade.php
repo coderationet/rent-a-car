@@ -1,9 +1,9 @@
 @extends('front.layouts.app')
 @section('title', $title)
 @section('content')
-    <div class="container driver-info-page page mx-auto flex gap-5 mb-5">
+    <div class="container driver-info-page page mx-auto flex flex-col md:flex-row gap-5 mb-5">
         <form action="{{route('front.appointment.driver_info_store')}}" method="post" id="driver-info-form"
-              class="validated-form w-2/3 mt-5 flex flex-col gap-5 ">
+              class="validated-form md:mt-5 flex flex-col gap-5  w-full md:w-2/3">
             @csrf
             <div class="card">
                 <div class="card-header">
@@ -21,7 +21,7 @@
                     <input type="hidden" name="start_date" value="{{$start_date}}">
                     <input type="hidden" name="end_date" value="{{$end_date}}">
                     <div>
-                        <div class="flex gap-3">
+                        <div class="flex gap-3 flex-col md:flex-row">
                             <!-- email -->
                             <div class="w-full md:w-1/2 flex flex-col">
                                 <label for="email">Email</label>
@@ -47,7 +47,7 @@
                             We will send you the booking details on this email address and phone number for free.
                         </small>
                     </div>
-                    <div class="flex gap-3">
+                    <div class="flex gap-3 flex-col md:flex-row">
                         <!-- first name -->
                         <div class="w-full md:w-1/2 flex flex-col">
                             <label for="first_name">First Name</label>
@@ -69,7 +69,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="flex gap-3">
+                    <div class="flex gap-3 flex-col md:flex-row">
                         <div class="w-full md:w-1/2 flex flex-col">
                             <label for="day_of_birth">Day of birth</label>
                             <input type="date" name="day_of_birth" id="day_of_birth"
@@ -95,7 +95,7 @@
                 </div>
                 <div class="card-footer">
                     <!-- Payment Options Credit Cart/Debit Cart or Bank Transfer -->
-                    <div class="flex gap-3 w-full">
+                    <div class="flex gap-3 flex-col md:flex-row w-full">
                         <div class="w-full md:w-full flex flex-col">
                             <label for="payment_option">Payment Option</label>
                             <select name="payment_option" id="payment_option" class="w-full" required>
@@ -144,7 +144,7 @@
                     </div>
                     <div class="billing-tab individual-billing {{old('billing_type') && old('billing_type') == 'individual' ? '' : 'hidden'}} flex flex-col gap-3">
                         <!-- country, city, district -->
-                        <div class="flex gap-3">
+                        <div class="flex gap-3 flex-col md:flex-row">
                             <!-- country -->
                             <div class="w-full md:w-1/3 flex flex-col">
                                 <label for="billing_country">Country</label>
@@ -177,7 +177,7 @@
                             </div>
                         </div>
                         <!-- address -->
-                        <div class="flex gap-3">
+                        <div class="flex gap-3 flex-col md:flex-row">
                             <div class="w-full flex flex-col ">
                                 <label for="billing_address">Address</label>
                                 <textarea name="individual_billing_address" id="individual_billing_address" cols="30" rows="5"
@@ -190,7 +190,7 @@
                     </div>
                     <div class="billing-tab company-billing {{old('billing_type') && old('billing_type') == 'company' ? '' : 'hidden'}} flex flex-col gap-3">
                         <!-- company name -->
-                        <div class="flex gap-3">
+                        <div class="flex gap-3 flex-col md:flex-row">
                             <div class="w-full flex flex-col ">
                                 <label for="company_name">Company Name</label>
                                 <input type="text" name="company_name" value="{{ old('company_name') }}"
@@ -202,7 +202,7 @@
                             </div>
                         </div>
                         <!-- tax number -->
-                        <div class="flex gap-3">
+                        <div class="flex gap-3 flex-col md:flex-row">
                             <div class="w-full flex flex-col ">
                                 <label for="tax_number">Tax Number</label>
                                 <input type="text" name="tax_number" value="{{ old('tax_number') }}"
@@ -214,7 +214,7 @@
                             </div>
                         </div>
                         <!-- country, city, district -->
-                        <div class="flex gap-3">
+                        <div class="flex gap-3 flex-col md:flex-row">
                             <!-- country -->
                             <div class="w-full md:w-1/3 flex flex-col">
                                 <label for="company_billing_country">Country</label>
@@ -250,7 +250,7 @@
                 </div>
             </div>
         </form>
-        <div class="w-1/3 mt-5 ">
+        <div class="w-full md:w-1/3 mt-5 ">
             <div class="card">
                 <h2 class="text-2xl">Summary</h2>
                 @include('front.appointment.partials.summary',['item' => $item,'days' => $days,'start_date' => $start_date,'end_date' => $end_date])

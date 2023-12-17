@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="content-wrapper">
-        <section class="content">
-            <div class="container-fluid">
-                <iframe src="{{route('admin.media-library.iframe')}}?page=library-index" frameborder="0"
-                        style="width: 100%; height: 100vh"></iframe>
-            </div>
-        </section>
+
+
+            <iframe src="{{route('admin.media-library.iframe')}}?page=library-index" frameborder="0"
+                    style="width: 100%; height: 100vh"></iframe>
+
+
     </div>
 @endsection
 @section('extra-css')

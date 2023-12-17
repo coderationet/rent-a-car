@@ -14,10 +14,10 @@
     ]])
     <div class="container category-page page">
         <div class="flex gap-5">
-            <div class="w-1/4 mb-3">
+            <div class="w-1/4 mb-3 filters-sidebar hidden md:block">
                 <x-filters :items="$items" :categoryids="isset($category) ? $category : null"/>
             </div>
-            <div class="w-3/4">
+            <div class="w-full md:w-3/4">
                 <x-active-filters :category="$category"/>
                 <div class="flex flex-col">
                     @foreach($items as $item)

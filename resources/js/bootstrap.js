@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import 'jquery-date-range-picker/dist/jquery.daterangepicker.min.js';
 import 'jquery-validation/dist/jquery.validate.min.js';
-import inputmask from 'inputmask/bundle.js';
-$.fn.mask = inputmask;
+// import inputmask from 'inputmask/bundle.js';
+// $.fn.mask = inputmask;
 window.$ = window.jQuery = $;
 window.jQuery = $;
 

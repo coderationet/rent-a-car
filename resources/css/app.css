@@ -46,7 +46,7 @@
 }
 .header{
     @apply flex items-center justify-between ;
-    height: 80px;
+    min-height: 80px;
 }
 .primary-bg{
     background-color: #385FDD;
@@ -107,6 +107,12 @@
 
 .appointment-form-sidebar{
     width: 300px;
+}
+
+@media (max-width: 768px) {
+    .appointment-form-sidebar{
+        width: 100%;
+    }
 }
 
 .sticky{
