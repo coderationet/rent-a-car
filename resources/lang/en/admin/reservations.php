@@ -2,9 +2,11 @@
 
 return [
     'reservations' => 'Reservations',
+    'all_reservations' => 'All Reservations',
+    'reservation' => 'Reservation',
     'create_new_reservation' => 'Create New Reservation',
     'new_reservation' => 'New Reservation',
-    'all_reservations' => 'All Reservations',
+    'add_reservation' => 'Add Reservation',
     'reservation_details' => 'Reservation Details',
     'start_date' => 'Start Date',
     'end_date' => 'End Date',

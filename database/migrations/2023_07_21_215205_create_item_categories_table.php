@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('short_description')->nullable();
             $table->unsignedBigInteger('image_id')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
+            $table->enum('status', ['active', 'draft'])->default('active');
             $table->timestamps();
         });
     }

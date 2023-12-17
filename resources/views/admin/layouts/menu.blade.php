@@ -12,7 +12,6 @@
                 <i class="right fas fa-angle-left"></i>
             </p>
         </a>
-
         <ul class="nav nav-treeview ">
             <li class="nav-item">
                 <a href="{{route('admin.items.index')}}"
@@ -46,15 +45,31 @@
         </ul>
     </li>
 
-    <!-- Reservations -->
-    <li class="nav-item">
-        <a href="{{route('admin.reservations.index')}}"
-           class="nav-link {{Route::is('admin.reservations.*') ? 'active' : ''}}">
+    <!-- Reservations: All, New -->
+    <li class="nav-item {{Route::is('admin.reservations.*') ? 'menu-open' : ''}} ">
+        <a href="{{route('admin.reservations.index')}}" class="nav-link {{Route::is('admin.reservations.*') ? 'active' : ''}}">
             <i class="nav-icon fas fa-calendar-check"></i>
             <p>
                 {{__('admin/reservations.reservations')}}
+                <i class="right fas fa-angle-left"></i>
             </p>
         </a>
+        <ul class="nav nav-treeview ">
+            <li class="nav-item">
+                <a href="{{route('admin.reservations.index')}}"
+                   class="nav-link {{Route::is('admin.reservations.index') ? 'active' : ''}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{{__('admin/reservations.all_reservations')}}</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('admin.reservations.create')}}"
+                   class="nav-link {{Route::is('admin.reservations.create') ? 'active' : ''}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{{__('admin/reservations.add_reservation')}}</p>
+                </a>
+            </li>
+        </ul>
     </li>
 
 
@@ -110,15 +125,15 @@
     </li>
 
     <!-- Menü Linkleri -->
-{{--    <li class="nav-item">--}}
-{{--        <a href="{{route('admin.menu-links.index')}}"--}}
-{{--           class="nav-link {{Route::is('admin.menu-links.*') ? 'active' : ''}}">--}}
-{{--            <i class="nav-icon fas fa-link"></i>--}}
-{{--            <p>--}}
-{{--                {{__('admin/menu_links.menu_links')}}--}}
-{{--            </p>--}}
-{{--        </a>--}}
-{{--    </li>--}}
+    {{--    <li class="nav-item">--}}
+    {{--        <a href="{{route('admin.menu-links.index')}}"--}}
+    {{--           class="nav-link {{Route::is('admin.menu-links.*') ? 'active' : ''}}">--}}
+    {{--            <i class="nav-icon fas fa-link"></i>--}}
+    {{--            <p>--}}
+    {{--                {{__('admin/menu_links.menu_links')}}--}}
+    {{--            </p>--}}
+    {{--        </a>--}}
+    {{--    </li>--}}
 
 
     <!-- İletişim -->
@@ -175,7 +190,8 @@
 
     <!-- settings page -->
     <li class="nav-item {{Route::is('admin.settings.*') ? 'menu-open' : ''}}">
-        <a href="{{route('admin.settings.general-settings.index')}}" class="nav-link {{Route::is('admin.settings.*') ? 'active' : ''}}">
+        <a href="{{route('admin.settings.general-settings.index')}}"
+           class="nav-link {{Route::is('admin.settings.*') ? 'active' : ''}}">
             <i class="nav-icon fas fa-cogs"></i>
             <p>
                 {{__('admin/settings.settings')}}
