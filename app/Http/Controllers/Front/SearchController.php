@@ -15,8 +15,7 @@ class SearchController extends Controller
 
         $items = Item::query();
 
-        $items->where('is_archived', false)
-            ->where('status', 'active');
+        $items->where('status', 'active');
 
         $category = $request->filled('category') ? [...$request->get('category')] : []; // category slug array
 

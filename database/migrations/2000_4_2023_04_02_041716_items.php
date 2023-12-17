@@ -18,6 +18,7 @@ return new class extends Migration
             $table->longText('description');
             $table->decimal('price', 10, 2);
             $table->unsignedBigInteger('thumbnail_id')->nullable();
+            $table->enum('status', ['active', 'draft'])->default('active');
             $table->timestamps();
         });
     }
