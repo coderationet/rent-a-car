@@ -24,6 +24,7 @@ return [
         'big' => '790x400',
         'large' => '250x250',
         'medium' => '250x150',
-        'small' => '190x120'
+        'small' => '190x120',
+        'original' => 'original',
     ]
 ];

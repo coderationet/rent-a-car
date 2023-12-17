@@ -88,7 +88,15 @@ class MediaLibraryController extends Controller
         if (file_exists($file)) {
             unlink($file);
         }
+        // delete cache for file if exists
+        $cache_folder = storage_path('app/public/cache/'.$media->name);
+        if (file_exists($cache_folder)) {
+            unlink($cache_folder);
+        }
+        // delete from database
         $media->delete();
+
+        // return response
         return response()->json([
             'success' => true,
         ]);

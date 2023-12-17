@@ -40,6 +40,12 @@ class ImageController extends Controller
             'cache' => storage_path('app/public/cache'),
         ]);
 
+        if ($size == 'original'){
+            $image = $server->makeImage( $image->name, ['fm' => 'webp']);
+            $image = storage_path('app/public/cache/'.$image);
+            return response()->file($image);
+        }
+
         $size = explode('x', $size);
 
         $w = $size[0];
