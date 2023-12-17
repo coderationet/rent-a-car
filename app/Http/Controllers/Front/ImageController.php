@@ -14,7 +14,7 @@ class ImageController extends Controller
     public function show($image_id, $size, $mode = 'fill')
     {
 
-        header('Content-Type: image/webp');
+//        header('Content-Type: image/webp');
 
         if (in_array($mode, ['fill', 'stretch', 'crop', 'border']) === false) {
             abort(404);
@@ -45,7 +45,17 @@ class ImageController extends Controller
         $w = $size[0];
         $h = $size[1];
 
-        $server->outputImage( $image->name, ['w' => $w, 'h' => $h, 'fm' => 'webp', 'fit' => $mode]);
+        $image = $server->makeImage( $image->name, ['w' => $w, 'h' => $h, 'fm' => 'webp', 'fit' => $mode]);
+        $image = storage_path('app/public/cache/'.$image);
 
+        return response()->file($image);
+
+    }
+    public function original_image($full_image_path){
+        $path = 'app/public/'.$full_image_path;
+        if (file_exists(storage_path($path)) === false) {
+            abort(404);
+        }
+        return response()->file(storage_path($path));
     }
 }

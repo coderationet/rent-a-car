@@ -16,9 +16,12 @@ Route::group(['as' => 'front.'], function () {
         Route::post('validate-home-search', 'validate_search')->name('validate-home-search');
     });
 
+
     // Image routes
     Route::get('image/{image_id}/{size}/image.webp', [Front\ImageController::class, 'show'])->name('image.show');
     Route::get('image/{image_id}/{size}/{mode}/image.webp', [Front\ImageController::class, 'show'])->name('image.show.mode');
+    // Original images starts with storage/ with all the subfolders
+    Route::get('storage/{full_image_path}', [Front\ImageController::class, 'original_image'])->name('image.show.original')->where('full_image_path', '.*');
 
     // Category routes
     Route::get('item/{slug}', [Front\ItemController::class, 'show'])->name('item.show');

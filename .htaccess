@@ -1,0 +1,3 @@
+# send all requests to /public/
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L,QSA]
