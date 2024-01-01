@@ -11,6 +11,8 @@ class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *  @return \Illuminate\Http\Response
+     *  @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
