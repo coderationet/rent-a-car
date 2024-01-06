@@ -76,13 +76,18 @@
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
-                    "url": "{{route('admin.pages.data')}}",
+                    "url": "{{route('admin.data-table.data')}}",
                     "type": "GET",
                     "dataSrc": "data",
                     "dataType": "json",
                     @if(request()->get('page_type'))
                     "data": {
-                        "page_type": "{{request()->get('page_type')}}"
+                        "page_type": "{{request()->get('page_type')}}",
+                        "table_name": "pages"
+                    }
+                    @else
+                    "data": {
+                        "table_name": "pages"
                     }
                     @endif
                 },

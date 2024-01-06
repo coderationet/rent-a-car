@@ -75,10 +75,13 @@
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
-                    "url": "{{route('admin.blogs.data')}}",
+                    "url": "{{route('admin.data-table.data')}}",
                     "type": "GET",
                     "dataSrc": "data",
                     "dataType": "json",
+                    "data" : {
+                        "table_name" : "blogs"
+                    }
                 },
                 "columns": [
                     {"data": "id"},

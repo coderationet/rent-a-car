@@ -15,8 +15,7 @@ class ItemCategoryController extends Controller
      */
     public function index()
     {
-        $item_categories = ItemCategory::simplePaginate(10);
-        return view('admin.item_category.index', compact('item_categories'));
+        return view('admin.item_category.index');
     }
 
     /**

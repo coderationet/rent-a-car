@@ -6,10 +6,13 @@
             "serverSide": true,
             "order": [[0, "desc"]],
             "ajax": {
-                "url": "{{route('admin.items.data')}}",
+                "url": "{{route('admin.data-table.data')}}",
                 "type": "GET",
                 "dataSrc": "data",
                 "dataType": "json",
+                "data" : {
+                    "table_name" : "items"
+                }
             },
             "language": datatable_tr,
             "columns": [

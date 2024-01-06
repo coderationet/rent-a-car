@@ -76,10 +76,13 @@
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
-                    "url": "{{route('admin.users.data')}}",
+                    "url": "{{route('admin.data-table.data')}}",
                     "type": "GET",
                     "dataSrc": "data",
                     "dataType": "json",
+                    "data" : {
+                        "table_name": "users"
+                    }
                 },
                 "columns": [
                     {"data": "id"},

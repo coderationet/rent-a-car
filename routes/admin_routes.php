@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin;
+use App\Http\Controllers\Admin\DataTableController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth','role:admin'],'prefix' => 'admin', 'as' => 'admin.'],function () {
@@ -74,4 +75,7 @@ Route::group(['middleware' => ['auth','role:admin'],'prefix' => 'admin', 'as' =>
 
     // Helpers
     Route::get('generate-slug',Admin\Helpers\SlugGeneratorController::class)->name('generate-slug');
+
+    // DataTable
+    Route::get('data-table/data',DataTableController::class)->name('data-table.data');
 });

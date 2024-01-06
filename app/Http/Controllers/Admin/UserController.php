@@ -94,36 +94,8 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'Kullanıcı Silindi');
     }
 
-    public function data(){
-
-        $users = User::query();
-
-        $response = [];
-
-        $response['draw'] = request()->get('draw');
-
-        $response['recordsTotal'] = $users->count();
-        $response['recordsFiltered'] = $users->count();
-
-        $offset = request()->get('start');
-        $limit = request()->get('length');
-
-        $data = $users->offset($offset)->limit($limit)->get()->map(function ($user){
-            return [
-                "id" => "#".$user->id,
-                "name" => $user->name,
-                "actions" => view('admin.user.actions', compact('user'))->render()
-            ];
-        });
-        $response['data'] = $data;
-        // pagination
-        $response['pagination']['more'] = false;
-
-        return response()->json($response);
-
-    }
-
     function ajax_data(){
+        
         // ajax data for select2
         $users = User::query();
 
