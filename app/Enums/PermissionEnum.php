@@ -73,5 +73,4 @@ enum PermissionEnum : string
     case ROLES_DELETE = 'roles_delete';
     case ROLES_CREATE = 'roles_create';
 
-
 }

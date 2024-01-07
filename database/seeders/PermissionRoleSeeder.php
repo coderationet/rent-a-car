@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\PermissionEnum;
 use App\Helpers\PermissionHelper;
 use App\Models\Authorizon\PermissionDescription;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -19,37 +20,11 @@ class PermissionRoleSeeder extends Seeder
     {
         $role = Role::create(['name' => 'admin', 'guard_name' => 'web']);
 
-        $permissions = Route::getRoutes();
+        $permissions = PermissionEnum::cases();
 
         foreach ($permissions as $permission) {
-
-            $routeName = $permission->getName();
-
-            if (is_null($routeName)) {
-                continue;
-            }
-
-            $permissionName = PermissionHelper::convertRouteNameToPermissionName($routeName);
-
-            if (!$permissionName){
-                continue;
-            }
-            if (Permission::where('name', $permissionName)->exists()) {
-                continue;
-            }
-
-            $permission = Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
-
-            $permissionDescriptionName = PermissionHelper::convertPermissionNameToPermissionDescriptionName($permissionName);
-
-            PermissionDescription::create([
-                'permission_id' => $permission->id,
-                'name' => $permissionDescriptionName,
-                'description' => $permissionName,
-            ]);
-
+            $permission = Permission::create(['name' => $permission, 'guard_name' => 'web']);
             $role->givePermissionTo($permission);
-
         }
     }
 }
