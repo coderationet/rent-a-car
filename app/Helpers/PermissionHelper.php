@@ -38,27 +38,27 @@ class PermissionHelper
             $permissionName = $permissionName->replace('.index', '.read');
         }
 
-        if ($permissionName->endsWith('.create')) {
-            $permissionName = $permissionName->replace('.create', '.create');
-        }
-
         if ($permissionName->endsWith('.edit')) {
-            $permissionName = $permissionName->replace('.edit', '.update');
+            $permissionName = $permissionName->replace('.edit', '.read');
         }
 
         if ($permissionName->endsWith('.show')) {
             $permissionName = $permissionName->replace('.show', '.read');
         }
 
-        if ($permissionName->endsWith('.update')) {
-            $permissionName = $permissionName->replace('.update', '.update');
-        }
-
         if ($permissionName->endsWith('.destroy')) {
             $permissionName = $permissionName->replace('.destroy', '.delete');
         }
 
-        if ($permissionName === $routeName) {
+        if($permissionName->endsWith('.store')){
+            $permissionName = $permissionName->replace('.store', '.create');
+        }
+
+        if (!$permissionName->endsWith('.read')
+            && !$permissionName->endsWith('.create')
+            && !$permissionName->endsWith('.update')
+            && !$permissionName->endsWith('.delete')
+        ) {
             return false;
         }
 
