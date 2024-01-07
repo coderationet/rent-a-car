@@ -27,9 +27,9 @@ class PermissionCheckMiddleware
             && $permissionName
             && $permission->exists()
             && auth()->user()
-            && auth()->user()->cannot($request->route()->getName())
+            && auth()->user()->cannot($permissionName)
         ) {
-            abort(403);
+            abort(403, 'You do not have permission to access this page : ' . $permissionName);
         }
 
         return $next($request);

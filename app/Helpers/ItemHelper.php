@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use App\Models\Item;
+use App\Models\Item\Item;
 use App\Models\Reservation;
 
 class ItemHelper

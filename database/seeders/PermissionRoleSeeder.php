@@ -17,7 +17,6 @@ class PermissionRoleSeeder extends Seeder
      */
     public function run(): void
     {
-        // all route names for permissions
         $role = Role::create(['name' => 'admin', 'guard_name' => 'web']);
 
         $permissions = Route::getRoutes();
@@ -41,9 +40,11 @@ class PermissionRoleSeeder extends Seeder
 
             $permission = Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
 
+            $permissionDescriptionName = PermissionHelper::convertPermissionNameToPermissionDescriptionName($permissionName);
+
             PermissionDescription::create([
                 'permission_id' => $permission->id,
-                'name' => $permissionName,
+                'name' => $permissionDescriptionName,
                 'description' => $permissionName,
             ]);
 

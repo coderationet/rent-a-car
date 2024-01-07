@@ -2,8 +2,8 @@
 
 namespace App\Helpers;
 
-use App\Models\Attribute;
-use App\Models\AttributeValue;
+use App\Models\Attribute\Attribute;
+use App\Models\Attribute\AttributeValue;
 
 class AttributeHelper
 {

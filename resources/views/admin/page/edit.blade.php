@@ -50,9 +50,11 @@
                                         <textarea required name="content" id="content"
                                                   class="form-control">{{isset($page) ? $page->content : ''}}</textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">
-                                        {{isset($page) ? __('admin/general.update') : __('admin/general.create')}}
-                                    </button>
+                                    @can('pages_update')
+                                        <button type="submit" class="btn btn-primary">
+                                            {{isset($page) ? __('admin/general.update') : __('admin/general.create')}}
+                                        </button>
+                                    @endcan
                                 </div>
                             </div>
                         </form>

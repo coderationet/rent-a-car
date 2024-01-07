@@ -2,7 +2,7 @@
 Axis label plugin for flot
 
 Derived from:
-Axis Labels Plugin for flot.
+Axis Labels Module for flot.
 http://github.com/markrcote/flot-axislabels
 
 Original code is Copyright (c) 2010 Xuan Luo.

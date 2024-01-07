@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Front;
 
 use App\Helpers\AttributeHelper;
-use App\Http\Controllers\Controller;
-use App\Models\Item;
 use App\Helpers\ItemHelper;
+use App\Http\Controllers\Controller;
+use App\Models\Item\Item;
 use Illuminate\Support\Facades\Validator;
 
 class ItemController extends Controller
