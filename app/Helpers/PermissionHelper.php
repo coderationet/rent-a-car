@@ -66,9 +66,7 @@ class PermissionHelper
 
         $permissionName = $permissionName->replace('-','_');
 
-        $permissionName = $permissionName->replace('.','_');
-
-        return $permissionName;
+        return $permissionName->replace('.','_');
 
     }
 
