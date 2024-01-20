@@ -48,9 +48,11 @@
             <img class="thumbnail" src="{{asset('storage/images/default-thumb.jpg')}}"/>
             <!-- <span class=" placeholder-name"> Resim Seçiniz </span>  -->
         </div>
+        @if(\App\Helpers\PermissionHelper::checkIfUserHasPermission(\App\Enums\PermissionEnum::MEDIA_READ))
         <div class="gc-image-preview-container-buttons">
-            <button type='button' class="btn btn-primary btn-sm multiple-image add-new" data-element-id="${element.attr('id')}"> Yen Ekle </button>
+            <button type='button' class="btn btn-primary btn-sm multiple-image add-new" data-element-id="${element.attr('id')}"> Yeni Ekle </button>
         </div>
+        @endif
         `);
 
             // add new button

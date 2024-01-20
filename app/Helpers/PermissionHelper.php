@@ -5,13 +5,24 @@ namespace App\Helpers;
 class PermissionHelper
 {
 
-    public static function checkUserPermission($permissionName,$user): void
+    public static function abortIfUserDoesNotHavePermission($permissionName,$user = null): void
     {
-        if ( auth()->user()->can($permissionName) ) {
+        if (is_null($user)) {
+            $user = auth()->user();
+        }
+
+        if ( $user->cannot($permissionName->value) ) {
             abort(403);
         }
     }
+    public static function checkIfUserHasPermission($permissionName,$user = null): bool
+    {
+        if (is_null($user)) {
+            $user = auth()->user();
+        }
 
+        return $user->can($permissionName->value);
+    }
     /**
      * Convert route name to permission name
      *

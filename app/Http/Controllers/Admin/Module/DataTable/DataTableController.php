@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Module\DataTable;
 
+use App\Helpers\PermissionHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\DataTable\IndexDataTableGetRequest;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +41,6 @@ class DataTableController extends Controller
                 }
             });
         }
-
 
 
         $count = $items->count();
@@ -88,12 +88,25 @@ class DataTableController extends Controller
                 }
             }
 
-            $row['actions'] = view('admin.layouts.datatable-actions', [
-                'editUrl' => route($route_name_prefix.'edit', $item->id),
-                'deleteUrl' => route($route_name_prefix . 'destroy', $item->id),
-            ])->render();
+            $actionData = [];
+
+
+            if (request()->filled('read_permission') && request()->get('read_permission') == 1) {
+                $actionData['editUrl'] = route($route_name_prefix.'edit', $item->id);
+            }
+
+            if (request()->filled('update_permission') && request()->get('update_permission') == 1) {
+                $actionData['editUrl'] = route($route_name_prefix.'edit', $item->id);
+            }
+
+            if (request()->filled('delete_permission') && request()->get('delete_permission') == 1) {
+                $actionData['deleteUrl'] = route($route_name_prefix . 'destroy', $item->id);
+            }
+
+            $row['actions'] = view('admin.layouts.datatable-actions',$actionData)->render();
 
             return $row;
+
         });
 
         // pagination

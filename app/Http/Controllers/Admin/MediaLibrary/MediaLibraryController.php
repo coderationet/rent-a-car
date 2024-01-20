@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\MediaLibrary;
 
+use App\Enums\PermissionEnum;
+use App\Helpers\PermissionHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Media;
 use Illuminate\Http\Request;
@@ -29,6 +31,8 @@ class MediaLibraryController extends Controller
      */
     public function store(Request $request)
     {
+        PermissionHelper::abortIfUserDoesNotHavePermission(PermissionEnum::MEDIA_CREATE);
+
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $filename = time() . '-' . rand(0, 99999) . '-' . uniqid() . '-' . $file->getClientOriginalName();

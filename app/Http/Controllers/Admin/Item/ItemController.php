@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Item;
 
+use App\Enums\PermissionEnum;
 use App\Helpers\AttributeHelper;
+use App\Helpers\PermissionHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute\Attribute;
 use App\Models\Item\Item;
@@ -14,11 +16,15 @@ class ItemController extends Controller
 {
     public function index()
     {
+        PermissionHelper::abortIfUserDoesNotHavePermission(PermissionEnum::ITEMS_READ);
+
         return view('admin.items.index');
     }
 
     public function create()
     {
+        PermissionHelper::abortIfUserDoesNotHavePermission(PermissionEnum::ITEMS_CREATE);
+
         $categories = ItemCategory::whereNull('parent_id')->orderBy('name', 'ASC')->get();
         $selected_categories = [];
         $strict_attributes = config('website.strict_attributes');
@@ -33,14 +39,18 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        PermissionHelper::abortIfUserDoesNotHavePermission(PermissionEnum::ITEMS_CREATE);
+
         $validator = Validator::make($request->all(), [
             'title' => ['string', 'required', 'max:255'],
             'description' => ['string', 'required'],
             'slug' => ['string', 'required'],
         ]);
+
         if ($validator->fails()) {
             return redirect()->back()->with('error', __('admin/general.msg.invalid_data'));
         }
+
         // create a new item
         $item = new Item();
         $item->title = $request->title;
@@ -101,6 +111,7 @@ class ItemController extends Controller
 
     public function get_item()
     {
+        PermissionHelper::abortIfUserDoesNotHavePermission(PermissionEnum::ITEMS_READ);
 
         $item = Item::query();
 
@@ -138,6 +149,8 @@ class ItemController extends Controller
      */
     public function edit(string $id)
     {
+        PermissionHelper::abortIfUserDoesNotHavePermission(PermissionEnum::ITEMS_READ);
+
         $item = Item::findOrFail($id);
 
         $item_attributes = [];
@@ -161,6 +174,7 @@ class ItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        PermissionHelper::abortIfUserDoesNotHavePermission(PermissionEnum::ITEMS_UPDATE);
 
         $validator = Validator::make($request->all(), [
             'title' => ['string', 'required', 'max:255'],
@@ -225,6 +239,8 @@ class ItemController extends Controller
      */
     public function destroy(string $id)
     {
+        PermissionHelper::abortIfUserDoesNotHavePermission(PermissionEnum::ITEMS_DELETE);
+
         $item = Item::findOrFail($id);
         $item->delete();
         return redirect()->route('admin.items.index')->with('success', 'İlan Silindi');

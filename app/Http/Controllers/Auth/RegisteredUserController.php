@@ -30,9 +30,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // Close User Registeration
-
-        return redirect()->back()->with('error', 'User registration is closed.');
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],

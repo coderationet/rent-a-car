@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Authorizon;
 
+use App\Enums\PermissionEnum;
+use App\Helpers\PermissionHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        PermissionHelper::abortIfUserDoesNotHavePermission(PermissionEnum::ROLES_READ);
+
+        return view('admin.authorizon.role.index');
     }
 
     /**

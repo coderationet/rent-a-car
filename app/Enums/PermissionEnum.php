@@ -16,6 +16,12 @@ enum PermissionEnum : string
     case ITEMS_DELETE = 'items_delete';
     case ITEMS_CREATE = 'items_create';
 
+    // Item Attribute
+    case ITEM_ATTRIBUTES_READ = 'item_attributes_read';
+    case ITEM_ATTRIBUTES_UPDATE = 'item_attributes_update';
+    case ITEM_ATTRIBUTES_DELETE = 'item_attributes_delete';
+    case ITEM_ATTRIBUTES_CREATE = 'item_attributes_create';
+
     // Reservations
     case RESERVATIONS_READ = 'reservations_read';
     case RESERVATIONS_UPDATE = 'reservations_update';
