@@ -52,6 +52,11 @@ Route::group(['as' => 'front.'], function () {
         Route::any('payment/{payment_gateway_id}/callback', 'payment_callback')->name('payment.callback');
     });
 
+    // Api
+    Route::group(['as' => 'api.','prefix' => 'api'],function (){
+        Route::get('item-calendar/index',[Front\Api\ItemCalendarController::class,'index'])->name('item-calendar.index');
+    });
+
 });
 
 Route::middleware('auth')->group(function () {
