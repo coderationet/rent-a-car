@@ -60,7 +60,7 @@ const configObject = {
 
 function updateItemCalendarAjax(startDate, endDate) {
 
-    if (window.item_availability[startDate] && window.item_availability[endDate]) {
+    if (window.item_availability !== undefined && window.item_availability[startDate] && window.item_availability[endDate]) {
         return;
     }
 
