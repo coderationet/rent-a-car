@@ -19,6 +19,11 @@ class Reservation extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+    ];
+
     public function item(){
         return $this->belongsTo(Item::class, 'item_id');
     }
