@@ -40,9 +40,11 @@
             @endforeach
         </div>
         <div class="gc-image-preview-container-buttons">
-            <button type="button" class="btn btn-primary btn-sm multiple-image add-new"
-                    data-element-id="{{$input_name}}"> Yeni Ekle
-            </button>
+            @if(\App\Helpers\PermissionHelper::checkIfUserHasPermission(\App\Enums\PermissionEnum::MEDIA_READ))
+                <button type="button" class="btn btn-primary btn-sm multiple-image add-new"
+                        data-element-id="{{$input_name}}"> Yeni Ekle
+                </button>
+            @endif
         </div>
     @endif
 @else
@@ -68,9 +70,12 @@
             @endif
         </div>
         <div class="gc-image-preview-container-buttons">
-            <button type="button" class="btn btn-primary btn-sm add-new single-image" data-element-id="{{$input_name}}">
-                Yeni Ekle
-            </button>
+            @if(\App\Helpers\PermissionHelper::checkIfUserHasPermission(\App\Enums\PermissionEnum::MEDIA_READ))
+                <button type="button" class="btn btn-primary btn-sm add-new single-image"
+                        data-element-id="{{$input_name}}">
+                    Yeni Ekle
+                </button>
+            @endif
             <button type="button" class="btn btn-primary btn-sm remove single-image" data-element-id="{{$input_name}}">
                 Kaldır
             </button>

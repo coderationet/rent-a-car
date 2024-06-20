@@ -2,13 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Attribute;
-use App\Models\AttributeValue;
-use App\Models\AttributeValueItem;
-use App\Models\Item;
-use App\Models\ItemCategory;
+use App\Models\Attribute\Attribute;
+use App\Models\Attribute\AttributeValue;
+use App\Models\Item\Item;
+use App\Models\Item\ItemCategory;
 use App\Models\Media;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ItemSeeder extends Seeder

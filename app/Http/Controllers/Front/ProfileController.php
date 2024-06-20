@@ -58,4 +58,15 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    /**
+     * User Reservations
+     */
+    public function reservations(Request $request): View
+    {
+        return view('profile.reservations', [
+            'reservations' => $request->user()->reservations()->with('item')->paginate(5),
+            'user' => $request->user(),
+        ]);
+    }
 }

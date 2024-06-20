@@ -2,9 +2,9 @@
 
 namespace App\Queries;
 
-use App\Models\Attribute;
-use App\Models\Item;
-use App\Models\ItemCategory;
+use App\Models\Attribute\Attribute;
+use App\Models\Item\Item;
+use App\Models\Item\ItemCategory;
 
 class ItemQuery{
 

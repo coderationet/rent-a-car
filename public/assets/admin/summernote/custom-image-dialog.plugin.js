@@ -21,7 +21,7 @@
     /**
      * @class plugin.examplePlugin
      *
-     * example Plugin
+     * example Module
      */
     $.extend(true, $.summernote.lang, {
         'en-US': { /* US English(Default Language) */

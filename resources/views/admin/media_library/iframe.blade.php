@@ -13,63 +13,75 @@
 <div class="row m-0 p-0">
     <div class="col-md-12  m-0 p-0" style="height: 100vh">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="new-tab" data-bs-toggle="tab" data-bs-target="#new" type="button"
-                        role="tab" aria-controls="home" aria-selected="true">Yeni Ekle
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="library-tab" data-bs-toggle="tab" data-bs-target="#library" type="button"
-                        role="tab" aria-controls="library" aria-selected="false">Kütüphane
-                </button>
-            </li>
+            @if(\App\Helpers\PermissionHelper::checkIfUserHasPermission(\App\Enums\PermissionEnum::MEDIA_CREATE))
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="new-tab" data-bs-toggle="tab" data-bs-target="#new"
+                            type="button"
+                            role="tab" aria-controls="home" aria-selected="true">Yeni Ekle
+                    </button>
+                </li>
+            @endif
+            @if(\App\Helpers\PermissionHelper::checkIfUserHasPermission(\App\Enums\PermissionEnum::MEDIA_READ))
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="library-tab" data-bs-toggle="tab" data-bs-target="#library"
+                            type="button"
+                            role="tab" aria-controls="library" aria-selected="false">Kütüphane
+                    </button>
+                </li>
+            @endif
         </ul>
-        <div class="tab-content h-100" id="myTabContent">
-            <div class="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
-                <div
-                    style="width: 100%;height: 100vh;display: flex;flex-direction:column;justify-content: center;align-items: center">
-                    <span><b>Max Size: {{$max_size}}MB</b></span>
-                    <button class="btn btn-primary" id="new-image">Yeni İçerik Ekle</button>
-                    <input type="file" id="new-image-input" style="display: none">
-                </div>
 
-            </div>
-            <div class="tab-pane fade " id="library" role="tabpanel" aria-labelledby="library-tab">
-                <div class="row bg-blue text-center m-0 p-0"
-                     style="display:flex; justify-content: center; align-items: center; width: 100%;text-align: center;background: #353dff; color:#fff">
-                    <span>Dosya Seçiniz</span>
+        <div class="tab-content h-100" id="myTabContent">
+            @if(\App\Helpers\PermissionHelper::checkIfUserHasPermission(\App\Enums\PermissionEnum::MEDIA_CREATE))
+                <div class="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
+                    <div
+                        style="width: 100%;height: 100vh;display: flex;flex-direction:column;justify-content: center;align-items: center">
+                        <span><b>Max Size: {{$max_size}}MB</b></span>
+                        <button class="btn btn-primary" id="new-image">Yeni İçerik Ekle</button>
+                        <input type="file" id="new-image-input" style="display: none">
+                    </div>
+
                 </div>
-                <div class="row image-items">
-                    @foreach($items as $file)
-                        <div class="col-md-3 file-to-pick"
-                             style="text-align: center; border:1px solid #eee"
-                             data-file-id="{{$file->id}}" data-file-type="{{$file->type}}"
-                             data-file-url="{{asset('storage/media/'.$file->name)}}"
-                             data-file-name="{{$file->name}}">
-                            <div class="remove-item"
-                                 data-remove-url="{{route('admin.media-library.destroy',$file->id)}}"
-                                 style="position: absolute; top: 10px; right: 10px; cursor: pointer; color: #fff; background: #ff0000; padding: 5px 10px; border-radius: 5px">
-                                Sil
+            @endif
+            @if(\App\Helpers\PermissionHelper::checkIfUserHasPermission(\App\Enums\PermissionEnum::MEDIA_READ))
+                <div class="tab-pane fade " id="library" role="tabpanel" aria-labelledby="library-tab">
+                    <div class="row bg-blue text-center m-0 p-0"
+                         style="display:flex; justify-content: center; align-items: center; width: 100%;text-align: center;background: #353dff; color:#fff">
+                        <span>Dosya Seçiniz</span>
+                    </div>
+                    <div class="row image-items">
+                        @foreach($items as $file)
+                            <div class="col-md-3 file-to-pick"
+                                 style="text-align: center; border:1px solid #eee"
+                                 data-file-id="{{$file->id}}" data-file-type="{{$file->type}}"
+                                 data-file-url="{{asset('storage/media/'.$file->name)}}"
+                                 data-file-name="{{$file->name}}">
+                                <div class="remove-item"
+                                     data-remove-url="{{route('admin.media-library.destroy',$file->id)}}"
+                                     style="position: absolute; top: 10px; right: 10px; cursor: pointer; color: #fff; background: #ff0000; padding: 5px 10px; border-radius: 5px">
+                                    Sil
+                                </div>
+                                @if($file->type == 'image')
+                                    <img src="{{asset('storage/media/'.$file->name)}}" alt="" class="img-fluid"
+                                         style="max-height: 250px">
+                                @elseif($file->type == 'video')
+                                    <img src="{{asset('storage/images/video-thumb.jpg')}}" alt="" class="img-fluid"
+                                         style="max-height: 250px">
+                                @elseif($file->type == 'application')
+                                    <img src="{{asset('storage/images/file.jpg')}}" alt="" class="img-fluid"
+                                         style="max-height: 250px">
+                                @endif
+                                <span>{{$file->name}}</span>
                             </div>
-                            @if($file->type == 'image')
-                                <img src="{{asset('storage/media/'.$file->name)}}" alt="" class="img-fluid"
-                                     style="max-height: 250px">
-                            @elseif($file->type == 'video')
-                                <img src="{{asset('storage/images/video-thumb.jpg')}}" alt="" class="img-fluid"
-                                     style="max-height: 250px">
-                            @elseif($file->type == 'application')
-                                <img src="{{asset('storage/images/file.jpg')}}" alt="" class="img-fluid"
-                                     style="max-height: 250px">
-                            @endif
-                            <span>{{$file->name}}</span>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
+                    <div style="display: flex; justify-content: center;align-items: center;margin-top: 20px">
+                        {{$items->appends(['active_tab' => 'library'])->links()}}
+                    </div>
                 </div>
-                <div style="display: flex; justify-content: center;align-items: center;margin-top: 20px">
-                    {{$items->appends(['active_tab' => 'library'])->links()}}
-                </div>
-            </div>
+            @endif
         </div>
+
     </div>
     npm
 </div>
@@ -280,11 +292,11 @@
 
         @endif
 
-        $(document).on('click','.remove-item', function () {
+        $(document).on('click', '.remove-item', function () {
             let confirm = window.confirm('Silmek istediğinize emin misiniz?');
             let file_id = $(this).parent().data('file-id');
             if (confirm) {
-                $.post($(this).data('remove-url'), {_token: '{{csrf_token()}}', _method:'DELETE'}, function (data) {
+                $.post($(this).data('remove-url'), {_token: '{{csrf_token()}}', _method: 'DELETE'}, function (data) {
                     if (data.success === true) {
 
                         console.log($('.file-to-pick[data-file-id=' + file_id + ']'));

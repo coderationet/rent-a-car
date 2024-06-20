@@ -2,8 +2,8 @@
 
 namespace App\View\Components;
 
-use App\Models\AttributeValue;
-use App\Models\ItemCategory;
+use App\Models\Attribute\AttributeValue;
+use App\Models\Item\ItemCategory;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;

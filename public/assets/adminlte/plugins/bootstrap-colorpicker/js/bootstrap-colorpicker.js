@@ -2662,7 +2662,7 @@ var plugin = 'colorpicker';
 
 _jquery2.default[plugin] = _Colorpicker2.default;
 
-// Colorpicker jQuery Plugin API
+// Colorpicker jQuery Module API
 _jquery2.default.fn[plugin] = function (option) {
   var fnArgs = Array.prototype.slice.call(arguments, 1),
       isSingleElement = this.length === 1,

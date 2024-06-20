@@ -20,13 +20,14 @@
                         <input type="text" id="date-range" name="daterange" autocomplete="off"
                                class="flex-1 mw-3/4 rounded"
                                required
+                               data-item-calendar-url="{{route('front.api.item-calendar.index')}}"
                                value="{{old('daterange') ? old('daterange') : $date_value}}"
                                placeholder="Select A Date Range">
                     </div>
                     <p class="text-sm">
                         Select a date range for your appointment.
                     </p>
-                    <input type="hidden" name="item_id" value="{{$item->id}}">
+                    <input type="hidden" name="item_id" id="item-id" value="{{$item->id}}">
                     @if(session()->has('errors'))
                         <ul class="error_list">
                             @foreach($errors->all() as $error)
@@ -47,3 +48,6 @@
         </div>
     </div>
 </div>
+<script>
+    var available_dates = {!! json_encode($available_dates) !!};
+</script>

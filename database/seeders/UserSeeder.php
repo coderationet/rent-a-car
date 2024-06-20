@@ -14,14 +14,15 @@ class UserSeeder extends Seeder
     public function run(): void
     {
 
+        $this->call(PermissionRoleSeeder::class);
+
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
         ]);
 
-        # create role admin
-        $role = Role::create(['name' => 'admin']);
+        $role = Role::findByName('admin', 'web');
 
         # assign role admin to user
         $admin->assignRole($role);

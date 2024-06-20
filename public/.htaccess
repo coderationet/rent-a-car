@@ -20,6 +20,7 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
+
 # cache
 <IfModule mod_expires.c>
     ExpiresActive On

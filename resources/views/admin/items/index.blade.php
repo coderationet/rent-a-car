@@ -25,7 +25,10 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title pt-2">{{__('admin/item.items')}}</h3>
-                                <a href="{{route('admin.items.create')}}" class="btn btn-primary float-right">{{__('admin/general.create_new')}}</a>
+                                @if(\App\Helpers\PermissionHelper::checkIfUserHasPermission(\App\Enums\PermissionEnum::ITEMS_CREATE))
+                                    <a href="{{route('admin.items.create')}}"
+                                       class="btn btn-primary float-right">{{__('admin/general.create_new')}}</a>
+                                @endif
                             </div>
                             <div class="card-body">
                                 <table id="items" class="table table-bordered table-hover">

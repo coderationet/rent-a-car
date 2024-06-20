@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Models\ItemCategory;
+use App\Models\Item\ItemCategory;
 use App\Models\Page;
 use Closure;
 use Illuminate\Contracts\View\View;

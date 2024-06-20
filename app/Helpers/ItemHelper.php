@@ -2,8 +2,9 @@
 
 namespace App\Helpers;
 
-use App\Models\Item;
+use App\Models\Item\Item;
 use App\Models\Reservation;
+use Illuminate\Support\Carbon;
 
 class ItemHelper
 {
@@ -19,35 +20,44 @@ class ItemHelper
         return $itemDateIsAvailable;
     }
 
-    public static function getItemAvailableDaysForDateRange($item_id, $start_date, $end_date)
+    public static function getItemAvailableDaysForDateRange($item_id, $start_date, $end_date) : array
     {
-        // get all reservations from start_date to end_date and return the days as array with availability status true or false
-        $item = Item::where('id', $item_id)->first();
-        $item_reservations = Reservation::where('item_id', $item_id)
-            ->where('start_date', '<=', $end_date)
-            ->where('end_date', '>=', $start_date)
-            ->where('status', 'approved')
-            ->get();
-        $days = [];
-        $start_date = strtotime($start_date);
-        $end_date = strtotime($end_date);
-        $current_date = $start_date;
-        while ($current_date <= $end_date) {
-            $day = date('Y-m-d', $current_date);
-            $day_is_available = true;
-            foreach ($item_reservations as $item_reservation) {
-                if ($day >= $item_reservation->start_date && $day <= $item_reservation->end_date) {
-                    $day_is_available = false;
-                }
-            }
-            $days[] = [
-                'day' => $day,
-                'available' => $day_is_available,
-                'price' => $item->price,
-            ];
-            $current_date = strtotime('+1 day', $current_date);
+
+        $start_date = Carbon::create($start_date);
+
+        if ($start_date->diffInDays(Carbon::now()) > 600) {
+            $start_date = Carbon::now()->startOfMonth();
         }
 
-        return $days;
+
+        $end_date = Carbon::create($end_date);
+
+        $item = Item::find($item_id);
+
+        $reservations = $item->reservations()
+            ->where('status', '=', 'approved')
+            ->whereDate('start_date', '>=', $start_date)
+            ->whereDate('end_date', '<=', $end_date)
+            ->get();
+
+        $period = Carbon::parse($start_date)->daysUntil($end_date);
+
+        $availability_data = [];
+
+        foreach ($period as $date) {
+
+            $is_available = true;
+
+            foreach ($reservations as $reservation) {
+                if ($date->between($reservation->start_date, $reservation->end_date)) {
+                    $is_available = false;
+                    break;
+                }
+            }
+
+            $availability_data[$date->format('Y-m-d')] = $is_available;
+        }
+
+        return $availability_data;
     }
 }

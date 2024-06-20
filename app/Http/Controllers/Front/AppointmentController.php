@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Helpers\Option;
 use App\Helpers\ReservationHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DriverInfoStepGetRequest;
 use App\Http\Requests\DriverInfoStoreGetRequest;
-use App\Models\Item;
+use App\Models\Item\Item;
 use App\Models\Reservation;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class AppointmentController extends Controller
 {

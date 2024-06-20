@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\AttributeValue;
+use App\Models\Attribute\AttributeValue;
 use Illuminate\Http\Request;
 
 class AttributeValueController extends Controller

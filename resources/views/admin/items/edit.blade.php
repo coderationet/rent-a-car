@@ -74,9 +74,11 @@
                                         </div>
 
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">
-                                                {{isset($item) ? __('admin/general.update') : __('admin/general.add_new')}}
-                                            </button>
+                                            @if(\App\Helpers\PermissionHelper::checkIfUserHasPermission(\App\Enums\PermissionEnum::ITEMS_UPDATE))
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{isset($item) ? __('admin/general.update') : __('admin/general.add_new')}}
+                                                </button>
+                                            @endif
                                         </div>
 
                                     </div>

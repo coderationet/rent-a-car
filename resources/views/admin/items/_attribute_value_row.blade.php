@@ -19,22 +19,23 @@
         </select>
     </td>
     <td>
-        <!-- new value popup -->
-        <button type="button"
-                class="btn btn-primary btn-xs add-new-attribute-value"
-                data-toggle="modal" data-target="#add-new-attribute-value-modal"
-                id="add-new-attribute-button"
-                data-attribute-id="{{$item_attribute['id']}}">
-            <i class="fas fa-plus"></i> {{__('admin/attributes.add_new_value')}}
-        </button>
-
-{{--        @if(config('website.strict_attributes') === false)--}}
+        @if(\App\Helpers\PermissionHelper::checkIfUserHasPermission(\App\Enums\PermissionEnum::ITEM_ATTRIBUTES_CREATE))
+            <!-- new value popup -->
             <button type="button"
-                    class="btn btn-danger btn-xs delete-attribute"
+                    class="btn btn-primary btn-xs add-new-attribute-value"
+                    data-toggle="modal" data-target="#add-new-attribute-value-modal"
+                    id="add-new-attribute-button"
                     data-attribute-id="{{$item_attribute['id']}}">
-                <i class="fas fa-trash"></i> {{__('admin/general.delete')}}
+                <i class="fas fa-plus"></i> {{__('admin/attributes.add_new_value')}}
             </button>
-{{--        @endif--}}
+        @endif
+        {{--        @if(config('website.strict_attributes') === false)--}}
+        <button type="button"
+                class="btn btn-danger btn-xs delete-attribute"
+                data-attribute-id="{{$item_attribute['id']}}">
+            <i class="fas fa-trash"></i> {{__('admin/general.delete')}}
+        </button>
+        {{--        @endif--}}
     </td>
 </tr>
 
